@@ -512,6 +512,19 @@ body {
   opacity: 0.6;
   transition: all 0.3s;
   z-index: 10;
+  /* 扩大热区 - 满足 iOS 最小点击尺寸 44x44px */
+  min-width: 64px;
+  min-height: 48px;
+  padding: 16px 20px;
+  /* 边缘安全距离 - 避免误触 */
+  margin: 0 16px;
+}
+
+/* 伪元素扩展不可见热区 */
+.nav-button::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
 }
 
 .nav-button:hover {
@@ -520,11 +533,11 @@ body {
 }
 
 .nav-button.prev {
-  left: var(--space-sm);
+  left: 0;
 }
 
 .nav-button.next {
-  right: var(--space-sm);
+  right: 0;
 }
 
 .nav-button:disabled {

@@ -1,6 +1,7 @@
 import './index.css'
 import { BookCover, UltramanInfo, Navigation, PageLeft } from './components'
 import { useMagicBook } from './hooks/useMagicBook'
+import { usePageFlip } from './hooks/usePageFlip'
 
 function App() {
   const {
@@ -22,6 +23,15 @@ function App() {
     playSkill,
   } = useMagicBook()
 
+  const isFirstPage = currentPage === 0
+  const isLastPage = currentPage === totalPages - 1
+
+  const swipeHandlers = usePageFlip({
+    onSwipeLeft: isLastPage ? undefined : goNext,
+    onSwipeRight: isFirstPage ? undefined : goPrev,
+    disabled: isFlipping,
+  })
+
   const handleImageError = (pageId) => {
     setImageLoadError(prev => ({...prev, [pageId]: true}))
   }
@@ -41,7 +51,12 @@ function App() {
       </button>
 
       <div className="magic-book">
-        <div className={`book-pages active ${isFlipping ? 'flipping' : ''}`}>
+        <div
+          className={`book-pages active ${isFlipping ? 'flipping' : ''}`}
+          onPointerDown={swipeHandlers.onPointerDown}
+          onPointerMove={swipeHandlers.onPointerMove}
+          onPointerUp={swipeHandlers.onPointerUp}
+        >
           <div className="book-page">
             <PageLeft 
               current={current} 

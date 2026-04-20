@@ -39,6 +39,23 @@ test.describe('奥特曼魔法书', () => {
     await expect(page.locator('.ultraman-name')).toContainText('初代奥特曼');
   });
 
+  test('滑动翻页功能', async ({ page }) => {
+    await page.click('.start-button');
+    
+    await expect(page.locator('.ultraman-name')).toContainText('奥特Q');
+    
+    const bookPages = page.locator('.book-pages');
+    const box = await bookPages.boundingBox();
+    
+    await page.dispatchEvent('.book-pages', 'pointerdown', { clientX: box.x + box.width - 50, clientY: box.y + box.height / 2 });
+    await page.dispatchEvent('.book-pages', 'pointermove', { clientX: box.x + 50, clientY: box.y + box.height / 2 });
+    await page.dispatchEvent('.book-pages', 'pointerup', { clientX: box.x + 50, clientY: box.y + box.height / 2 });
+    
+    await page.waitForTimeout(700);
+    
+    await expect(page.locator('.ultraman-name')).toContainText('初代');
+  });
+
   test('Tab切换', async ({ page }) => {
     await page.click('.start-button');
     
