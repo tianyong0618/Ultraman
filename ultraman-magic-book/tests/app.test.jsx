@@ -314,5 +314,36 @@ describe('App 组件 - 增强断言测试', () => {
         expect(screen.getByText('无多种形态')).toBeInTheDocument()
       })
     })
+
+    it('has forms shows form buttons', async () => {
+      fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      await waitFor(() => expect(screen.getByText('1 / 31')).toBeInTheDocument())
+      const nextBtn = document.querySelector('.nav-button.next')
+      fireEvent.click(nextBtn)
+      await waitFor(() => expect(screen.getByText('2 / 31')).toBeInTheDocument())
+      fireEvent.click(nextBtn)
+      await waitFor(() => expect(screen.getByText('3 / 31')).toBeInTheDocument())
+      fireEvent.click(screen.getByText('形态'))
+      await waitFor(() => {
+        expect(screen.getByText('普通形态')).toBeInTheDocument()
+        expect(screen.getByText('闪耀版')).toBeInTheDocument()
+      })
+    })
+
+    it('form button has active state when clicked', async () => {
+      fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      await waitFor(() => expect(screen.getByText('1 / 31')).toBeInTheDocument())
+      const nextBtn = document.querySelector('.nav-button.next')
+      fireEvent.click(nextBtn)
+      await waitFor(() => expect(screen.getByText('2 / 31')).toBeInTheDocument())
+      fireEvent.click(nextBtn)
+      await waitFor(() => expect(screen.getByText('3 / 31')).toBeInTheDocument())
+      fireEvent.click(screen.getByText('形态'))
+      await waitFor(() => {
+        const formBtns = document.querySelectorAll('.form-button')
+        expect(formBtns.length).toBe(2)
+        expect(formBtns[0]).not.toHaveClass('active')
+      })
+    })
   })
 })
