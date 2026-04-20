@@ -1,0 +1,51 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic:
+        - img "logo"
+      - generic [ref=e6]:
+        - button "中文" [ref=e7] [cursor=pointer]:
+          - img [ref=e9]
+          - generic [ref=e14]: 中文
+        - button "文档" [ref=e15] [cursor=pointer]:
+          - img [ref=e17]
+          - generic [ref=e22]: 文档
+        - button "Github ..." [ref=e23] [cursor=pointer]:
+          - img [ref=e24]
+          - generic [ref=e30]: Github
+          - generic [ref=e31]: ...
+        - generic [ref=e32] [cursor=pointer]:
+          - img "plus" [ref=e33]
+          - text: 开通会员
+        - button "登 录" [ref=e34] [cursor=pointer]:
+          - generic [ref=e35]: 登 录
+  - main [ref=e36]:
+    - generic [ref=e37]:
+      - link [ref=e40] [cursor=pointer]:
+        - /url: https://discord.gg/Ykz7zbba3j
+        - img [ref=e41]
+      - generic [ref=e43]:
+        - alert [ref=e45]:
+          - img "info" [ref=e46]
+          - generic [ref=e48]: 将文件同步到 IPFS 网关可能需要大约两分钟。
+          - button "close" [ref=e49] [cursor=pointer]:
+            - img "close" [ref=e50]:
+              - img [ref=e51]
+        - generic [ref=e54]:
+          - generic [ref=e55]:
+            - generic [ref=e58]: 您的网站链接
+            - generic [ref=e60]:
+              - img "link" [ref=e61]
+              - generic [ref=e62] [cursor=pointer]: 生成中...
+          - generic [ref=e64]:
+            - img "link" [ref=e66]
+            - generic [ref=e67]: 自定义您的域名
+            - button "自定义域名" [ref=e69] [cursor=pointer]:
+              - generic [ref=e70]: 自定义域名
+        - generic [ref=e71]: 您上传项目的预览
+        - generic [ref=e79]:
+          - generic [ref=e80]: 📄
+          - generic [ref=e81]: 文件预览不可用
+          - generic [ref=e82]: 此文件类型无法在浏览器中预览。
+          - button "下载文件" [ref=e83] [cursor=pointer]:
+            - generic [ref=e84]: 下载文件
