@@ -1,6 +1,6 @@
 # Ultraman Magic Book - 项目需求说明书
 
-**版本**: 1.3.0  
+**版本**: 1.4.0  
 **日期**: 2026-04-20  
 **状态**: 正式版
 
@@ -492,6 +492,7 @@ npx vitest run --coverage
 
 | 版本 | 日期 | 变更 |
 |------|------|------|
+| 1.4.0 | 2026-04-20 | 翻页方式优化 (CP-004-20260420)：按钮热区64×48px、边缘安全距离16px、手势滑动翻页、移动端touch-action优化、图片拖拽阻止 |
 | 1.3.0 | 2026-04-20 | UI 重构 (CP-003-20260420)：CSS 变量系统增强、间距/阴影/圆角变量、starGlow 动画修复、FormButton 激活逻辑修复、Tablet 响应式断点、ARIA 可访问性增强 |
 | 1.2.0 | 2026-04-20 | 设计系统 DESIGN.md：创建设计系统文档、preview.html、preview-dark.html |
 | 1.1.0 | 2026-04-20 | 代码结构优化：组件拆分、数据外部化、useMagicBook Hook、图片懒加载、React.memo优化、playwright.config.js |
