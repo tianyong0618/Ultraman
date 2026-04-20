@@ -92,6 +92,9 @@ body {
   min-height: 600px;
   max-height: 90vh;
   transform-style: preserve-3d;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* ========================================
@@ -264,6 +267,9 @@ body {
 .book-pages.active {
   display: block;
   perspective: 1500px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .book-page.flip-out {
