@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ultraman Magic Book - Design Preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Sans+SC:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Design System Variables */
+    :root {
+      --magic-black: #1a0f0a;
+      --ancient-gold: #d4a84b;
+      --leather-brown: #5c3d2e;
+      --parchment: #f4e4c1;
+      --warm-white: #fffef5;
+      --ink-black: #2c1810;
+      --crimson: #8b2500;
+      --electric-blue: #00d4ff;
+      --flame-orange: #ff6b00;
+      --font-title: 'Cinzel', serif;
+      --font-body: 'Noto Sans SC', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--parchment);
+      color: var(--ink-black);
+      min-height: 100vh;
+      padding: 32px;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-title);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+      padding-bottom: 24px;
+      border-bottom: 3px solid var(--leather-brown);
+    }
+
+    header h1 {
+      font-size: 48px;
+      color: var(--leather-brown);
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 16px;
+      color: var(--leather-brown);
+      opacity: 0.7;
+    }
+
+    section {
+      margin-bottom: 48px;
+    }
+
+    section h2 {
+      font-size: 28px;
+      color: var(--leather-brown);
+      margin-bottom: 24px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--ancient-gold);
+    }
+
+    /* Color Swatches */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .color-swatch {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .color-preview {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .color-info {
+      padding: 12px;
+      background: white;
+    }
+
+    .color-name {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .color-hex {
+      font-family: monospace;
+      font-size: 13px;
+      color: #666;
+    }
+
+    .color-role {
+      font-size: 12px;
+      color: #999;
+      margin-top: 4px;
+    }
+
+    /* Typography Scale */
+    .type-scale {
+      display: grid;
+      gap: 24px;
+    }
+
+    .type-sample {
+      padding: 16px;
+      background: white;
+      border-radius: 8px;
+      border-left: 4px solid var(--ancient-gold);
+    }
+
+    .type-sample h1 { font-size: 48px; }
+    .type-sample h2 { font-size: 32px; }
+    .type-sample h3 { font-size: 24px; }
+    .type-sample p { font-size: 16px; line-height: 1.6; }
+    .type-sample small { font-size: 14px; }
+
+    .type-label {
+      font-size: 12px;
+      color: var(--leather-brown);
+      margin-bottom: 8px;
+    }
+
+    /* Buttons */
+    .button-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--crimson);
+      color: var(--warm-white);
+      border: 2px solid var(--ancient-gold);
+    }
+
+    .btn-primary:hover {
+      background: var(--flame-orange);
+      transform: scale(1.02);
+    }
+
+    .btn-secondary {
+      background: var(--electric-blue);
+      color: var(--ink-black);
+    }
+
+    .btn-gold {
+      font-family: var(--font-title);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--ink-black);
+      background: linear-gradient(180deg, #f4d03f 0%, #d4a84b 50%, #b8923f 100%);
+      border: 3px solid #f4d03f;
+      border-radius: 12px;
+      padding: 16px 48px;
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(212, 168, 75, 0.4);
+    }
+
+    .btn-tab {
+      padding: 6px 12px;
+      background: var(--leather-brown);
+      color: var(--parchment);
+      font-size: 12px;
+      opacity: 0.7;
+    }
+
+    .btn-tab.active {
+      opacity: 1;
+      background: var(--ancient-gold);
+      color: var(--ink-black);
+    }
+
+    /* Cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--parchment);
+      border: 3px solid var(--leather-brown);
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 0 2px var(--ancient-gold), 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    .card-title {
+      font-family: var(--font-title);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink-black);
+      margin-bottom: 8px;
+    }
+
+    .card-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink-black);
+      opacity: 0.8;
+    }
+
+    .card-badge {
+      display: inline-block;
+      font-size: 12px;
+      padding: 4px 8px;
+      background: var(--leather-brown);
+      color: var(--parchment);
+      border-radius: 4px;
+      margin-top: 8px;
+    }
+
+    /* Forms */
+    .form-sample {
+      display: flex;
+      gap: 8px;
+    }
+
+    .form-btn {
+      padding: 6px 12px;
+      background: var(--electric-blue);
+      color: var(--ink-black);
+      border: none;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .form-btn.active {
+      background: var(--crimson);
+      color: var(--warm-white);
+    }
+
+    /* Shadows */
+    .shadow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 24px;
+    }
+
+    .shadow-sample {
+      padding: 24px;
+      background: var(--parchment);
+      border-radius: 8px;
+    }
+
+    .shadow-subtle {
+      box-shadow: 0 0 0 2px var(--ancient-gold);
+    }
+
+    .shadow-medium {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    .shadow-strong {
+      box-shadow: 0 30px 80px rgba(0,0,0,0.9);
+    }
+
+    .shadow-glow {
+      box-shadow: 0 0 40px rgba(244, 208, 63, 0.3);
+    }
+
+    /* Layout */
+    .layout-sample {
+      display: flex;
+      gap: 16px;
+      padding: 16px;
+      background: var(--magic-black);
+      border-radius: 8px;
+    }
+
+    .layout-left {
+      width: 50%;
+      height: 200px;
+      background: linear-gradient(180deg, #e8d8b0 0%, var(--parchment) 20%);
+      border: 3px solid var(--leather-brown);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .layout-right {
+      width: 50%;
+      height: 200px;
+      background: var(--parchment);
+      border: 3px solid var(--leather-brown);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .layout-label {
+      font-family: var(--font-title);
+      font-size: 14px;
+      color: var(--leather-brown);
+    }
+
+    /* Do's and Don'ts */
+    .guidelines {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .guideline-list {
+      list-style: none;
+    }
+
+    .guideline-list li {
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .guideline-list li::before {
+      margin-right: 8px;
+      font-weight: bold;
+    }
+
+    .do-list li {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .do-list li::before {
+      content: "✓";
+    }
+
+    .dont-list li {
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    .dont-list li::before {
+      content: "✗";
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 2px solid var(--leather-brown);
+      font-size: 14px;
+      color: var(--leather-brown);
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Ultraman Magic Book</h1>
+      <p>Design System Preview - Light Theme</p>
+    </header>
+
+    <!-- Color Palette -->
+    <section>
+      <h2>Color Palette</h2>
+      <div class="color-grid">
+        <div class="color-swatch">
+          <div class="color-preview" style="background: #1a0f0a;">
+            <span style="color: #888;"> Magic Black</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Magic Black</div>
+            <div class="color-hex">#1a0f0a</div>
+            <div class="color-role">主背景色</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-preview" style="background: #d4a84b;">
+            <span style="color: #1a0f0a;"> Ancient Gold</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Ancient Gold</div>
+            <div class="color-hex">#d4a84b</div>
+            <div class="color-role">金色边框，标题</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-preview" style="background: #5c3d2e;">
+            <span style="color: #fff;"> Leather Brown</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Leather Brown</div>
+            <div class="color-hex">#5c3d2e</div>
+            <div class="color-role">封面，标题背景</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-preview" style="background: #f4e4c1;">
+            <span style="color: #333;"> Parchment</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Parchment</div>
+            <div class="color-hex">#f4e4c1</div>
+            <div class="color-role">书页背景，卡片</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-preview" style="background: #fffef5;">
+            <span style="color: #333;"> Warm White</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Warm White</div>
+            <div class="color-hex">#fffef5</div>
+            <div class="color-role">文字背景</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-preview" style="background: #2c1810;">
+            <span style="color: #f4e4c1;"> Ink Black</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Ink Black</div>
+            <div class="color-hex">#2c1810</div>
+            <div class="color-role">主要文字</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-preview" style="background: #8b2500;">
+            <span style="color: #fff;"> Crimson</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Crimson</div>
+            <div class="color-hex">#8b2500</div>
+            <div class="color-role">强调色，特效</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-preview" style="background: #00d4ff;">
+            <span style="color: #1a0f0a;"> Electric Blue</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Electric Blue</div>
+            <div class="color-hex">#00d4ff</div>
+            <div class="color-role">发光效果</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-preview" style="background: #ff6b00;">
+            <span style="color: #fff;"> Flame Orange</span>
+          </div>
+          <div class="color-info">
+            <div class="color-name">Flame Orange</div>
+            <div class="color-hex">#ff6b00</div>
+            <div class="color-role">技能特效</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Typography -->
+    <section>
+      <h2>Typography</h2>
+      <div class="type-scale">
+        <div class="type-sample">
+          <div class="type-label">主标题 - Cinzel 700 48px</div>
+          <h1>奥特曼魔法书</h1>
+        </div>
+        <div class="type-sample">
+          <div class="type-label">章节标题 - Cinzel 600 32px</div>
+          <h2>迪迦奥特曼</h2>
+        </div>
+        <div class="type-sample">
+          <div class="type-label">卡片标题 - Cinzel 700 24px</div>
+          <h3>胜利号飞燕二号</h3>
+        </div>
+        <div class="type-sample">
+          <div class="type-label">正文 - Noto Sans SC 400 16px</div>
+          <p>平成时代的代表作，讲述来自金字塔的巨人迪迦与队友们共同保卫地球的故事。</p>
+        </div>
+        <div class="type-sample">
+          <div class="type-label">说明文字 - Noto Sans SC 400 14px</div>
+          <small>身高：53米 | 体重：44000吨 | 飞行速度：马赫5</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- Buttons -->
+    <section>
+      <h2>Buttons</h2>
+      <div class="button-grid">
+        <button class="btn btn-primary">技能按钮</button>
+        <button class="btn btn-secondary">形态按钮</button>
+        <button class="btn btn-gold">开始阅读</button>
+        <button class="btn btn-tab">基本信息</button>
+        <button class="btn btn-tab active">详细信息</button>
+      </div>
+    </section>
+
+    <!-- Cards -->
+    <section>
+      <h2>Cards</h2>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">迪迦·奥特曼</div>
+          <div class="card-text">来自平成时代的巨人，光之巨人。</div>
+          <div class="card-badge">1996</div>
+        </div>
+        <div class="card">
+          <div class="card-title">戴拿·奥特曼</div>
+          <div class="card-text">继承迪迦意志的新一代英雄。</div>
+          <div class="card-badge">1997</div>
+        </div>
+        <div class="card">
+          <div class="card-title">盖亚·奥特曼</div>
+          <div class="card-text">大地意志的体现者。</div>
+          <div class="card-badge">1998</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Forms -->
+    <section>
+      <h2>Form Buttons</h2>
+      <div class="form-sample">
+        <button class="form-btn">复合型</button>
+        <button class="form-btn active">空中型</button>
+        <button class="form-btn">力量型</button>
+      </div>
+    </section>
+
+    <!-- Shadows -->
+    <section>
+      <h2>Depth & Elevation</h2>
+      <div class="shadow-grid">
+        <div class="shadow-sample shadow-subtle">
+          <div class="type-label">Subtle - Gold Border</div>
+        </div>
+        <div class="shadow-sample shadow-medium">
+          <div class="type-label">Medium - Page Depth</div>
+        </div>
+        <div class="shadow-sample shadow-strong" style="background: var(--magic-black);">
+          <div class="type-label" style="color: var(--parchment);">Strong - Cover Shadow</div>
+        </div>
+        <div class="shadow-sample" style="background: var(--magic-black); border: 2px solid var(--ancient-gold);">
+          <div class="type-label" style="color: var(--ancient-gold);">Glow - Gold Effect</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Layout -->
+    <section>
+      <h2>Layout Structure</h2>
+      <div class="layout-sample">
+        <div class="layout-left">
+          <span class="layout-label">Page Left (图像)</span>
+        </div>
+        <div class="layout-right">
+          <span class="layout-label">Page Right (信息)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Do's and Don'ts -->
+    <section>
+      <h2>Design Guidelines</h2>
+      <div class="guidelines">
+        <ul class="guideline-list do-list">
+          <li>Use Cinzel for all titles and headings</li>
+          <li>Apply gold border to cover</li>
+          <li>Use parchment for page backgrounds</li>
+          <li>Include 3D flip animations</li>
+          <li>Add glow effects on hover</li>
+          <li>Support touch swipe on mobile</li>
+        </ul>
+        <ul class="guideline-list dont-list">
+          <li>Use pure black (#000000)</li>
+          <li>Use pure white (#FFFFFF)</li>
+          <li>Skip leather texture on cover</li>
+          <li>Remove gold accents</li>
+          <li>Remove page flip animations</li>
+          <li>Make UI too dark for children</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      <p>Ultraman Magic Book Design System v1.0 | 2026-04-20</p>
+    </footer>
+  </div>
+</body>
+</html>
