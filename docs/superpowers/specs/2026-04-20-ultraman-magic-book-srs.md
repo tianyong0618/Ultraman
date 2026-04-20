@@ -211,6 +211,34 @@ const [imageLoadError, setImageLoadError] = useState({})  // 图片加载错误
 ```
 ultraman-magic-book/
 ├── .github/workflows/
+│   └── test.yml
+├── public/
+│   └── images/
+│       └── ultraman/
+├── src/
+│   ├── components/
+│   │   ├── BookCover.jsx      # 封面组件 (React.memo)
+│   │   ├── Navigation.jsx    # 导航组件
+│   │   ├── PageLeft.jsx       # 左页（图像）
+│   │   ├── UltramanInfo.jsx   # 信息区组件
+│   │   └── index.js           # 导出
+│   ├── data/
+│   │   └── ultraman.js       # 外部化数据
+│   ├── hooks/
+│   │   └── useMagicBook.js   # 状态管理 Hook
+│   ├── App.jsx               # 主入口（重构）
+│   └── index.css             # 全局样式
+├── tests/
+│   ├── app.test.jsx         # 单元测试
+│   ├── app.spec.js          # E2E测试
+│   ├── setup.js            # 测试配置
+│   └── testUtils.js        # 测试工具
+├── index.html
+├── vite.config.js
+└── package.json
+```
+ultraman-magic-book/
+├── .github/workflows/
 │   └── test.yml          # CI配置
 ├── public/
 │   └── images/
@@ -452,8 +480,9 @@ npx vitest run --coverage
 
 | 版本 | 日期 | 变更 |
 |------|------|------|
+| 1.1.0 | 2026-04-20 | 代码结构优化：组件拆分、数据外部化、useMagicBook Hook |
 | 1.0.0 | 2026-04-20 | 初始版本 |
-| - | 2026-04-16 | 设计规范 (docs/superpowers/specs/) |
+| - | 2026-04-16 | 设计规范 |
 
 ---
 

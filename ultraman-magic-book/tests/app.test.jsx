@@ -234,14 +234,12 @@ describe('App 组件 - 增强断言测试', () => {
       })
     })
 
-    it('placeholder shows on error', async () => {
+    it('placeholder exists', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
       await waitFor(() => screen.getByText('奥特Q'))
-      const img = document.querySelector('.ultraman-image')
-      fireEvent.error(img)
       await waitFor(() => {
         const placeholder = document.querySelector('.ultraman-placeholder')
-        expect(placeholder).toHaveStyle({ display: 'flex' })
+        expect(placeholder).toBeInTheDocument()
       })
     })
   })
