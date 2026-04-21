@@ -4,7 +4,13 @@
 
 ## 启动方式
 
-### 方式一：npm（推荐）
+### 方式一：启动脚本（推荐）
+```bash
+./scripts/start-dev.sh
+```
+访问：http://localhost:5173/
+
+### 方式二：npm
 ```bash
 cd ultraman-magic-book
 npm install
@@ -12,12 +18,9 @@ npm run dev
 ```
 访问：http://localhost:5173/
 
-### 方式二：Python（直接运行dist）
+### 方式三：Python（直接运行dist）
 ```bash
-# 构建
 npm run build
-
-# 启动Python服务器
 python3 -m http.server 9000 --directory dist
 ```
 访问：http://localhost:9000/
@@ -29,7 +32,7 @@ python3 -m http.server 9000 --directory dist
 - 左页：奥特曼图片
 - 右页：信息展示（简介/形态/技能/人间体/台词）
 - 形态切换
-- 翻页动画（桌面端：半页3D翻页；移动端：整页3D翻页）
+- 翻页方式：按钮点击 + 手势滑动（桌面端鼠标拖拽 / 移动端触摸滑动手势）
 
 ## 技术栈
 
