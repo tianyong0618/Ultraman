@@ -63,6 +63,7 @@ export const UltramanInfo = memo(function UltramanInfo({
       <div className="info-tabs" role="tablist" aria-label="信息分类">
         {infoLabels.map((label, idx) => (
           <button
+            key={label}
             role="tab"
             aria-selected={activeTab === idx}
             aria-controls={`tabpanel-${idx}`}
