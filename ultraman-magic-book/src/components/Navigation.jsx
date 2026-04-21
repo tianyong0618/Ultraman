@@ -1,24 +1,14 @@
 import { memo } from 'react'
 
-export const Navigation = memo(function Navigation({ currentPage, totalPages, onPrev, onNext, playAudio }) {
+export const Navigation = memo(function Navigation({ currentPage, totalPages, onPrev, onNext }) {
   const isFirstPage = currentPage === 0
   const isLastPage = currentPage === totalPages - 1
-
-  const handlePrev = () => {
-    onPrev()
-    if (playAudio) playAudio('name')
-  }
-
-  const handleNext = () => {
-    onNext()
-    if (playAudio) playAudio('name')
-  }
 
   return (
     <>
       <button
         className="nav-button prev"
-        onClick={handlePrev}
+        onClick={onPrev}
         disabled={isFirstPage}
         aria-label="上一页"
       >
@@ -26,7 +16,7 @@ export const Navigation = memo(function Navigation({ currentPage, totalPages, on
       </button>
       <button
         className="nav-button next"
-        onClick={handleNext}
+        onClick={onNext}
         disabled={isLastPage}
         aria-label="下一页"
       >

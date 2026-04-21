@@ -82,7 +82,6 @@ function App() {
           totalPages={totalPages}
           onPrev={goPrev}
           onNext={goNext}
-          playAudio={playAudio}
         />
       </div>
     </div>

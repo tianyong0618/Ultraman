@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1776668848684" clover="3.2.0">
+  <project timestamp="1776668848684" name="All files">
+    <metrics statements="70" coveredstatements="42" conditionals="46" coveredconditionals="29" methods="32" coveredmethods="13" elements="148" coveredelements="84" complexity="0" loc="70" ncloc="70" packages="4" files="9" classes="9"/>
+    <package name="src">
+      <metrics statements="8" coveredstatements="7" conditionals="6" coveredconditionals="5" methods="6" coveredmethods="4"/>
+      <file name="App.jsx" path="/Users/tianyong/Documents/works/workspace/tianyong/Ultraman/ultraman-magic-book/src/App.jsx">
+        <metrics statements="8" coveredstatements="7" conditionals="6" coveredconditionals="5" methods="6" coveredmethods="4"/>
+        <line num="22" count="78" type="stmt"/>
+        <line num="25" count="78" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="29" count="78" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="33" count="78" type="cond" truecount="2" falsecount="0"/>
+        <line num="34" count="35" type="stmt"/>
+        <line num="37" count="43" type="stmt"/>
+      </file>
+      <file name="index.css" path="/Users/tianyong/Documents/works/workspace/tianyong/Ultraman/ultraman-magic-book/src/index.css">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.components">
+      <metrics statements="17" coveredstatements="14" conditionals="30" coveredconditionals="24" methods="10" coveredmethods="7"/>
+      <file name="BookCover.jsx" path="/Users/tianyong/Documents/works/workspace/tianyong/Ultraman/ultraman-magic-book/src/components/BookCover.jsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="35" type="stmt"/>
+      </file>
+      <file name="Navigation.jsx" path="/Users/tianyong/Documents/works/workspace/tianyong/Ultraman/ultraman-magic-book/src/components/Navigation.jsx">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="32" type="stmt"/>
+        <line num="5" count="32" type="stmt"/>
+        <line num="7" count="32" type="stmt"/>
+      </file>
+      <file name="PageLeft.jsx" path="/Users/tianyong/Documents/works/workspace/tianyong/Ultraman/ultraman-magic-book/src/components/PageLeft.jsx">
+        <metrics statements="3" coveredstatements="2" conditionals="8" coveredconditionals="6" methods="2" coveredmethods="1"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="43" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+      </file>
+      <file name="UltramanInfo.jsx" path="/Users/tianyong/Documents/works/workspace/tianyong/Ultraman/ultraman-magic-book/src/components/UltramanInfo.jsx">
+        <metrics statements="8" coveredstatements="6" conditionals="22" coveredconditionals="18" methods="6" coveredmethods="4"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="40" type="stmt"/>
+        <line num="11" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="43" type="stmt"/>
+        <line num="32" count="215" type="stmt"/>
+        <line num="35" count="8" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+      </file>
+      <file name="index.js" path="/Users/tianyong/Documents/works/workspace/tianyong/Ultraman/ultraman-magic-book/src/components/index.js">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="src.data">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="ultraman.js" path="/Users/tianyong/Documents/works/workspace/tianyong/Ultraman/ultraman-magic-book/src/data/ultraman.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.hooks">
+      <metrics statements="42" coveredstatements="18" conditionals="10" coveredconditionals="0" methods="16" coveredmethods="2"/>
+      <file name="useMagicBook.js" path="/Users/tianyong/Documents/works/workspace/tianyong/Ultraman/ultraman-magic-book/src/hooks/useMagicBook.js">
+        <metrics statements="42" coveredstatements="18" conditionals="10" coveredconditionals="0" methods="16" coveredmethods="2"/>
+        <line num="5" count="78" type="stmt"/>
+        <line num="6" count="78" type="stmt"/>
+        <line num="7" count="78" type="stmt"/>
+        <line num="8" count="78" type="stmt"/>
+        <line num="9" count="78" type="stmt"/>
+        <line num="10" count="78" type="stmt"/>
+        <line num="11" count="78" type="stmt"/>
+        <line num="13" count="78" type="stmt"/>
+        <line num="15" count="78" type="stmt"/>
+        <line num="16" count="35" type="stmt"/>
+        <line num="17" count="35" type="stmt"/>
+        <line num="18" count="35" type="stmt"/>
+        <line num="19" count="35" type="stmt"/>
+        <line num="22" count="78" type="stmt"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="37" count="78" type="stmt"/>
+        <line num="38" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="52" count="78" type="stmt"/>
+        <line num="53" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="59" count="78" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="63" count="78" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

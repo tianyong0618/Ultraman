@@ -19,6 +19,15 @@ export function useMagicBook() {
     img.src = ultramanData[currentPage]?.image
   }, [currentPage])
 
+  useEffect(() => {
+    if (started && soundOn) {
+      const item = ultramanData[currentPage]
+      if (item) {
+        speak(item.name)
+      }
+    }
+  }, [currentPage, started, soundOn, speak])
+
   const goNext = useCallback(() => {
     if (currentPage < totalPages - 1 && !isFlipping) {
       setIsFlipping(true)
