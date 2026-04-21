@@ -399,8 +399,10 @@ body {
 .info-tabs {
   display: flex;
   gap: var(--space-xs);
-  margin-bottom: 12px;
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-lg);
   flex-wrap: wrap;
+  min-height: 24px;
 }
 
 .info-tab {
@@ -426,6 +428,7 @@ body {
   flex: 1;
   overflow-y: auto;
   overscroll-behavior: contain;
+  touch-action: pan-y;
 }
 
 .info-text {

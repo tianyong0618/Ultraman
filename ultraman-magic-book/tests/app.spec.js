@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('奥特曼魔法书', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('http://localhost:5173');
+    await page.evaluate(() => localStorage.setItem('currentPage', '0'));
   });
 
   test('首页加载', async ({ page }) => {
@@ -22,8 +23,8 @@ test.describe('奥特曼魔法书', () => {
     // 检查是否显示书页
     await expect(page.locator('.book-page')).toBeVisible();
     
-    // 检查第一页是奥特Q
-    await expect(page.locator('.ultraman-name')).toContainText('奥特Q');
+    // 检查第一页是初代奥特曼
+    await expect(page.locator('.ultraman-name')).toContainText('初代奥特曼');
   });
 
   test('翻页功能', async ({ page }) => {

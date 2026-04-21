@@ -52,7 +52,7 @@ export const UltramanInfo = memo(function UltramanInfo({
   activeForm,
   setActiveForm,
   onPlaySkill,
-  playTabAudio
+  playTabAudio,
 }) {
   const handleTabClick = (idx) => {
     setActiveTab(idx)

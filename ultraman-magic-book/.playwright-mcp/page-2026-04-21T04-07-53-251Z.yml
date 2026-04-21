@@ -1,0 +1,20 @@
+- generic [ref=e13]:
+  - button "🔊" [ref=e14] [cursor=pointer]
+  - generic [ref=e15]:
+    - generic [ref=e17]:
+      - img "奥特Q" [ref=e19]
+      - generic [ref=e20]:
+        - heading "奥特Q · 1966 · 昭和时期" [level=2] [ref=e21]
+        - tablist "信息分类" [ref=e22]:
+          - tab "简介" [selected] [ref=e23] [cursor=pointer]
+          - tab "形态" [ref=e24] [cursor=pointer]
+          - tab "技能" [ref=e25] [cursor=pointer]
+          - tab "人间体" [ref=e26] [cursor=pointer]
+          - tab "台词" [ref=e27] [cursor=pointer]
+        - tabpanel [ref=e29]: 圆谷首部特摄作品，日本特摄史上首部以怪兽为主角的特摄连续剧，共28集，讲述万城目淳、户川一平、江户川由利子三人遭遇的各种怪兽相关奇异事件。为空想科学特摄系列开山之作。
+        - generic [ref=e30]:
+          - paragraph [ref=e31]: 技能展示
+          - 'button "播放技能: 暂无技能" [ref=e32] [cursor=pointer]': ⚡ 暂无技能
+    - button "上一页" [disabled] [ref=e33]: ‹
+    - button "下一页" [ref=e34] [cursor=pointer]: ›
+    - paragraph [ref=e35]: 1 / 31
