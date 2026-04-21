@@ -50,7 +50,8 @@ export function useMagicBook() {
   }, [currentPage, isFlipping])
 
   const speak = useCallback((text) => {
-    if (!soundOn || !text) return
+    if (!soundOn || !text || typeof window === 'undefined') return
+    if (!window.speechSynthesis) return
     window.speechSynthesis.cancel()
     const utterance = new SpeechSynthesisUtterance(text)
     utterance.lang = 'zh-CN'
