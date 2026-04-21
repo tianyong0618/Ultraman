@@ -30,6 +30,6 @@ export const ultramanData = [
   { id: 29, name: '亚刻奥特曼', year: 2024, series: '亚刻奥特曼', era: '新生代', desc: '最新作品。亚刻源自日语「明るい」（明亮）。新时代的英雄。', forms: ['通常形态', '赛亚古形态'], skills: ['亚刻光线', '亚刻飞踢'], catchphrase: '亚刻！', human: '稚野源次（直接适能者）', color: '#9400D3', image: '/images/ultraman/31_亚刻.jpeg' },
 ]
 
-export const infoLabels = ['简介', '形态', '技能', '人间体', '台词']
+export const infoLabels = ['简介', '人间体', '台词', '形态']
 
 export const totalPages = 29

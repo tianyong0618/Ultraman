@@ -14,15 +14,18 @@ export function useMagicBook() {
 
   let audioPlayer = null
 
+  const sanitizeFilename = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_')
+
   const playAudioFile = useCallback((type) => {
-    if (!soundOn || typeof window === 'undefined') return
+    if (!soundOn || typeof window === 'undefined' || !current) return
     if (audioPlayer) {
       audioPlayer.pause()
       audioPlayer = null
     }
-    audioPlayer = new Audio(`/audio/${type}/${currentPage + 1}.mp3`)
+    const safeName = sanitizeFilename(current.name)
+    audioPlayer = new Audio(`/audio/${type}/${safeName}.mp3`)
     audioPlayer.play().catch(() => {})
-  }, [soundOn, currentPage])
+  }, [soundOn, current])
 
   useEffect(() => {
     const img = new Image()
@@ -69,7 +72,7 @@ export function useMagicBook() {
 
   const playTabAudio = useCallback((tabIndex) => {
     if (!soundOn) return
-    const typeMap = ['desc', 'forms', 'skills', 'human', 'catchphrase']
+    const typeMap = ['desc', 'human', 'catchphrase', 'forms']
     const type = typeMap[tabIndex]
     if (type) {
       playAudioFile(type)
@@ -77,13 +80,15 @@ export function useMagicBook() {
   }, [playAudioFile])
 
   const playSkill = useCallback((skillIndex) => {
-    if (!soundOn) return
-    const item = ultramanData[currentPage]
-    if (item && item.skills[skillIndex]) {
-      const audio = new Audio(`/audio/skills/${currentPage + 1}.mp3`)
+    if (!soundOn || !current) return
+    const skillName = current.skills[skillIndex]
+    if (skillName) {
+      const safeUltramanName = sanitizeFilename(current.name)
+      const safeSkillName = skillName.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_')
+      const audio = new Audio(`/audio/skills/${safeUltramanName}_${safeSkillName}.mp3`)
       audio.play().catch(() => {})
     }
-  }, [soundOn, currentPage])
+  }, [soundOn, current])
 
   const toggleSound = useCallback(() => {
     setSoundOn(prev => !prev)
