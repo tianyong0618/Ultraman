@@ -20,6 +20,8 @@ function App() {
     totalPages,
     goNext,
     goPrev,
+    playAudio,
+    playTabAudio,
     playSkill,
   } = useMagicBook()
 
@@ -41,7 +43,7 @@ function App() {
   }
 
   if (!started) {
-    return <BookCover onStart={() => setStarted(true)} />
+    return <BookCover onStart={() => { setStarted(true); playAudio('name') }} />
   }
 
   return (
@@ -70,6 +72,7 @@ function App() {
               activeForm={activeForm}
               setActiveForm={setActiveForm}
               onPlaySkill={playSkill}
+              playTabAudio={playTabAudio}
             />
           </div>
         </div>
@@ -79,6 +82,7 @@ function App() {
           totalPages={totalPages}
           onPrev={goPrev}
           onNext={goNext}
+          playAudio={playAudio}
         />
       </div>
     </div>

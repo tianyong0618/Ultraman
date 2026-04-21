@@ -51,8 +51,16 @@ export const UltramanInfo = memo(function UltramanInfo({
   setActiveTab,
   activeForm,
   setActiveForm,
-  onPlaySkill
+  onPlaySkill,
+  playTabAudio
 }) {
+  const handleTabClick = (idx) => {
+    setActiveTab(idx)
+    if (playTabAudio) {
+      playTabAudio(idx)
+    }
+  }
+
   return (
     <div className="page-right">
       <h2 className="ultraman-name">{current.name}</h2>
@@ -65,7 +73,7 @@ export const UltramanInfo = memo(function UltramanInfo({
             aria-selected={activeTab === idx}
             aria-controls={`tabpanel-${idx}`}
             className={`info-tab ${activeTab === idx ? 'active' : ''}`}
-            onClick={() => setActiveTab(idx)}
+            onClick={() => handleTabClick(idx)}
           >
             {label}
           </button>
