@@ -19,7 +19,6 @@ export const PageLeft = memo(function PageLeft({ current, imageError, onImageErr
       }} draggable="false" onDragStart={(e) => e.preventDefault()}>
         <span className="placeholder-text">{current.name.charAt(0)}</span>
       </div>
-      <p className="page-left-title">{current.era}</p>
     </div>
   )
 })

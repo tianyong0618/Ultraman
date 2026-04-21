@@ -63,8 +63,7 @@ export const UltramanInfo = memo(function UltramanInfo({
 
   return (
     <div className="page-right">
-      <h2 className="ultraman-name">{current.name}</h2>
-      <p className="ultraman-year">{current.year} · {current.series}</p>
+      <h2 className="ultraman-name">{current.name} · {current.year} · {current.era}</h2>
 
       <div className="info-tabs" role="tablist" aria-label="信息分类">
         {infoLabels.map((label, idx) => (
@@ -88,7 +87,7 @@ export const UltramanInfo = memo(function UltramanInfo({
         <p className="skills-title">技能展示</p>
         <button 
           className="skill-button" 
-          onClick={() => onPlaySkill(current.skills[0])}
+          onClick={() => onPlaySkill && onPlaySkill(0)}
           aria-label={`播放技能: ${current.skills[0] || '暂无技能'}`}
         >
           ⚡ {current.skills[0] || '暂无技能'}

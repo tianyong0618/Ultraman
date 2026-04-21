@@ -41,7 +41,7 @@ async function generateAudio(type, id, text) {
 
   try {
     execSync(
-      `npx edge-tts --voice "zh-CN-XiaoxiaoNeural" --file "${tempFile}" --write "${filePath}"`,
+      `edge-tts -f "${tempFile}" --write-media "${filePath}" --voice "zh-CN-XiaoxiaoNeural"`,
       { stdio: 'ignore' }
     )
     fs.unlinkSync(tempFile)

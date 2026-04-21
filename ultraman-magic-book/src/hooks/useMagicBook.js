@@ -12,6 +12,18 @@ export function useMagicBook() {
 
   const current = ultramanData[currentPage]
 
+  let audioPlayer = null
+
+  const playAudioFile = useCallback((type) => {
+    if (!soundOn || typeof window === 'undefined') return
+    if (audioPlayer) {
+      audioPlayer.pause()
+      audioPlayer = null
+    }
+    audioPlayer = new Audio(`/audio/${type}/${currentPage + 1}.mp3`)
+    audioPlayer.play().catch(() => {})
+  }, [soundOn, currentPage])
+
   useEffect(() => {
     const img = new Image()
     img.onload = () => setImageLoadError(prev => ({...prev, [currentPage]: false}))
@@ -20,13 +32,10 @@ export function useMagicBook() {
   }, [currentPage])
 
   useEffect(() => {
-    if (started && soundOn) {
-      const item = ultramanData[currentPage]
-      if (item) {
-        speak(item.name)
-      }
+    if (started && soundOn && current) {
+      playAudioFile('name')
     }
-  }, [currentPage, started, soundOn, speak])
+  }, [currentPage, started, soundOn, playAudioFile])
 
   const goNext = useCallback(() => {
     if (currentPage < totalPages - 1 && !isFlipping) {
@@ -58,49 +67,23 @@ export function useMagicBook() {
     }
   }, [currentPage, isFlipping])
 
-  const speak = useCallback((text) => {
-    if (!soundOn || !text || typeof window === 'undefined') return
-    if (!window.speechSynthesis) return
-    window.speechSynthesis.cancel()
-    const utterance = new SpeechSynthesisUtterance(text)
-    utterance.lang = 'zh-CN'
-    utterance.rate = 0.9
-    window.speechSynthesis.speak(utterance)
-  }, [soundOn])
-
-  const playAudio = useCallback((type) => {
-    if (!soundOn) return
-    const item = ultramanData[currentPage]
-    if (!item) return
-    
-    const textMap = {
-      name: item.name,
-      desc: item.desc,
-      forms: item.forms.length > 0 ? item.forms.join('、') : '无多种形态',
-      skills: item.skills.length > 0 ? item.skills.join('、') : '无技能数据',
-      human: item.human || '待补充',
-      catchphrase: item.catchphrase,
-    }
-    
-    if (textMap[type]) {
-      speak(textMap[type])
-    }
-  }, [soundOn, currentPage, speak])
-
   const playTabAudio = useCallback((tabIndex) => {
     if (!soundOn) return
     const typeMap = ['desc', 'forms', 'skills', 'human', 'catchphrase']
     const type = typeMap[tabIndex]
     if (type) {
-      playAudio(type)
+      playAudioFile(type)
     }
-  }, [playAudio])
+  }, [playAudioFile])
 
-  const playSkill = useCallback((skillName) => {
-    if (soundOn && skillName) {
-      speak(skillName)
+  const playSkill = useCallback((skillIndex) => {
+    if (!soundOn) return
+    const item = ultramanData[currentPage]
+    if (item && item.skills[skillIndex]) {
+      const audio = new Audio(`/audio/skills/${currentPage + 1}.mp3`)
+      audio.play().catch(() => {})
     }
-  }, [soundOn, speak])
+  }, [soundOn, currentPage])
 
   const toggleSound = useCallback(() => {
     setSoundOn(prev => !prev)
@@ -123,10 +106,9 @@ export function useMagicBook() {
     totalPages,
     goNext,
     goPrev,
-    playAudio,
+    playAudioFile,
     playTabAudio,
     playSkill,
     toggleSound,
-    speak,
   }
 }

@@ -425,6 +425,7 @@ body {
 .info-content {
   flex: 1;
   overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .info-text {

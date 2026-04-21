@@ -1,0 +1,8 @@
+- generic [ref=e4]:
+  - generic [ref=e6]: ✦
+  - generic [ref=e7]: ✦
+  - generic [ref=e8]: ✦
+  - generic [ref=e9]: ✦
+  - heading "奥特曼魔法书" [level=1] [ref=e10]
+  - paragraph [ref=e11]: ——ULTRAMAN MAGIC BOOK——
+  - button "✦ 开启旅程 ✦" [ref=e12] [cursor=pointer]

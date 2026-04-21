@@ -20,7 +20,7 @@ function App() {
     totalPages,
     goNext,
     goPrev,
-    playAudio,
+    playAudioFile,
     playTabAudio,
     playSkill,
   } = useMagicBook()
@@ -43,7 +43,7 @@ function App() {
   }
 
   if (!started) {
-    return <BookCover onStart={() => { setStarted(true); playAudio('name') }} />
+    return <BookCover onStart={() => { setStarted(true); playAudioFile('name') }} />
   }
 
   return (
