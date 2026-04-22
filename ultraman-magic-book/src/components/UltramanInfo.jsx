@@ -68,7 +68,7 @@ export const UltramanInfo = memo(function UltramanInfo({
 
   return (
     <div className="page-right">
-      <h2 className="ultraman-name">{current.name} · {current.year}
+      <h2 className="ultraman-name" style={{ textAlign: 'center' }}>{current.name} · {current.year}
         {currentFormData && <span className="current-form"> · {currentFormData.name}</span>}
       </h2>
 
