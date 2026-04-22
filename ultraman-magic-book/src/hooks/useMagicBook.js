@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { ultramanData, totalPages } from '../data/ultraman'
 
 export function useMagicBook() {
@@ -12,27 +12,65 @@ export function useMagicBook() {
 
   const current = ultramanData[currentPage]
 
-  let audioPlayer = null
+  const audioPlayerRef = useRef(null)
+  const preloadedAudioRef = useRef({})
 
   const sanitizeFilename = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_')
 
+  const preloadAudio = useCallback((type, name) => {
+    const key = `${type}/${name}`
+    if (!preloadedAudioRef.current[key]) {
+      const audio = new Audio(`/audio/${type}/${name}.mp3`)
+      audio.preload = 'auto'
+      preloadedAudioRef.current[key] = audio
+    }
+  }, [])
+
   const playAudioFile = useCallback((type) => {
     if (!soundOn || typeof window === 'undefined' || !current) return
-    if (audioPlayer) {
-      audioPlayer.pause()
-      audioPlayer = null
-    }
     const safeName = sanitizeFilename(current.name)
-    audioPlayer = new Audio(`/audio/${type}/${safeName}.mp3`)
-    audioPlayer.play().catch(() => {})
-  }, [soundOn, current])
+    const key = `${type}/${safeName}`
+    
+    if (audioPlayerRef.current) {
+      audioPlayerRef.current.pause()
+      audioPlayerRef.current = null
+    }
+    
+    if (preloadedAudioRef.current[key]) {
+      audioPlayerRef.current = preloadedAudioRef.current[key]
+      audioPlayerRef.current.currentTime = 0
+      const playPromise = audioPlayerRef.current.play()
+      if (playPromise) playPromise.catch(() => {})
+    } else {
+      audioPlayerRef.current = new Audio(`/audio/${type}/${safeName}.mp3`)
+      const playPromise = audioPlayerRef.current.play()
+      if (playPromise) playPromise.catch(() => {})
+      preloadAudio(type, safeName)
+    }
+  }, [soundOn, current, preloadAudio])
 
   useEffect(() => {
     const img = new Image()
     img.onload = () => setImageLoadError(prev => ({...prev, [currentPage]: false}))
     img.onerror = () => setImageLoadError(prev => ({...prev, [currentPage]: true}))
     img.src = ultramanData[currentPage]?.image
-  }, [currentPage])
+    
+    const preloadNext = currentPage < totalPages - 1 ? ultramanData[currentPage + 1]?.image : null
+    const preloadPrev = currentPage > 0 ? ultramanData[currentPage - 1]?.image : null
+    
+    if (preloadNext) {
+      const nextImg = new Image()
+      nextImg.src = preloadNext
+    }
+    if (preloadPrev) {
+      const prevImg = new Image()
+      prevImg.src = preloadPrev
+    }
+    
+    const safeName = sanitizeFilename(ultramanData[currentPage]?.name)
+    preloadAudio('name', safeName)
+    preloadAudio('human', safeName)
+  }, [currentPage, preloadAudio])
 
   useEffect(() => {
     if (started && soundOn && current) {
@@ -85,8 +123,26 @@ export function useMagicBook() {
     if (skillName) {
       const safeUltramanName = sanitizeFilename(current.name)
       const safeSkillName = skillName.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_')
-      const audio = new Audio(`/audio/skills/${safeUltramanName}_${safeSkillName}.mp3`)
-      audio.play().catch(() => {})
+      const key = `skills/${safeUltramanName}_${safeSkillName}`
+      
+      if (audioPlayerRef.current) {
+        audioPlayerRef.current.pause()
+        audioPlayerRef.current = null
+      }
+      
+      if (preloadedAudioRef.current[key]) {
+        audioPlayerRef.current = preloadedAudioRef.current[key]
+        audioPlayerRef.current.currentTime = 0
+        const playPromise = audioPlayerRef.current.play()
+        if (playPromise) playPromise.catch(() => {})
+      } else {
+        audioPlayerRef.current = new Audio(`/audio/skills/${safeUltramanName}_${safeSkillName}.mp3`)
+        const playPromise = audioPlayerRef.current.play()
+        if (playPromise) playPromise.catch(() => {})
+        const skillAudio = new Audio(`/audio/skills/${safeUltramanName}_${safeSkillName}.mp3`)
+        skillAudio.preload = 'auto'
+        preloadedAudioRef.current[key] = skillAudio
+      }
     }
   }, [soundOn, current])
 

@@ -43,7 +43,7 @@ test.describe('奥特曼魔法书', () => {
   test('滑动翻页功能', async ({ page }) => {
     await page.click('.start-button');
     
-    await expect(page.locator('.ultraman-name')).toContainText('奥特Q');
+    await expect(page.locator('.ultraman-name')).toContainText('初代奥特曼');
     
     const bookPages = page.locator('.book-pages');
     const box = await bookPages.boundingBox();
@@ -61,7 +61,7 @@ test.describe('奥特曼魔法书', () => {
     await page.click('.start-button');
     
     // 默认显示简介
-    await expect(page.locator('.info-text')).toContainText('圆谷首部特摄作品');
+    await expect(page.locator('.info-text')).toContainText('M78星云');
     
     // 点击形态Tab
     await page.click('.info-tab:has-text("形态")');
