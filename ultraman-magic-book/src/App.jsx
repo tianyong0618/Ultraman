@@ -16,6 +16,7 @@ function App() {
     setSoundOn,
     isFlipping,
     imageLoadError,
+    setImageLoadError,
     current,
     totalPages,
     goNext,
@@ -64,6 +65,7 @@ function App() {
               current={current} 
               imageError={imageLoadError}
               onImageError={handleImageError}
+              activeForm={activeForm}
             />
             <UltramanInfo 
               current={current}

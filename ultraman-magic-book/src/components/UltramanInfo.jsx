@@ -1,7 +1,11 @@
 import { memo } from 'react'
 import { infoLabels } from '../data/ultraman'
 
-const TabContent = memo(function TabContent({ activeTab, current }) {
+const TabContent = memo(function TabContent({ activeTab, current, activeForm, setActiveForm }) {
+  const handleFormClick = (idx) => {
+    setActiveForm(idx)
+  }
+
   return (
     <>
       {activeTab === 0 && (
@@ -24,11 +28,12 @@ const TabContent = memo(function TabContent({ activeTab, current }) {
           {current.forms.length > 0 ? (
             current.forms.map((form, idx) => (
               <button
-                key={form}
-                className="form-button"
-                aria-pressed={activeTab === 3}
+                key={form.name}
+                className={`form-button ${activeForm === idx ? 'active' : ''}`}
+                aria-pressed={activeForm === idx}
+                onClick={() => handleFormClick(idx)}
               >
-                {form}
+                {form.name}
               </button>
             ))
           ) : (
@@ -56,9 +61,16 @@ export const UltramanInfo = memo(function UltramanInfo({
     }
   }
 
+  const currentFormData = current.forms && current.forms.length > 0 ? current.forms[activeForm] : null
+  const displaySkills = currentFormData && currentFormData.skills && currentFormData.skills.length > 0
+    ? currentFormData.skills
+    : current.skills
+
   return (
     <div className="page-right">
-      <h2 className="ultraman-name">{current.name} · {current.year} · {current.era}</h2>
+      <h2 className="ultraman-name">{current.name} · {current.year} · {current.era}
+        {currentFormData && <span className="current-form"> · {currentFormData.name}</span>}
+      </h2>
 
       <div className="info-tabs" role="tablist" aria-label="信息分类">
         {infoLabels.map((label, idx) => (
@@ -76,14 +88,14 @@ export const UltramanInfo = memo(function UltramanInfo({
       </div>
 
       <div className="info-content">
-        <TabContent activeTab={activeTab} current={current} />
+        <TabContent activeTab={activeTab} current={current} activeForm={activeForm} setActiveForm={setActiveForm} />
       </div>
 
       <div className="skills-section">
         <p className="skills-title">技能展示</p>
         <div className="skills-list">
-          {current.skills.length > 0 ? (
-            current.skills.map((skill, idx) => (
+          {displaySkills.length > 0 ? (
+            displaySkills.map((skill, idx) => (
               <button
                 key={skill}
                 className="skill-button"

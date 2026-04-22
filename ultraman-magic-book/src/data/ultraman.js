@@ -1,33 +1,114 @@
 export const ultramanData = [
   { id: 1, name: '初代奥特曼', year: 1966, series: '初代奥特曼', era: '昭和时期', desc: '来自M78星云光之国的奥特战士，为了追捕宇宙怪兽百慕拉来到地球。是奥特系列第一位登场的奥特战士，被誉为起源的巨人。拥有彩色计时器，经典三分钟限制由此开始。', forms: [], skills: ['斯派修姆光线', '奥特屏障', '奥特水流'], catchphrase: '奥特曼！', human: '早田进', color: '#FF6B00', image: '/images/ultraman/02_初代.png' },
-  { id: 2, name: '赛文奥特曼', year: 1967, series: '赛文奥特曼', era: '昭和时期', desc: '来自M78星云的恒星观测员340号，起初为制作轨道图来到地球。后因感动于青年的英勇事迹自愿留在地球，加入奥特警备队。是赛罗奥特曼的父亲，奥特兄弟中的三哥。', forms: ['普通形态', '闪耀版'], skills: ['集束射线', '艾梅利射线', '头镖', '怪兽胶囊'], catchphrase: '赛文！', human: '诸星团（诸星弹）', color: '#FF0000', image: '/images/ultraman/03_赛文.jpg' },
+  { id: 2, name: '赛文奥特曼', year: 1967, series: '赛文奥特曼', era: '昭和时期', desc: '来自M78星云的恒星观测员340号，起初为制作轨道图来到地球。后因感动于青年的英勇事迹自愿留在地球，加入奥特警备队。是赛罗奥特曼的父亲，奥特兄弟中的三哥。', forms: [
+    { name: '普通形态', image: '/images/ultraman/03_赛文.jpg', skills: ['集束射线', '艾梅利射线'] },
+    { name: '闪耀版', image: '/images/ultraman/03_赛文.jpg', skills: ['闪耀集束射线'] }
+  ], skills: ['集束射线', '艾梅利射线', '头镖', '怪兽胶囊'], catchphrase: '赛文！', human: '诸星团（诸星弹）', color: '#FF0000', image: '/images/ultraman/03_赛文.jpg' },
   { id: 3, name: '杰克奥特曼', year: 1971, series: '杰克奥特曼', era: '昭和时期', desc: '原名《归来的奥特曼》。来自M78星云，是奥特兄弟中第一个带着正式驻防任务来到地球的战士。拥有万能武器奥特手镯，可变出多种武器作战。', forms: [], skills: ['流星飞踢', '斯派修姆光线', '奥特手镯', '希卡利玛光束'], catchphrase: '归来吧，奥特曼！', human: '乡秀树', color: '#FFD700', image: '/images/ultraman/04_杰克.png' },
   { id: 4, name: '艾斯奥特曼', year: 1972, series: '艾斯奥特曼', era: '昭和时期', desc: '为了粉碎异次元人亚波人侵略地球的野心，从超兽手中保护地球。将力量赐予北斗星司和南夕子两名青年。奥特兄弟中光线和超能力最多的战士，被誉为光线王子。', forms: [], skills: ['梅塔利姆光线', '艾斯电击踢', '奥特宏大光墙', '计时器光线'], catchphrase: '艾斯！', human: '北斗星司、南夕子', color: '#FF4500', image: '/images/ultraman/05_艾斯.jpeg' },
-  { id: 5, name: '泰罗奥特曼', year: 1973, series: '泰罗奥特曼', era: '昭和时期', desc: '奥特之父与奥特之母的亲生儿子，奥特兄弟第六位成员。拥有奥特兄弟中最强的战斗能力，可以使用奥特炸弹，是宇宙警备队首席教官，泰迦奥特曼的父亲。', forms: ['普通形态', '超级形态', '少年形态'], skills: ['斯特利姆光线', '奥特炸弹', '泰罗手镯'], catchphrase: '泰罗！', human: '东光太郎', color: '#FF6347', image: '/images/ultraman/06_泰罗.jpg' },
+  { id: 5, name: '泰罗奥特曼', year: 1973, series: '泰罗奥特曼', era: '昭和时期', desc: '奥特之父与奥特之母的亲生儿子，奥特兄弟第六位成员。拥有奥特兄弟中最强的战斗能力，可以使用奥特炸弹，是宇宙警备队首席教官，泰迦奥特曼的父亲。', forms: [
+    { name: '普通形态', image: '/images/ultraman/06_泰罗.jpg', skills: ['斯特利姆光线', '奥特炸弹'] },
+    { name: '超级形态', image: '/images/ultraman/06_泰罗.jpg', skills: ['斯特利姆光线'] },
+    { name: '少年形态', image: '/images/ultraman/06_泰罗.jpg', skills: ['泰罗手镯'] }
+  ], skills: ['斯特利姆光线', '奥特炸弹', '泰罗手镯'], catchphrase: '泰罗！', human: '东光太郎', color: '#FF6347', image: '/images/ultraman/06_泰罗.jpg' },
   { id: 6, name: '雷欧奥特曼', year: 1974, series: '雷欧奥特曼', era: '昭和时期', desc: '来自狮子座L77星球的炎之战士，故乡被马格马星人毁灭后流浪到地球。将地球当作第二故乡，在MAC队任职。擅长宇宙拳法，最强必杀技雷欧飞踢。', forms: [], skills: ['雷欧飞踢', '雷欧手刀', '透视能力', '宇宙拳法'], catchphrase: '雷欧！', human: '凤源', color: '#DC143C', image: '/images/ultraman/07_雷欧.webp' },
   { id: 7, name: '乔尼亚斯奥特曼', year: 1979, series: '乔尼亚斯奥特曼', era: '昭和时期', desc: '来自U40行星的奥特战士，日本首部动画版奥特曼。身高在昭和时期最高达70米。最显著特征是胸口的五角星计时器。', forms: [], skills: ['普兰尼姆光线', '流星火花', '断头回旋镖'], catchphrase: '乔尼亚斯！', human: '光超一郎', color: '#4169E1', image: '/images/ultraman/08_乔尼亚斯.png' },
   { id: 8, name: '爱迪奥特曼', year: 1980, series: '爱迪奥特曼', era: '昭和时期', desc: '昭和系列最后一部TV作品。被派遣至地球调查负能量与怪兽的关系。化身UGM队员矢的猛，同时担任中学理科教师。是昭和系唯一TV本篇无败绩的全能王。', forms: [], skills: ['沙库修姆光线', '爱迪飞踢', '蒙萨尔特飞踢'], catchphrase: '爱迪！', human: '矢的猛', color: '#9400D3', image: '/images/ultraman/09_爱迪.avif' },
   { id: 9, name: '葛雷奥特曼', year: 1990, series: '葛雷奥特曼', era: '昭和海外', desc: '澳大利亚制作的奥特曼作品。讲述葛雷为保护地球与怪兽战斗的故事。', forms: [], skills: ['葛雷光线', '葛雷火焰'], catchphrase: '葛雷！', human: '丹尼尔·科尔文', color: '#32CD32', image: '/images/ultraman/11_葛雷.webp' },
   { id: 10, name: '帕瓦特奥特曼', year: 1993, series: '帕瓦特奥特曼', era: '昭和海外', desc: '美国旧金山制作的奥特曼作品。帕瓦特是来自M78星云的奥特战士，与邪恶的宇宙人作战。', forms: [], skills: ['帕瓦特光线', '超级拳法'], catchphrase: '帕瓦特！', human: '健一（改名）', color: '#FF1493', image: '/images/ultraman/12_帕瓦特.webp' },
-  { id: 11, name: '迪迦奥特曼', year: 1996, series: '迪迦奥特曼', era: '平成时期', desc: '奥特曼30周年纪念作，开启平成时代。3000万年前超古代黑暗巨人，后受幽怜感召弃暗投明。与卡蜜拉、达拉姆、希特拉三大黑暗巨人决战获胜后获得三种形态。', forms: ['复合型', '空中型', '强力型', '闪耀型'], skills: ['哉佩利敖光线', '迪迦拉休尔光流', '兰帕尔特光弹', '迪迦计时器闪光'], catchphrase: '迪迦！', human: '圆大古', color: '#FFD700', image: '/images/ultraman/13_迪迦.jpg' },
-  { id: 12, name: '戴拿奥特曼', year: 1997, series: '戴拿奥特曼', era: '平成时期', desc: '迪迦的续作，来自宇宙的神秘之光。与宇宙飞行员飞鸟信合为一体。具有和迪迦相似却更极端的三形态转换能力。', forms: ['闪亮型', '奇迹型', '强壮型'], skills: ['索尔捷特光线', '立波留姆光弹', '强壮重击'], catchphrase: '戴拿！', human: '飞鸟信', color: '#00BFFF', image: '/images/ultraman/14_戴拿.jpeg' },
-  { id: 13, name: '盖亚奥特曼', year: 1998, series: '盖亚奥特曼', era: '平成时期', desc: '平成时期代表作品。盖亚是地球本身产生的光之巨人，与阿古茹形成双主角设定。代表大地的力量。', forms: ['V2型', 'V3型', '至高型'], skills: ['量子冲击', '盖亚粉碎', '光子冰刀'], catchphrase: '盖亚！', human: '高山我梦', color: '#8B0000', image: '/images/ultraman/15_盖亚.jpeg' },
-  { id: 14, name: '高斯奥特曼', year: 2001, series: '高斯奥特曼', era: '平成时期', desc: '强调和平共处理念的奥特战士。月神型代表温柔，日蚀型代表勇气。慈爱的战士，目标是与怪兽和平共处。', forms: ['月神型', '日蚀型', '最终型', '宇宙日蚀型'], skills: ['高斯月光', '日食破坏', '高斯提取'], catchphrase: '高斯！', human: '春野武藏', color: '#1E90FF', image: '/images/ultraman/16_高斯.avif' },
-  { id: 15, name: '奈克瑟斯奥特曼', year: 2004, series: '奈克瑟斯奥特曼', era: '平成时期', desc: '风格较黑暗的成人向作品。系列构成新颖，采用单元剧形式。是被诺亚奥特曼选中的适能者。', forms: ['幼年型', '青年型', '蓝色成年型', '红色成年型', '诺亚形态'], skills: ['奈克瑟斯光线', '十字风暴', '诺亚闪电'], catchphrase: 'Nexus！', human: '姬矢准（第一适能者）、千树怜、孤门一辉', color: '#4B0082', image: '/images/ultraman/17_奈克瑟斯.jpeg' },
+  { id: 11, name: '迪迦奥特曼', year: 1996, series: '迪迦奥特曼', era: '平成时期', desc: '奥特曼30周年纪念作，开启平成时代。3000万年前超古代黑暗巨人，后受幽怜感召弃暗投明。与卡蜜拉、达拉姆、希特拉三大黑暗巨人决战获胜后获得三种形态。', forms: [
+    { name: '复合型', image: '/images/ultraman/13_迪迦.jpg', skills: ['哉佩利敖光线'] },
+    { name: '空中型', image: '/images/ultraman/13_迪迦.jpg', skills: ['兰帕尔特光弹'] },
+    { name: '强力型', image: '/images/ultraman/13_迪迦.jpg', skills: ['迪迦拉休尔光流'] },
+    { name: '闪耀型', image: '/images/ultraman/13_迪迦.jpg', skills: ['迪迦计时器闪光'] }
+  ], skills: ['哉佩利敖光线', '迪迦拉休尔光流', '兰帕尔特光弹', '迪迦计时器闪光'], catchphrase: '迪迦！', human: '圆大古', color: '#FFD700', image: '/images/ultraman/13_迪迦.jpg' },
+  { id: 12, name: '戴拿奥特曼', year: 1997, series: '戴拿奥特曼', era: '平成时期', desc: '迪迦的续作，来自宇宙的神秘之光。与宇宙飞行员飞鸟信合为一体。具有和迪迦相似却更极端的三形态转换能力。', forms: [
+    { name: '闪亮型', image: '/images/ultraman/14_戴拿.jpeg', skills: ['索尔捷特光线'] },
+    { name: '奇迹型', image: '/images/ultraman/14_戴拿.jpeg', skills: ['立波留姆光弹'] },
+    { name: '强壮型', image: '/images/ultraman/14_戴拿.jpeg', skills: ['强壮重击'] }
+  ], skills: ['索尔捷特光线', '立波留姆光弹', '强壮重击'], catchphrase: '戴拿！', human: '飞鸟信', color: '#00BFFF', image: '/images/ultraman/14_戴拿.jpeg' },
+  { id: 13, name: '盖亚奥特曼', year: 1998, series: '盖亚奥特曼', era: '平成时期', desc: '平成时期代表作品。盖亚是地球本身产生的光之巨人，与阿古茹形成双主角设定。代表大地的力量。', forms: [
+    { name: 'V2型', image: '/images/ultraman/15_盖亚.jpeg', skills: ['量子冲击'] },
+    { name: 'V3型', image: '/images/ultraman/15_盖亚.jpeg', skills: [] },
+    { name: '至高型', image: '/images/ultraman/15_盖亚.jpeg', skills: ['盖亚粉碎', '光子冰刀'] }
+  ], skills: ['量子冲击', '盖亚粉碎', '光子冰刀'], catchphrase: '盖亚！', human: '高山我梦', color: '#8B0000', image: '/images/ultraman/15_盖亚.jpeg' },
+  { id: 14, name: '高斯奥特曼', year: 2001, series: '高斯奥特曼', era: '平成时期', desc: '强调和平共处理念的奥特战士。月神型代表温柔，日蚀型代表勇气。慈爱的战士，目标是与怪兽和平共处。', forms: [
+    { name: '月神型', image: '/images/ultraman/16_高斯.avif', skills: ['高斯月光'] },
+    { name: '日蚀型', image: '/images/ultraman/16_高斯.avif', skills: ['日食破坏'] },
+    { name: '最终型', image: '/images/ultraman/16_高斯.avif', skills: ['高斯提取'] },
+    { name: '宇宙日蚀型', image: '/images/ultraman/16_高斯.avif', skills: [] }
+  ], skills: ['高斯月光', '日食破坏', '高斯提取'], catchphrase: '高斯！', human: '春野武藏', color: '#1E90FF', image: '/images/ultraman/16_高斯.avif' },
+  { id: 15, name: '奈克瑟斯奥特曼', year: 2004, series: '奈克瑟斯奥特曼', era: '平成时期', desc: '风格较黑暗的成人向作品。系列构成新颖，采用单元剧形式。是被诺亚奥特曼选中的适能者。', forms: [
+    { name: '幼年型', image: '/images/ultraman/17_奈克瑟斯.jpeg', skills: [] },
+    { name: '青年型', image: '/images/ultraman/17_奈克瑟斯.jpeg', skills: [] },
+    { name: '蓝色成年型', image: '/images/ultraman/17_奈克瑟斯.jpeg', skills: ['十字风暴'] },
+    { name: '红色成年型', image: '/images/ultraman/17_奈克瑟斯.jpeg', skills: ['奈克瑟斯光线'] },
+    { name: '诺亚形态', image: '/images/ultraman/17_奈克瑟斯.jpeg', skills: ['诺亚闪电'] }
+  ], skills: ['奈克瑟斯光线', '十字风暴', '诺亚闪电'], catchphrase: 'Nexus！', human: '姬矢准（第一适能者）、千树怜、孤门一辉', color: '#4B0082', image: '/images/ultraman/17_奈克瑟斯.jpeg' },
   { id: 16, name: '麦克斯奥特曼', year: 2005, series: '麦克斯奥特曼', era: '平成时期', desc: '回归传统风格的奥托战士。拥有最快最强之名，擅长马库修姆光线等技能。', forms: [], skills: ['马库修姆光线', '麦克斯火花', '银河光击'], catchphrase: '麦克斯！', human: '东马快斗', color: '#FF0000', image: '/images/ultraman/18_麦克斯.jpeg' },
-  { id: 17, name: '梦比优斯奥特曼', year: 2006, series: '梦比优斯奥特曼', era: '平成时期', desc: '奥特曼40周年纪念作。来到地球后加入GUYS队，是昭和奥特的集大成之作。', forms: ['普通形态', '无限形态', '凤凰形态'], skills: ['梦比优斯光线', '梦比优斯爆裂', '扎古光线'], catchphrase: '梦比优斯！', human: '日比野未来', color: '#FF4500', image: '/images/ultraman/19_梦比优斯.jpeg' },
+  { id: 17, name: '梦比优斯奥特曼', year: 2006, series: '梦比优斯奥特曼', era: '平成时期', desc: '奥特曼40周年纪念作。来到地球后加入GUYS队，是昭和奥特的集大成之作。', forms: [
+    { name: '普通形态', image: '/images/ultraman/19_梦比优斯.jpeg', skills: ['梦比优斯光线'] },
+    { name: '无限形态', image: '/images/ultraman/19_梦比优斯.jpeg', skills: ['梦比优斯光线'] },
+    { name: '凤凰形态', image: '/images/ultraman/19_梦比优斯.jpeg', skills: ['梦比优斯爆裂', '扎古光线'] }
+  ], skills: ['梦比优斯光线', '梦比优斯爆裂', '扎古光线'], catchphrase: '梦比优斯！', human: '日比野未来', color: '#FF4500', image: '/images/ultraman/19_梦比优斯.jpeg' },
   { id: 18, name: '银河奥特曼', year: 2013, series: '银河奥特曼', era: '新生代', desc: '新生代开端之作。来自未来，与礼堂光融合作战。使用维克特路姆武装，擅长光线技。', forms: [], skills: ['银河闪电击', '维克特路姆光线'], catchphrase: '银河！', human: '礼堂光（直接合体）', color: '#FFD700', image: '/images/ultraman/20_银河.jpeg' },
   { id: 19, name: '银河S奥特曼', year: 2014, series: '银河奥特曼S', era: '新生代', desc: '银河的续作。礼堂光与维克特利安共同作战。', forms: [], skills: ['银河S闪电击', '宇宙维克特流'], catchphrase: '银河S！', human: '礼堂光、维克特利安', color: '#C0C0C0', image: '/images/ultraman/21_银河S.jpeg' },
-  { id: 20, name: '艾克斯奥特曼', year: 2015, series: '艾克斯奥特曼', era: '新生代', desc: '融合数码科技元素的奥特战士。可以将怪兽卡片实体化进行战斗。', forms: ['基础形态', '虚拟哥莫拉', '超越哥莫拉'], skills: ['艾克斯射线', '哥莫拉冲击', '虚拟哥莫拉装甲'], catchphrase: '艾克斯！', human: '大空大地', color: '#00FF7F', image: '/images/ultraman/22_艾克斯.jpeg' },
-  { id: 21, name: '欧布奥特曼', year: 2016, series: '欧布奥特曼', era: '新生代', desc: '可使用前辈力量的融合战士。欧布之意是O（起源）+β（融合）。通过读取卡片融合前辈力量变身。', forms: ['起源形态', '暴怒形态', '疾风形态', '暗耀形态', '辉煌形态'], skills: ['欧布高贾', 'Z修姆光轮', 'Z修姆加农'], catchphrase: '欧布！', human: '红凯', color: '#FF1493', image: '/images/ultraman/23_欧布.jpeg' },
-  { id: 22, name: '捷德奥特曼', year: 2017, series: '捷德奥特曼', era: '新生代', desc: '贝利亚之子。为证明自己不是贝利亚而战斗。使用贝利亚的胶囊提取力量。', forms: ['初始形态', '刚燃形态', '机敏形态', '尊捷形态', '终极形态'], skills: ['捷德毁灭光线', '毁灭拳击', '尊捷光轮'], catchphrase: '捷德！', human: '朝仓陆', color: '#DC143C', image: '/images/ultraman/24_捷德.jpeg' },
-  { id: 23, name: '罗布奥特曼', year: 2018, series: '罗布奥特曼', era: '新生代', desc: '兄弟二人变身的奥特战士。活海和勇海兄弟。与妹妹凑朝阳共同作战。', forms: ['罗索形态', '布鲁形态', '格罗布形态'], skills: ['罗布光轮', '格罗布漩涡', '火焰波浪'], catchphrase: '罗布！', human: '凑活海、凑勇海', color: '#FF6347', image: '/images/ultraman/25_罗布.jpeg' },
-  { id: 24, name: '泰迦奥特曼', year: 2019, series: '泰迦奥特曼', era: '新生代', desc: '泰罗之子，令和时代首作。 inherits 父亲的奥特炸弹。使用泰迦火花变身。', forms: ['光之绊形态', '泰塔斯形态', '风马形态', '煜形态'], skills: ['泰迦螺旋冲击', '光之芒', '奥特炸弹'], catchphrase: '泰迦！', human: '泰迦（泰罗之子）、工藤优幸', color: '#FF8C00', image: '/images/ultraman/26_泰迦.jpeg' },
-  { id: 25, name: '泽塔奥特曼', year: 2020, series: '泽塔奥特曼', era: '新生代', desc: '赛罗的弟子。使用泽塔升华器，读取勋章变形。使用阿尔法、贝塔、伽马三种形态。', forms: ['阿尔法形态', '贝塔形态', '伽马形态', '德尔塔形态'], skills: ['泽斯蒂姆光线', '阿尔法爆碎', '贝塔粉碎击'], catchphrase: '泽塔！', human: '夏川遥辉', color: '#1E90FF', image: '/images/ultraman/27_泽塔.png' },
-  { id: 26, name: '特利迦奥特曼', year: 2021, series: '特利迦奥特曼', era: '新生代', desc: '迪迦精神续作。汲取平成三杰的力量，是特利迦、戴拿、盖亚的融合。被称为新时代迪迦。', forms: ['复合形态', '强力形态', '空中形态', '永恒核心形态'], skills: ['特利迦螺旋', '哉拉修尔光线', '迪拉修尔光流'], catchphrase: '特利迦！', human: '真中剑悟', color: '#FFD700', image: '/images/ultraman/28_特利迦.png' },
-  { id: 27, name: '德凯奥特曼', year: 2022, series: '德凯奥特曼', era: '新生代', desc: '特利迦续作。被称为令和版戴拿。使用闪烁密钥变形。', forms: ['闪亮形态', '强劲形态', '奇迹形态', '光辉形态'], skills: ['德凯闪亮光线', '德凯冲击', '奇迹光束'], catchphrase: '德凯！', human: '龙门神藏（直接适能者）', color: '#00CED1', image: '/images/ultraman/29_德凯.jpeg' },
-  { id: 28, name: '布莱泽奥特曼', year: 2023, series: '布莱泽奥特曼', era: '新生代', desc: '原始野性风格的新作。贴近自然的战斗方式，使用布莱泽之弓作战。', forms: ['通常形态', '甲胄形态'], skills: ['布莱泽脉冲', '布莱泽之弓', '阿基托斯'], catchphrase: '布莱泽！', human: '菱川见川（直接适能者）', color: '#228B22', image: '/images/ultraman/30_布莱泽.jpeg' },
-  { id: 29, name: '亚刻奥特曼', year: 2024, series: '亚刻奥特曼', era: '新生代', desc: '最新作品。亚刻源自日语「明るい」（明亮）。新时代的英雄。', forms: ['通常形态', '赛亚古形态'], skills: ['亚刻光线', '亚刻飞踢'], catchphrase: '亚刻！', human: '稚野源次（直接适能者）', color: '#9400D3', image: '/images/ultraman/31_亚刻.jpeg' },
+  { id: 20, name: '艾克斯奥特曼', year: 2015, series: '艾克斯奥特曼', era: '新生代', desc: '融合数码科技元素的奥特战士。可以将怪兽卡片实体化进行战斗。', forms: [
+    { name: '基础形态', image: '/images/ultraman/22_艾克斯.jpeg', skills: ['艾克斯射线'] },
+    { name: '虚拟哥莫拉', image: '/images/ultraman/22_艾克斯.jpeg', skills: ['哥莫拉冲击', '虚拟哥莫拉装甲'] },
+    { name: '超越哥莫拉', image: '/images/ultraman/22_艾克斯.jpeg', skills: [] }
+  ], skills: ['艾克斯射线', '哥莫拉冲击', '虚拟哥莫拉装甲'], catchphrase: '艾克斯！', human: '大空大地', color: '#00FF7F', image: '/images/ultraman/22_艾克斯.jpeg' },
+  { id: 21, name: '欧布奥特曼', year: 2016, series: '欧布奥特曼', era: '新生代', desc: '可使用前辈力量的融合战士。欧布之意是O（起源）+β（融合）。通过读取卡片融合前辈力量变身。', forms: [
+    { name: '起源形态', image: '/images/ultraman/23_欧布.jpeg', skills: ['欧布高贾'] },
+    { name: '暴怒形态', image: '/images/ultraman/23_欧布.jpeg', skills: [] },
+    { name: '疾风形态', image: '/images/ultraman/23_欧布.jpeg', skills: [] },
+    { name: '暗耀形态', image: '/images/ultraman/23_欧布.jpeg', skills: ['Z修姆加农'] },
+    { name: '辉煌形态', image: '/images/ultraman/23_欧布.jpeg', skills: ['Z修姆光轮'] }
+  ], skills: ['欧布高贾', 'Z修姆光轮', 'Z修姆加农'], catchphrase: '欧布！', human: '红凯', color: '#FF1493', image: '/images/ultraman/23_欧布.jpeg' },
+  { id: 22, name: '捷德奥特曼', year: 2017, series: '捷德奥特曼', era: '新生代', desc: '贝利亚之子。为证明自己不是贝利亚而战斗。使用贝利亚的胶囊提取力量。', forms: [
+    { name: '初始形态', image: '/images/ultraman/24_捷德.jpeg', skills: [] },
+    { name: '刚燃形态', image: '/images/ultraman/24_捷德.jpeg', skills: ['毁灭拳击'] },
+    { name: '机敏形态', image: '/images/ultraman/24_捷德.jpeg', skills: [] },
+    { name: '尊捷形态', image: '/images/ultraman/24_捷德.jpeg', skills: ['尊捷光轮'] },
+    { name: '终极形态', image: '/images/ultraman/24_捷德.jpeg', skills: ['捷德毁灭光线'] }
+  ], skills: ['捷德毁灭光线', '毁灭拳击', '尊捷光轮'], catchphrase: '捷德！', human: '朝仓陆', color: '#DC143C', image: '/images/ultraman/24_捷德.jpeg' },
+  { id: 23, name: '罗布奥特曼', year: 2018, series: '罗布奥特曼', era: '新生代', desc: '兄弟二人变身的奥特战士。活海和勇海兄弟。与妹妹凑朝阳共同作战。', forms: [
+    { name: '罗索形态', image: '/images/ultraman/25_罗布.jpeg', skills: ['罗布光轮'] },
+    { name: '布鲁形态', image: '/images/ultraman/25_罗布.jpeg', skills: [] },
+    { name: '格罗布形态', image: '/images/ultraman/25_罗布.jpeg', skills: ['格罗布漩涡', '火焰波浪'] }
+  ], skills: ['罗布光轮', '格罗布漩涡', '火焰波浪'], catchphrase: '罗布！', human: '凑活海、凑勇海', color: '#FF6347', image: '/images/ultraman/25_罗布.jpeg' },
+  { id: 24, name: '泰迦奥特曼', year: 2019, series: '泰迦奥特曼', era: '新生代', desc: '泰罗之子，令和时代首作。 inherits 父亲的奥特炸弹。使用泰迦火花变身。', forms: [
+    { name: '光之绊形态', image: '/images/ultraman/26_泰迦.jpeg', skills: ['泰迦螺旋冲击'] },
+    { name: '泰塔斯形态', image: '/images/ultraman/26_泰迦.jpeg', skills: [] },
+    { name: '风马形态', image: '/images/ultraman/26_泰迦.jpeg', skills: [] },
+    { name: '煜形态', image: '/images/ultraman/26_泰迦.jpeg', skills: ['光之芒', '奥特炸弹'] }
+  ], skills: ['泰迦螺旋冲击', '光之芒', '奥特炸弹'], catchphrase: '泰迦！', human: '泰迦（泰罗之子）、工藤优幸', color: '#FF8C00', image: '/images/ultraman/26_泰迦.jpeg' },
+  { id: 25, name: '泽塔奥特曼', year: 2020, series: '泽塔奥特曼', era: '新生代', desc: '赛罗的弟子。使用泽塔升华器，读取勋章变形。使用阿尔法、贝塔、伽马三种形态。', forms: [
+    { name: '阿尔法形态', image: '/images/ultraman/27_泽塔.png', skills: ['阿尔法爆碎'] },
+    { name: '贝塔形态', image: '/images/ultraman/27_泽塔.png', skills: ['贝塔粉碎击'] },
+    { name: '伽马形态', image: '/images/ultraman/27_泽塔.png', skills: [] },
+    { name: '德尔塔形态', image: '/images/ultraman/27_泽塔.png', skills: ['泽斯蒂姆光线'] }
+  ], skills: ['泽斯蒂姆光线', '阿尔法爆碎', '贝塔粉碎击'], catchphrase: '泽塔！', human: '夏川遥辉', color: '#1E90FF', image: '/images/ultraman/27_泽塔.png' },
+  { id: 26, name: '特利迦奥特曼', year: 2021, series: '特利迦奥特曼', era: '新生代', desc: '迪迦精神续作。汲取平成三杰的力量，是特利迦、戴拿、盖亚的融合。被称为新时代迪迦。', forms: [
+    { name: '复合形态', image: '/images/ultraman/28_特利迦.png', skills: ['哉拉修尔光线'] },
+    { name: '强力形态', image: '/images/ultraman/28_特利迦.png', skills: ['迪拉修尔光流'] },
+    { name: '空中形态', image: '/images/ultraman/28_特利迦.png', skills: [] },
+    { name: '永恒核心形态', image: '/images/ultraman/28_特利迦.png', skills: ['特利迦螺旋'] }
+  ], skills: ['特利迦螺旋', '哉拉修尔光线', '迪拉修尔光流'], catchphrase: '特利迦！', human: '真中剑悟', color: '#FFD700', image: '/images/ultraman/28_特利迦.png' },
+  { id: 27, name: '德凯奥特曼', year: 2022, series: '德凯奥特曼', era: '新生代', desc: '特利迦续作。被称为令和版戴拿。使用闪烁密钥变形。', forms: [
+    { name: '闪亮形态', image: '/images/ultraman/29_德凯.jpeg', skills: ['德凯闪亮光线'] },
+    { name: '强劲形态', image: '/images/ultraman/29_德凯.jpeg', skills: ['德凯冲击'] },
+    { name: '奇迹形态', image: '/images/ultraman/29_德凯.jpeg', skills: ['奇迹光束'] },
+    { name: '光辉形态', image: '/images/ultraman/29_德凯.jpeg', skills: ['德凯闪亮光线'] }
+  ], skills: ['德凯闪亮光线', '德凯冲击', '奇迹光束'], catchphrase: '德凯！', human: '龙门神藏（直接适能者）', color: '#00CED1', image: '/images/ultraman/29_德凯.jpeg' },
+  { id: 28, name: '布莱泽奥特曼', year: 2023, series: '布莱泽奥特曼', era: '新生代', desc: '原始野性风格的新作。贴近自然的战斗方式，使用布莱泽之弓作战。', forms: [
+    { name: '通常形态', image: '/images/ultraman/30_布莱泽.jpeg', skills: ['布莱泽脉冲', '布莱泽之弓'] },
+    { name: '甲胄形态', image: '/images/ultraman/30_布莱泽.jpeg', skills: ['阿基托斯'] }
+  ], skills: ['布莱泽脉冲', '布莱泽之弓', '阿基托斯'], catchphrase: '布莱泽！', human: '菱川见川（直接适能者）', color: '#228B22', image: '/images/ultraman/30_布莱泽.jpeg' },
+  { id: 29, name: '亚刻奥特曼', year: 2024, series: '亚刻奥特曼', era: '新生代', desc: '最新作品。亚刻源自日语「明るい」（明亮）。新时代的英雄。', forms: [
+    { name: '通常形态', image: '/images/ultraman/31_亚刻.jpeg', skills: ['亚刻光线', '亚刻飞踢'] },
+    { name: '赛亚古形态', image: '/images/ultraman/31_亚刻.jpeg', skills: [] }
+  ], skills: ['亚刻光线', '亚刻飞踢'], catchphrase: '亚刻！', human: '稚野源次（直接适能者）', color: '#9400D3', image: '/images/ultraman/31_亚刻.jpeg' },
 ]
 
 export const infoLabels = ['简介', '人间体', '台词', '形态']
