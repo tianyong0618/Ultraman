@@ -111,6 +111,6 @@ export const ultramanData = [
   ], skills: ['亚刻光线', '亚刻飞踢'], catchphrase: '亚刻！', human: '稚野源次（直接适能者）', color: '#9400D3', image: '/images/ultraman/31_亚刻.jpg' },
 ]
 
-export const infoLabels = ['简介', '人间体', '台词', '形态']
+export const infoLabels = ['形态', '简介', '人间体', '台词']
 
 export const totalPages = 29

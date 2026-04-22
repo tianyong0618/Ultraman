@@ -9,21 +9,6 @@ const TabContent = memo(function TabContent({ activeTab, current, activeForm, se
   return (
     <>
       {activeTab === 0 && (
-        <p className="info-text" id="tabpanel-0" role="tabpanel">
-          {current.desc}
-        </p>
-      )}
-      {activeTab === 1 && (
-        <p className="info-text" id="tabpanel-1" role="tabpanel">
-          {current.human || '待补充'}
-        </p>
-      )}
-      {activeTab === 2 && (
-        <p className="info-text" id="tabpanel-2" role="tabpanel" style={{ fontStyle: 'italic' }}>
-          "{current.catchphrase}"
-        </p>
-      )}
-      {activeTab === 3 && (
         <div className="forms-list" role="group" aria-label="形态选择">
           {current.forms.length > 0 ? (
             current.forms.map((form, idx) => (
@@ -37,9 +22,24 @@ const TabContent = memo(function TabContent({ activeTab, current, activeForm, se
               </button>
             ))
           ) : (
-            <p className="info-text">无多种形态</p>
+            <button className="form-button active">普通形态</button>
           )}
         </div>
+      )}
+      {activeTab === 1 && (
+        <p className="info-text" id="tabpanel-1" role="tabpanel">
+          {current.desc}
+        </p>
+      )}
+      {activeTab === 2 && (
+        <p className="info-text" id="tabpanel-2" role="tabpanel">
+          {current.human || '待补充'}
+        </p>
+      )}
+      {activeTab === 3 && (
+        <p className="info-text" id="tabpanel-3" role="tabpanel" style={{ fontStyle: 'italic' }}>
+          "{current.catchphrase}"
+        </p>
       )}
     </>
   )
@@ -69,7 +69,7 @@ export const UltramanInfo = memo(function UltramanInfo({
   return (
     <div className="page-right">
       <h2 className="ultraman-name" style={{ textAlign: 'center' }}>{current.name} · {current.year}
-        {currentFormData && <span className="current-form"> · {currentFormData.name}</span>}
+        {currentFormData && currentFormData.name !== '普通形态' && <span className="current-form"> · {currentFormData.name}</span>}
       </h2>
 
       <div className="info-tabs" role="tablist" aria-label="信息分类">
