@@ -1,9 +1,9 @@
 export const ultramanData = [
   { id: 1, name: '初代奥特曼', year: 1966, series: '初代奥特曼', era: '昭和时期', desc: '来自M78星云光之国的奥特战士，为了追捕宇宙怪兽百慕拉来到地球。是奥特系列第一位登场的奥特战士，被誉为起源的巨人。拥有彩色计时器，经典三分钟限制由此开始。', forms: [], skills: ['斯派修姆光线', '奥特屏障', '奥特水流'], catchphrase: '奥特曼！', human: '早田进', color: '#FF6B00', image: '/images/ultraman/02_初代.png' },
   { id: 2, name: '赛文奥特曼', year: 1967, series: '赛文奥特曼', era: '昭和时期', desc: '来自M78星云的恒星观测员340号，起初为制作轨道图来到地球。后因感动于青年的英勇事迹自愿留在地球，加入奥特警备队。是赛罗奥特曼的父亲，奥特兄弟中的三哥。', forms: [
-    { name: '普通形态', image: '/images/ultraman/03_赛文.jpg', skills: ['集束射线', '艾梅利射线'] },
+    { name: '普通形态', image: '/images/ultraman/03_赛文.jpg', skills: ['集束射线', '艾梅利光线'] },
     { name: '闪耀版', image: '/images/ultraman/03_赛文_闪耀版.jpg', skills: ['闪耀集束射线'] }
-  ], skills: ['集束射线', '艾梅利射线', '头镖', '怪兽胶囊'], catchphrase: '赛文！', human: '诸星团（诸星弹）', color: '#FF0000', image: '/images/ultraman/03_赛文.jpg' },
+  ], skills: ['集束射线', '艾梅利光线', '头镖', '怪兽胶囊'], catchphrase: '赛文！', human: '诸星团（诸星弹）', color: '#FF0000', image: '/images/ultraman/03_赛文.jpg' },
   { id: 3, name: '杰克奥特曼', year: 1971, series: '杰克奥特曼', era: '昭和时期', desc: '原名《归来的奥特曼》。来自M78星云，是奥特兄弟中第一个带着正式驻防任务来到地球的战士。拥有万能武器奥特手镯，可变出多种武器作战。', forms: [], skills: ['流星飞踢', '斯派修姆光线', '奥特手镯', '希卡利玛光束'], catchphrase: '归来吧，奥特曼！', human: '乡秀树', color: '#FFD700', image: '/images/ultraman/04_杰克.png' },
   { id: 4, name: '艾斯奥特曼', year: 1972, series: '艾斯奥特曼', era: '昭和时期', desc: '为了粉碎异次元人亚波人侵略地球的野心，从超兽手中保护地球。将力量赐予北斗星司和南夕子两名青年。奥特兄弟中光线和超能力最多的战士，被誉为光线王子。', forms: [], skills: ['梅塔利姆光线', '艾斯电击踢', '奥特宏大光墙', '计时器光线'], catchphrase: '艾斯！', human: '北斗星司、南夕子', color: '#FF4500', image: '/images/ultraman/05_艾斯.jpeg' },
   { id: 5, name: '泰罗奥特曼', year: 1973, series: '泰罗奥特曼', era: '昭和时期', desc: '奥特之父与奥特之母的亲生儿子，奥特兄弟第六位成员。拥有奥特兄弟中最强的战斗能力，可以使用奥特炸弹，是宇宙警备队首席教官，泰迦奥特曼的父亲。', forms: [
@@ -14,8 +14,8 @@ export const ultramanData = [
   { id: 6, name: '雷欧奥特曼', year: 1974, series: '雷欧奥特曼', era: '昭和时期', desc: '来自狮子座L77星球的炎之战士，故乡被马格马星人毁灭后流浪到地球。将地球当作第二故乡，在MAC队任职。擅长宇宙拳法，最强必杀技雷欧飞踢。', forms: [], skills: ['雷欧飞踢', '雷欧手刀', '透视能力', '宇宙拳法'], catchphrase: '雷欧！', human: '凤源', color: '#DC143C', image: '/images/ultraman/07_雷欧.webp' },
   { id: 7, name: '乔尼亚斯奥特曼', year: 1979, series: '乔尼亚斯奥特曼', era: '昭和时期', desc: '来自U40行星的奥特战士，日本首部动画版奥特曼。身高在昭和时期最高达70米。最显著特征是胸口的五角星计时器。', forms: [], skills: ['普兰尼姆光线', '流星火花', '断头回旋镖'], catchphrase: '乔尼亚斯！', human: '光超一郎', color: '#4169E1', image: '/images/ultraman/08_乔尼亚斯.png' },
   { id: 8, name: '爱迪奥特曼', year: 1980, series: '爱迪奥特曼', era: '昭和时期', desc: '昭和系列最后一部TV作品。被派遣至地球调查负能量与怪兽的关系。化身UGM队员矢的猛，同时担任中学理科教师。是昭和系唯一TV本篇无败绩的全能王。', forms: [], skills: ['沙库修姆光线', '爱迪飞踢', '蒙萨尔特飞踢'], catchphrase: '爱迪！', human: '矢的猛', color: '#9400D3', image: '/images/ultraman/09_爱迪.avif' },
-  { id: 9, name: '葛雷奥特曼', year: 1990, series: '葛雷奥特曼', era: '昭和海外', desc: '澳大利亚制作的奥特曼作品。讲述葛雷为保护地球与怪兽战斗的故事。', forms: [], skills: ['葛雷光线', '葛雷火焰'], catchphrase: '葛雷！', human: '丹尼尔·科尔文', color: '#32CD32', image: '/images/ultraman/11_葛雷.webp' },
-  { id: 10, name: '帕瓦特奥特曼', year: 1993, series: '帕瓦特奥特曼', era: '昭和海外', desc: '美国旧金山制作的奥特曼作品。帕瓦特是来自M78星云的奥特战士，与邪恶的宇宙人作战。', forms: [], skills: ['帕瓦特光线', '超级拳法'], catchphrase: '帕瓦特！', human: '健一（改名）', color: '#FF1493', image: '/images/ultraman/12_帕瓦特.webp' },
+  { id: 9, name: '葛雷奥特曼', year: 1990, series: '葛雷奥特曼', era: '昭和海外', desc: '澳大利亚制作的第一部海外奥特曼作品。来自M78星云光之国，与宇宙生物戈迪斯战斗的奥特战士。', forms: [], skills: ['葛雷光线', '葛雷火焰'], catchphrase: '葛雷！', human: '杰克·辛多', color: '#32CD32', image: '/images/ultraman/11_葛雷.webp' },
+  { id: 10, name: '帕瓦特奥特曼', year: 1993, series: '帕瓦特奥特曼', era: '昭和海外', desc: '美国旧金山制作的奥特曼作品。来自M78星云的银色奥特战士，与宇宙人巴尔坦星人战斗。', forms: [], skills: ['Mega斯派修姆光线', '超级拳法'], catchphrase: '帕瓦特！', human: '甲斐健一', color: '#FF1493', image: '/images/ultraman/12_帕瓦特.webp' },
   { id: 11, name: '迪迦奥特曼', year: 1996, series: '迪迦奥特曼', era: '平成时期', desc: '奥特曼30周年纪念作，开启平成时代。3000万年前超古代黑暗巨人，后受幽怜感召弃暗投明。与卡蜜拉、达拉姆、希特拉三大黑暗巨人决战获胜后获得三种形态。', forms: [
     { name: '复合型', image: '/images/ultraman/13_迪迦.jpg', skills: ['哉佩利敖光线'] },
     { name: '空中型', image: '/images/ultraman/13_迪迦_空中型.jpg', skills: ['兰帕尔特光弹'] },
