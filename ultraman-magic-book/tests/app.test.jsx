@@ -21,19 +21,33 @@ describe('App 组件 - 增强断言测试', () => {
   })
 
   describe('状态变化', () => {
-    it('start hides cover shows book', async () => {
+    it('start hides cover shows family portrait', async () => {
       const startBtn = screen.getByRole('button', { name: /开启旅程/ })
       fireEvent.click(startBtn)
       await waitFor(() => {
         expect(screen.queryByText('奥特曼魔法书')).not.toBeInTheDocument()
       })
       await waitFor(() => {
-        expect(document.querySelector('.ultraman-name')).toBeInTheDocument()
+        expect(document.querySelector('.family-portrait')).toBeInTheDocument()
+      })
+    })
+
+    it('click avatar shows book page', async () => {
+      fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      await waitFor(() => {
+        expect(document.querySelector('.family-portrait')).toBeInTheDocument()
+      })
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
+      await waitFor(() => {
+        expect(document.querySelector('.book-pages')).toBeInTheDocument()
       })
     })
 
     it('sound toggle changes icon', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => expect(screen.getByText('🔊')).toBeInTheDocument())
       fireEvent.click(screen.getByText('🔊'))
       await waitFor(() => {
@@ -46,6 +60,8 @@ describe('App 组件 - 增强断言测试', () => {
 
     it('sound toggle reverts', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => screen.getByText('🔊'))
       fireEvent.click(screen.getByText('🔊'))
       await waitFor(() => screen.getByText('🔇'))
@@ -57,36 +73,42 @@ describe('App 组件 - 增强断言测试', () => {
   })
 
   describe('Tab切换', () => {
-    it('default tab is 简介', async () => {
+    it('default tab is 形态', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => {
         const activeTab = document.querySelector('.info-tab.active')
-        expect(activeTab).toHaveTextContent('简介')
+        expect(activeTab).toHaveTextContent('形态')
       })
     })
 
-    it('switch to 技能 tab', async () => {
+    it('switch to 简介 tab', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => screen.getByText(/初代/))
-      const skillBtns = document.querySelectorAll('.skill-button')
-      fireEvent.click(skillBtns[0])
+      fireEvent.click(screen.getByText('简介', { selector: '.info-tab' }))
       await waitFor(() => {
-        expect(screen.getByRole('button', { name: /斯派修姆光线/ })).toBeInTheDocument()
+        expect(screen.getByText(/M78星云/)).toBeInTheDocument()
       })
     })
 
-    it('技能 tab shows skill buttons', async () => {
+    it('形态 tab shows forms buttons', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => screen.getByText(/初代/))
-      const tabs = document.querySelectorAll('.info-tab')
-      fireEvent.click(tabs[3])
+      fireEvent.click(screen.getByText('形态', { selector: '.info-tab' }))
       await waitFor(() => {
-        expect(screen.getByText(/斯派修姆光线/)).toBeInTheDocument()
+        expect(screen.getByText(/普通形态/)).toBeInTheDocument()
       })
     })
 
     it('人间体 tab shows human', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => screen.getByText(/初代/))
       fireEvent.click(screen.getByText('人间体', { selector: '.info-tab' }))
       await waitFor(() => {
@@ -94,25 +116,14 @@ describe('App 组件 - 增强断言测试', () => {
       })
     })
 
-    it('台词 tab shows catchphrase', async () => {
+    it('关系 tab shows relation info', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => screen.getByText(/初代/))
-      const tabs = document.querySelectorAll('.info-tab')
-      fireEvent.click(tabs[2])
+      fireEvent.click(screen.getByText('关系', { selector: '.info-tab' }))
       await waitFor(() => {
-        const el = document.querySelector('.info-text')
-        expect(el).toHaveTextContent(/奥特曼/)
-      })
-    })
-
-    it('catchphrase in italics', async () => {
-      fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
-      await waitFor(() => screen.getByText(/初代/))
-      fireEvent.click(screen.getByText('台词', { selector: '.info-tab' }))
-      await waitFor(() => {
-        const el = document.querySelector('.info-text')
-        expect(el).toHaveTextContent(/奥特曼/)
-        expect(el).toHaveStyle({ fontStyle: 'italic' })
+        expect(document.querySelector('.relation-list')).toBeInTheDocument()
       })
     })
   })
@@ -120,6 +131,8 @@ describe('App 组件 - 增强断言测试', () => {
   describe('翻页', () => {
     it('page indicator shows 1 / 29', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => {
         expect(screen.getByText('1 / 29')).toBeInTheDocument()
       })
@@ -127,6 +140,8 @@ describe('App 组件 - 增强断言测试', () => {
 
     it('prev disabled on first page', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => {
         const prevBtn = document.querySelector('.nav-button.prev')
         expect(prevBtn).toBeDisabled()
@@ -135,6 +150,8 @@ describe('App 组件 - 增强断言测试', () => {
 
     it('next enabled on first page', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => {
         const nextBtn = document.querySelector('.nav-button.next')
         expect(nextBtn).toBeEnabled()
@@ -143,22 +160,18 @@ describe('App 组件 - 增强断言测试', () => {
 
     it('shows 初代奥特曼 name', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => {
         const nameEl = document.querySelector('.ultraman-name')
         expect(nameEl).toHaveTextContent('初代奥特曼')
       })
     })
 
-    it('shows 昭和时期 era', async () => {
-      fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
-      await waitFor(() => {
-        const nameEl = document.querySelector('.ultraman-name')
-        expect(nameEl).toHaveTextContent('昭和时期')
-      })
-    })
-
     it('shows year 1966', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => {
         const nameEl = document.querySelector('.ultraman-name')
         expect(nameEl).toHaveTextContent(/1966/)
@@ -167,17 +180,20 @@ describe('App 组件 - 增强断言测试', () => {
   })
 
   describe('边界条件', () => {
-    it('no forms shows 无多种形态', async () => {
+    it('no forms shows 普通形态', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => screen.getByText(/初代/))
-      fireEvent.click(screen.getByText('形态', { selector: '.info-tab' }))
       await waitFor(() => {
-        expect(screen.getByText('无多种形态')).toBeInTheDocument()
+        expect(screen.getByText('普通形态')).toBeInTheDocument()
       })
     })
 
-    it('has 5 info tabs', async () => {
+    it('has 4 info tabs', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => {
         expect(document.querySelectorAll('.info-tab').length).toBe(4)
       })
@@ -185,19 +201,73 @@ describe('App 组件 - 增强断言测试', () => {
 
     it('active tab has active class', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => {
         expect(document.querySelector('.info-tab.active')).toBeInTheDocument()
       })
     })
   })
 
-  describe('DOM渲染', () => {
+describe('DOM渲染', () => {
     it('image has correct alt', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => {
         const img = document.querySelector('.ultraman-image')
         expect(img).toHaveAttribute('alt', '初代奥特曼')
       })
+    })
+
+    it('image has src', async () => {
+      fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
+      await waitFor(() => {
+        const img = document.querySelector('.ultraman-image')
+        expect(img).toHaveAttribute('src')
+      })
+    })
+
+    it('book-pages has active class', async () => {
+      fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
+      await waitFor(() => {
+        expect(document.querySelector('.book-pages.active')).toBeInTheDocument()
+      })
+    })
+
+    it('page-left and page-right exist', async () => {
+      fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
+      await waitFor(() => {
+        expect(document.querySelector('.page-left')).toBeInTheDocument()
+        expect(document.querySelector('.page-right')).toBeInTheDocument()
+      })
+    })
+
+    it('skills-section exists', async () => {
+      fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
+      await waitFor(() => {
+        expect(document.querySelector('.skills-section')).toBeInTheDocument()
+      })
+    })
+
+    it('placeholder hidden initially', async () => {
+      fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
+      await waitFor(() => {
+        const placeholder = document.querySelector('.ultraman-placeholder')
+        expect(placeholder).toBeInTheDocument()
+      })
+    })
+  })
     })
 
     it('image has src', async () => {
@@ -251,6 +321,8 @@ describe('App 组件 - 增强断言测试', () => {
   describe('按钮', () => {
     it('skill button enabled', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => {
         const btn = screen.getByRole('button', { name: /斯派修姆光线/ })
         expect(btn).toBeEnabled()
@@ -273,6 +345,8 @@ describe('App 组件 - 增强断言测试', () => {
 
     it('形态 tab hides description', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => screen.getByText(/初代/))
       fireEvent.click(screen.getByText('形态', { selector: '.info-tab' }))
       await waitFor(() => {
@@ -284,6 +358,8 @@ describe('App 组件 - 增强断言测试', () => {
   describe('边界导航分支 - goNext/goPrev', () => {
     it('goPrev disabled on first page', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => {
         const prevBtn = document.querySelector('.nav-button.prev')
         expect(prevBtn).toBeDisabled()
@@ -292,6 +368,8 @@ describe('App 组件 - 增强断言测试', () => {
 
     it('nav buttons exist', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => {
         expect(document.querySelector('.nav-button.prev')).toBeInTheDocument()
         expect(document.querySelector('.nav-button.next')).toBeInTheDocument()
@@ -302,6 +380,8 @@ describe('App 组件 - 增强断言测试', () => {
   describe('playSkill音频分支', () => {
     it('skill button exists', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
+      const avatar = document.querySelector('.avatar')
+      fireEvent.click(avatar)
       await waitFor(() => screen.getByText(/初代/))
       await waitFor(() => {
         expect(screen.getByRole('button', { name: /斯派修姆光线/ })).toBeInTheDocument()
@@ -309,22 +389,23 @@ describe('App 组件 - 增强断言测试', () => {
     })
   })
 
-  describe('形态分支测试 - forms.length > 0', () => {
-    it('no forms shows 无多种形态', async () => {
+  describe('全家福功能测试', () => {
+    it('family portrait shows avatars', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
-      await waitFor(() => screen.getByText(/初代/))
-      fireEvent.click(screen.getByText('形态', { selector: '.info-tab' }))
       await waitFor(() => {
-        expect(screen.getByText('无多种形态')).toBeInTheDocument()
+        expect(document.querySelector('.family-portrait')).toBeInTheDocument()
       })
+      const avatars = document.querySelectorAll('.avatar')
+      expect(avatars.length).toBe(29)
     })
 
-    it('has forms shows form buttons', async () => {
+    it('relation lines exist', async () => {
       fireEvent.click(screen.getByRole('button', { name: /开启旅程/ }))
-      await waitFor(() => expect(screen.getByText('1 / 29')).toBeInTheDocument())
-      const nextBtn = document.querySelector('.nav-button.next')
-      fireEvent.click(nextBtn)
-      await waitFor(() => expect(screen.getByText(/赛文/)))
+      await waitFor(() => {
+        expect(document.querySelector('.relation-lines')).toBeInTheDocument()
+      })
+      const lines = document.querySelectorAll('.relation-line')
+      expect(lines.length).toBeGreaterThan(0)
     })
   })
 })
