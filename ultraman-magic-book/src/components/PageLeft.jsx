@@ -1,14 +1,34 @@
 import { memo } from 'react'
 
-export const PageLeft = memo(function PageLeft({ current, imageError, onImageError, activeForm }) {
-  // 获取当前形态的图片（如果有形态的话）
+export const PageLeft = memo(function PageLeft({ 
+  current, 
+  imageError, 
+  onImageError, 
+  activeForm,
+  activeSkill,
+  isSkillAnimating,
+  getSkillImage 
+}) {
   const displayImage = current.forms && current.forms.length > 0 && current.forms[activeForm]
     ? current.forms[activeForm].image
     : current.image
 
+  const skillImageSrc = activeSkill && isSkillAnimating && getSkillImage ? getSkillImage(current.name, activeSkill) : null
+
+  const hasValidMainImage = displayImage && !imageError[current.id - 1]
+
   return (
     <div className="page-left">
-      {displayImage && !imageError[current.id - 1] ? (
+      {skillImageSrc ? (
+        <img 
+          src={skillImageSrc} 
+          alt={`${current.name} - ${activeSkill}`}
+          className="ultraman-image skill-animation"
+          onError={() => {}}
+          draggable="false"
+          onDragStart={(e) => e.preventDefault()}
+        />
+      ) : hasValidMainImage ? (
         <img 
           src={displayImage} 
           alt={current.name}

@@ -9,6 +9,8 @@ export function useMagicBook() {
   const [soundOn, setSoundOn] = useState(true)
   const [isFlipping, setIsFlipping] = useState(false)
   const [imageLoadError, setImageLoadError] = useState({})
+  const [activeSkill, setActiveSkill] = useState(null)
+  const [isSkillAnimating, setIsSkillAnimating] = useState(false)
 
   const current = ultramanData[currentPage]
 
@@ -16,6 +18,11 @@ export function useMagicBook() {
   const preloadedAudioRef = useRef({})
 
   const sanitizeFilename = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_')
+
+  const getSkillImage = useCallback((ultramanName, skillName) => {
+    const sanitize = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_')
+    return `/images/skills/${sanitize(ultramanName)}_${sanitize(skillName)}.jpg`
+  }, [])
 
   const preloadAudio = useCallback((type, name) => {
     const key = `${type}/${name}`
@@ -123,15 +130,15 @@ export function useMagicBook() {
     if (skillName) {
       const safeUltramanName = sanitizeFilename(current.name)
       const safeSkillName = skillName.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_')
-      const key = `skills/${safeUltramanName}_${safeSkillName}`
+      const audioKey = `skills/${safeUltramanName}_${safeSkillName}`
       
       if (audioPlayerRef.current) {
         audioPlayerRef.current.pause()
         audioPlayerRef.current = null
       }
       
-      if (preloadedAudioRef.current[key]) {
-        audioPlayerRef.current = preloadedAudioRef.current[key]
+      if (preloadedAudioRef.current[audioKey]) {
+        audioPlayerRef.current = preloadedAudioRef.current[audioKey]
         audioPlayerRef.current.currentTime = 0
         const playPromise = audioPlayerRef.current.play()
         if (playPromise) playPromise.catch(() => {})
@@ -141,8 +148,16 @@ export function useMagicBook() {
         if (playPromise) playPromise.catch(() => {})
         const skillAudio = new Audio(`/audio/skills/${safeUltramanName}_${safeSkillName}.mp3`)
         skillAudio.preload = 'auto'
-        preloadedAudioRef.current[key] = skillAudio
+        preloadedAudioRef.current[audioKey] = skillAudio
       }
+      
+      setActiveSkill(skillName)
+      setIsSkillAnimating(true)
+      
+      setTimeout(() => {
+        setIsSkillAnimating(false)
+        setActiveSkill(null)
+      }, 3000)
     }
   }, [soundOn, current])
 
@@ -171,5 +186,10 @@ export function useMagicBook() {
     playTabAudio,
     playSkill,
     toggleSound,
+    activeSkill,
+    setActiveSkill,
+    isSkillAnimating,
+    setIsSkillAnimating,
+    getSkillImage,
   }
 }

@@ -24,6 +24,9 @@ function App() {
     playAudioFile,
     playTabAudio,
     playSkill,
+    activeSkill,
+    isSkillAnimating,
+    getSkillImage,
   } = useMagicBook()
 
   const isFirstPage = currentPage === 0
@@ -66,6 +69,9 @@ function App() {
               imageError={imageLoadError}
               onImageError={handleImageError}
               activeForm={activeForm}
+              activeSkill={activeSkill}
+              isSkillAnimating={isSkillAnimating}
+              getSkillImage={getSkillImage}
             />
             <UltramanInfo 
               current={current}
