@@ -785,6 +785,159 @@ body {
   }
 }
 
+/* ========================================
+   Family Portrait 全家福样式
+   ======================================== */
+.family-portrait {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, #0a0a1a 0%, #1a1a3a 100%);
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.starfield {
+  position: absolute;
+  inset: 0;
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+    radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+    radial-gradient(1px 1px at 90px 40px, #ddd, transparent),
+    radial-gradient(2px 2px at 160px 120px, #fff, transparent),
+    radial-gradient(1px 1px at 230px 80px, #eee, transparent),
+    radial-gradient(2px 2px at 300px 150px, #fff, transparent),
+    radial-gradient(1px 1px at 370px 200px, #ddd, transparent),
+    radial-gradient(2px 2px at 450px 50px, #fff, transparent),
+    radial-gradient(1px 1px at 520px 180px, #eee, transparent),
+    radial-gradient(2px 2px at 600px 100px, #fff, transparent);
+  background-size: 650px 250px;
+  animation: twinkle 4s linear infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.relation-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.relation-line {
+  stroke-width: 2;
+  stroke-linecap: round;
+  opacity: 0.6;
+  filter: drop-shadow(0 0 4px currentColor);
+}
+
+.relation-line.brother {
+  stroke: #FFD700;
+}
+
+.relation-line.master {
+  stroke: #00BFFF;
+}
+
+.relation-line.parallel {
+  stroke: #FF69B4;
+}
+
+.relation-line.parent {
+  stroke: #98FB98;
+}
+
+.relation-line.hidden {
+  opacity: 0.1;
+}
+
+.avatar {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 3px solid var(--avatar-color, #FFD700);
+  background: linear-gradient(135deg, #2a2a4a 0%, #1a1a2a 100%);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.avatar:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 20px var(--avatar-color, #FFD700);
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar.selected {
+  border-color: #FFD700;
+  box-shadow: 0 0 12px gold, 0 0 24px gold;
+  transform: scale(1.1);
+}
+
+.avatar.related {
+  border-color: #87CEEB;
+  box-shadow: 0 0 8px #87CEEB;
+}
+
+.avatar.dimmed {
+  opacity: 0.3;
+  filter: grayscale(100%);
+}
+
+.relation-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.relation-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.relation-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(255, 255, 255, 0.5);
+  border-left: 4px solid;
+  border-radius: var(--radius-sm);
+}
+
+.relation-name {
+  font-family: var(--font-body);
+  font-size: clamp(12px, 1.5vw, 14px);
+  color: var(--ink-black);
+}
+
+.relation-label {
+  font-family: var(--font-body);
+  font-size: clamp(10px, 1.2vw, 12px);
+  color: var(--leather-brown);
+  background: var(--parchment);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
 /* Skill Animation */
 .ultraman-image.skill-animation {
   animation: fadeIn 0.3s ease-in-out;

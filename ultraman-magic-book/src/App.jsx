@@ -1,5 +1,6 @@
+import { useState, useCallback } from 'react'
 import './index.css'
-import { BookCover, UltramanInfo, Navigation, PageLeft } from './components'
+import { BookCover, UltramanInfo, Navigation, PageLeft, FamilyPortrait } from './components'
 import { useMagicBook } from './hooks/useMagicBook'
 import { usePageFlip } from './hooks/usePageFlip'
 
@@ -8,6 +9,7 @@ function App() {
     started,
     setStarted,
     currentPage,
+    setCurrentPage,
     activeTab,
     setActiveTab,
     activeForm,
@@ -29,6 +31,10 @@ function App() {
     getSkillImage,
   } = useMagicBook()
 
+  const [showFamilyPortrait, setShowFamilyPortrait] = useState(false)
+  const [isFilterMode, setIsFilterMode] = useState(false)
+  const [filterId, setFilterId] = useState(null)
+
   const isFirstPage = currentPage === 0
   const isLastPage = currentPage === totalPages - 1
 
@@ -46,8 +52,42 @@ function App() {
     setSoundOn(prev => !prev)
   }
 
-  if (!started) {
-    return <BookCover onStart={() => { setStarted(true); playAudioFile('name') }} />
+  const handleStart = useCallback(() => {
+    setShowFamilyPortrait(true)
+    playAudioFile('name')
+  }, [playAudioFile])
+
+  const handleAvatarClick = useCallback((ultramanId) => {
+    const pageIndex = ultramanId - 1
+    setCurrentPage(pageIndex)
+    setActiveTab(0)
+    setActiveForm(0)
+    setShowFamilyPortrait(false)
+    setIsFilterMode(false)
+    setFilterId(null)
+    setStarted(true)
+  }, [setCurrentPage, setActiveTab, setActiveForm, setStarted])
+
+  const handleRelationClick = useCallback(() => {
+    if (current) {
+      setFilterId(current.id)
+      setIsFilterMode(true)
+      setShowFamilyPortrait(true)
+    }
+  }, [current])
+
+  if (!started && !showFamilyPortrait) {
+    return <BookCover onStart={handleStart} />
+  }
+
+  if (showFamilyPortrait) {
+    return (
+      <FamilyPortrait
+        isFilterMode={isFilterMode}
+        filterId={filterId}
+        onAvatarClick={handleAvatarClick}
+      />
+    )
   }
 
   return (
@@ -81,6 +121,7 @@ function App() {
               setActiveForm={setActiveForm}
               onPlaySkill={playSkill}
               playTabAudio={playTabAudio}
+              onRelationClick={handleRelationClick}
             />
           </div>
         </div>

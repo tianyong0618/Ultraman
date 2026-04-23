@@ -1,9 +1,19 @@
 import { memo } from 'react'
-import { infoLabels } from '../data/ultraman'
+import { infoLabels, ultramanRelations, ultramanData } from '../data/ultraman'
 
 const TabContent = memo(function TabContent({ activeTab, current, activeForm, setActiveForm }) {
   const handleFormClick = (idx) => {
     setActiveForm(idx)
+  }
+
+  const getRelations = () => {
+    const relation = ultramanRelations.find(r => r.id === current.id)
+    if (!relation || relation.relatedIds.length === 0) return []
+    
+    return relation.relatedIds.map(id => {
+      const ultraman = ultramanData.find(u => u.id === id)
+      return ultraman ? { ...ultraman, relationType: relation.relationType, label: relation.label } : null
+    }).filter(Boolean)
   }
 
   return (
@@ -37,9 +47,24 @@ const TabContent = memo(function TabContent({ activeTab, current, activeForm, se
         </p>
       )}
       {activeTab === 3 && (
-        <p className="info-text" id="tabpanel-3" role="tabpanel" style={{ fontStyle: 'italic' }}>
-          "{current.catchphrase}"
-        </p>
+        <div className="relation-list" id="tabpanel-3" role="tabpanel">
+          {(() => {
+            const relations = getRelations()
+            if (relations.length === 0) {
+              return <p className="info-text">暂无关系</p>
+            }
+            return (
+              <div className="relation-items">
+                {relations.map(u => (
+                  <div key={u.id} className="relation-item" style={{ borderLeftColor: u.color }}>
+                    <span className="relation-name">{u.name}</span>
+                    <span className="relation-label">{u.label}</span>
+                  </div>
+                ))}
+              </div>
+            )
+          })()}
+        </div>
       )}
     </>
   )
@@ -53,11 +78,16 @@ export const UltramanInfo = memo(function UltramanInfo({
   setActiveForm,
   onPlaySkill,
   playTabAudio,
+  onRelationClick,
 }) {
   const handleTabClick = (idx) => {
-    setActiveTab(idx)
-    if (playTabAudio) {
-      playTabAudio(idx)
+    if (idx === 3 && onRelationClick) {
+      onRelationClick()
+    } else {
+      setActiveTab(idx)
+      if (playTabAudio) {
+        playTabAudio(idx)
+      }
     }
   }
 

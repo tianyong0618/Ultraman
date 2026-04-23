@@ -111,6 +111,24 @@ export const ultramanData = [
   ], skills: ['亚刻光线', '亚刻飞踢'], catchphrase: '亚刻！', human: '稚野源次（直接适能者）', color: '#9400D3', image: '/images/ultraman/31_亚刻.jpg' },
 ]
 
-export const infoLabels = ['形态', '简介', '人间体', '台词']
+// 奥特曼关系数据
+export const ultramanRelations = [
+  { id: 1, relatedIds: [2], relationType: 'brother', label: '奥特兄弟' },
+  { id: 2, relatedIds: [3], relationType: 'brother', label: '奥特兄弟' },
+  { id: 3, relatedIds: [4], relationType: 'brother', label: '奥特兄弟' },
+  { id: 4, relatedIds: [5], relationType: 'brother', label: '奥特兄弟' },
+  { id: 5, relatedIds: [], relationType: 'brother', label: '奥特兄弟' },
+  { id: 6, relatedIds: [2], relationType: 'master', label: '师徒' },
+  { id: 24, relatedIds: [5], relationType: 'master', label: '师徒' },
+  { id: 25, relatedIds: [24], relationType: 'master', label: '师徒' },
+  { id: 11, relatedIds: [12, 13], relationType: 'parallel', label: '平成三杰' },
+  { id: 12, relatedIds: [11, 13], relationType: 'parallel', label: '平成三杰' },
+  { id: 13, relatedIds: [11, 12], relationType: 'parallel', label: '平成三杰' },
+  { id: 19, relatedIds: [22], relationType: 'parent', label: '相关' },
+  { id: 22, relatedIds: [2], relationType: 'parent', label: '父子' },
+  { id: 17, relatedIds: [5, 1], relationType: 'brother', label: '奥特兄弟' },
+]
+
+export const infoLabels = ['形态', '简介', '人间体', '关系']
 
 export const totalPages = 29
