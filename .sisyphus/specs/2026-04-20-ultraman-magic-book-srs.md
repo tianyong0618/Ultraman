@@ -1,7 +1,7 @@
 # Ultraman Magic Book - 项目需求说明书
 
-**版本**: 1.10.0  
-**日期**: 2026-04-23  
+**版本**: 1.11.0
+**日期**: 2026-04-23
 **状态**: 正式版
 
 ---
@@ -201,6 +201,30 @@ Ultraman Magic Book（奥特曼魔法书）是一个面向儿童的互动百科�
 - [x] soundOn=true 时翻页自动播放名称
 - [x] soundOn=false 时不播放
 
+#### 2.1.8 全家福 (FamilyPortrait)
+
+**功能描述**: 全屏展示全部29个奥特曼头像及关系连线
+
+**界面元素**:
+- 全屏星空背景（闪烁动画）
+- 29个随机分布的奥特曼头像
+- 相关奥特曼之间的光束连线
+- 筛选模式下无关头像置灰
+
+**交互规则**:
+- 点击"开启旅程"后显示全家福页面
+- 点击头像跳转到对应书页
+- 点击书页的"关系"Tab进入筛选模式
+- 筛选模式下相关头像正常显示，选中头像高亮
+
+**验收标准**:
+- [x] 全屏星空背景显示
+- [x] 29个头像随机分布
+- [x] 关系连线显示
+- [x] 点击头像跳转书页
+- [x] 筛选模式无关头像置灰
+- [x] 选中头像高亮
+
 ### 2.2 数据结构
 
 ```typescript
@@ -225,7 +249,14 @@ interface Form {
   skills: string[]  // 形态特有技能（可选）
 }
 
-const infoLabels = ['形态', '简介', '人间体', '台词']
+interface UltramanRelation {
+  id: number           // 奥特曼ID
+  relatedIds: number[] // 相关奥特曼ID列表
+  relationType: string // 关系类型：brother | master | parallel | parent
+  label: string        // 关系标签
+}
+
+const infoLabels = ['形态', '简介', '人间体', '关系']
 ```
 
 ### 2.3 状态管理
@@ -240,6 +271,9 @@ const [isFlipping, setIsFlipping] = useState(false) // 翻页动画中
 const [imageLoadError, setImageLoadError] = useState({})  // 图片加载错误
 const [activeSkill, setActiveSkill] = useState(null)   // 当前激活技能
 const [isSkillAnimating, setIsSkillAnimating] = useState(false) // 技能动画中
+const [showFamilyPortrait, setShowFamilyPortrait] = useState(false) // 显示全家福
+const [isFilterMode, setIsFilterMode] = useState(false) // 关系筛选模式
+const [filterId, setFilterId] = useState(null) // 筛选的奥特曼ID
 ```
 
 ---
@@ -273,9 +307,10 @@ ultraman-magic-book/
 │   │   ├── Navigation.jsx    # 导航组件
 │   │   ├── PageLeft.jsx       # 左页（图像）
 │   │   ├── UltramanInfo.jsx   # 信息区组件
+│   │   ├── FamilyPortrait.jsx # 全家福组件 (React.memo)
 │   │   └── index.js           # 导出
 │   ├── data/
-│   │   └── ultraman.js       # 外部化数据
+│   │   └── ultraman.js       # 外部化数据（含关系数据）
 │   ├── hooks/
 │   │   └── useMagicBook.js   # 状态管理 Hook
 │   ├── App.jsx               # 主入口（重构）
@@ -554,6 +589,7 @@ npx vitest run --coverage
 
 | 版本 | 日期 | 变更 |
 |------|------|------|
+| 1.11.0 | 2026-04-23 | 奥特曼全家福 (CP-012)：全屏星空、全家福页面、关系连线、筛选模式、关系Tab |
 | 1.10.0 | 2026-04-23 | 技能展示动画化 (CP-011)：点击技能显示技能图片、3秒后自动恢复、淡入效果 |
 | 1.9.0 | 2026-04-22 | 形态显示与Tab顺序调整 (CP-010)：无形态显示普通形态、4个Tab |
 | 1.8.0 | 2026-04-22 | 形态切换图片功能 (CP-009)：forms对象数组、形态图片切换 |
