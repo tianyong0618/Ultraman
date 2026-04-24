@@ -149,41 +149,38 @@ export function useMagicBook() {
     }
   }, [playAudioFile])
 
-  const playSkill = useCallback((skillIndex) => {
-    if (!soundOn || !current) return
-    const skillName = current.skills[skillIndex]
-    if (skillName) {
-      const safeUltramanName = sanitizeFilename(current.name)
-      const safeSkillName = skillName.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_')
-      const audioKey = `skills/${safeUltramanName}_${safeSkillName}`
-      
-      if (audioPlayerRef.current) {
-        audioPlayerRef.current.pause()
-        audioPlayerRef.current = null
-      }
-      
-      if (preloadedAudioRef.current[audioKey]) {
-        audioPlayerRef.current = preloadedAudioRef.current[audioKey]
-        audioPlayerRef.current.currentTime = 0
-        const playPromise = audioPlayerRef.current.play()
-        if (playPromise) playPromise.catch(() => {})
-      } else {
-        audioPlayerRef.current = new Audio(`/audio/skills/${safeUltramanName}_${safeSkillName}.mp3`)
-        const playPromise = audioPlayerRef.current.play()
-        if (playPromise) playPromise.catch(() => {})
-        const skillAudio = new Audio(`/audio/skills/${safeUltramanName}_${safeSkillName}.mp3`)
-        skillAudio.preload = 'auto'
-        preloadedAudioRef.current[audioKey] = skillAudio
-      }
-      
-      setActiveSkill(skillName)
-      setIsSkillAnimating(true)
-      
-      setTimeout(() => {
-        setIsSkillAnimating(false)
-        setActiveSkill(null)
-      }, 3000)
+  const playSkill = useCallback((skillName) => {
+    if (!soundOn || !current || !skillName) return
+    const safeUltramanName = sanitizeFilename(current.name)
+    const safeSkillName = skillName.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_')
+    const audioKey = `skills/${safeUltramanName}_${safeSkillName}`
+    
+    if (audioPlayerRef.current) {
+      audioPlayerRef.current.pause()
+      audioPlayerRef.current = null
     }
+    
+    if (preloadedAudioRef.current[audioKey]) {
+      audioPlayerRef.current = preloadedAudioRef.current[audioKey]
+      audioPlayerRef.current.currentTime = 0
+      const playPromise = audioPlayerRef.current.play()
+      if (playPromise) playPromise.catch(() => {})
+    } else {
+      audioPlayerRef.current = new Audio(`/audio/skills/${safeUltramanName}_${safeSkillName}.mp3`)
+      const playPromise = audioPlayerRef.current.play()
+      if (playPromise) playPromise.catch(() => {})
+      const skillAudio = new Audio(`/audio/skills/${safeUltramanName}_${safeSkillName}.mp3`)
+      skillAudio.preload = 'auto'
+      preloadedAudioRef.current[audioKey] = skillAudio
+    }
+    
+    setActiveSkill(skillName)
+    setIsSkillAnimating(true)
+    
+    setTimeout(() => {
+      setIsSkillAnimating(false)
+      setActiveSkill(null)
+    }, 3000)
   }, [soundOn, current])
 
   const toggleSound = useCallback(() => {

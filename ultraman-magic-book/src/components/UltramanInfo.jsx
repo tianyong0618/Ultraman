@@ -129,7 +129,7 @@ export const UltramanInfo = memo(function UltramanInfo({
               <button
                 key={skill}
                 className="skill-button"
-                onClick={() => onPlaySkill && onPlaySkill(idx)}
+                onClick={() => onPlaySkill && onPlaySkill(skill)}
                 aria-label={`播放技能: ${skill}`}
               >
                 ⚡ {skill}
