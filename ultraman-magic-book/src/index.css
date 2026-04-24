@@ -860,6 +860,49 @@ body {
   opacity: 0.1;
 }
 
+.relation-legend {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: #fff;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-line {
+  width: 24px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.legend-line.brother {
+  background: #FF6B6B;
+}
+
+.legend-line.master {
+  background: #4ECDC4;
+}
+
+.legend-line.parallel {
+  background: #45B7D1;
+}
+
+.legend-line.parent {
+  background: #98FB98;
+}
+
 .avatar {
   position: absolute;
   width: 48px;

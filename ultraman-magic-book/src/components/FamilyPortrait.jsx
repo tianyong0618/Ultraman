@@ -195,6 +195,13 @@ export const FamilyPortrait = memo(function FamilyPortrait({
         <div className="stars" />
       </div>
       
+      <div className="relation-legend">
+        <div className="legend-item"><span className="legend-line brother"></span>奥特兄弟</div>
+        <div className="legend-item"><span className="legend-line master"></span>师徒</div>
+        <div className="legend-item"><span className="legend-line parallel"></span>平成三杰</div>
+        <div className="legend-item"><span className="legend-line parent"></span>父子</div>
+      </div>
+      
       <svg className="relation-lines">
         {lines.map((line, idx) => {
           const fromPos = positions[line.fromIdx]
