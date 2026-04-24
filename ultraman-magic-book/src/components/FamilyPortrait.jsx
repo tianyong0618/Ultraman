@@ -203,6 +203,20 @@ export const FamilyPortrait = memo(function FamilyPortrait({
       </div>
       
       <svg className="relation-lines">
+        <defs>
+          <marker id="arrow-brother" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L9,3 z" fill="#FFD700" />
+          </marker>
+          <marker id="arrow-master" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L9,3 z" fill="#00BFFF" />
+          </marker>
+          <marker id="arrow-parallel" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L9,3 z" fill="#FF69B4" />
+          </marker>
+          <marker id="arrow-parent" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L9,3 z" fill="#98FB98" />
+          </marker>
+        </defs>
         {lines.map((line, idx) => {
           const fromPos = positions[line.fromIdx]
           const toPos = positions[line.toIdx]
@@ -221,6 +235,7 @@ export const FamilyPortrait = memo(function FamilyPortrait({
               y1={line.fromPos.y + fromPos.size / 2}
               x2={line.toPos.x + toPos.size / 2}
               y2={line.toPos.y + toPos.size / 2}
+              markerEnd={`url(#arrow-${line.type})`}
               className={`relation-line ${line.type} ${isVisible ? '' : 'hidden'}`}
             />
           )
