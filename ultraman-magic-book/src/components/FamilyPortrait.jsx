@@ -48,45 +48,86 @@ function getLayerConfig(popularity) {
   }
 }
 
-// Generate positions with concentric circle layout based on popularity
+// Generate stable random positions with popular heroes centered
 function generatePositionsByPopularity(count) {
-  const popularity = calculatePopularity()
-  const centerX = window.innerWidth / 2
-  const centerY = window.innerHeight / 2
-  const positions = []
+  const isMobile = window.innerWidth < 500
+  const cacheKey = `ultraman_positions_${isMobile ? 'mobile' : 'desktop'}`
   
-  // Create position data for each Ultraman
-  const positionData = ultramanData.map((u, idx) => {
-    const pop = popularity[u.id] || 0
-    const layer = getLayerConfig(pop)
-    return {
-      idx,
-      id: u.id,
-      popularity: pop,
-      layer,
-      // Use stable angle distribution + small random offset
-      baseAngle: (idx / count) * Math.PI * 2,
-      randomOffset: (Math.random() - 0.5) * 0.3,
+  // Try to get cached positions
+  const cached = sessionStorage.getItem(cacheKey)
+  if (cached) {
+    try {
+      const parsed = JSON.parse(cached)
+      if (parsed.length === count) {
+        return parsed
+      }
+    } catch {}
+  }
+  
+  const popularity = calculatePopularity()
+  const margin = isMobile ? 30 : 60
+  const minDistance = isMobile ? 50 : 100
+  const positions = []
+  const usedPositions = []
+  
+  // Sort by popularity (highest first)
+  const sorted = ultramanData.map((u, idx) => ({
+    idx,
+    id: u.id,
+    popularity: popularity[u.id] || 0,
+  })).sort((a, b) => b.popularity - a.popularity)
+  
+  // Generate positions - popular ones get priority for inner positions
+  sorted.forEach((item) => {
+    let x, y, attempts = 0
+    const targetRadius = 1 - (item.popularity / 4) * 0.5
+    
+    do {
+      const maxRadius = window.innerWidth * targetRadius
+      const angle = Math.random() * Math.PI * 2
+      const radius = Math.random() * maxRadius
+      x = margin + Math.random() * (window.innerWidth - margin * 2 - 48)
+      y = margin + Math.random() * (window.innerHeight - margin * 2 - 48)
+      
+      // For popular heroes, prefer center region
+      if (item.popularity >= 2) {
+        const centerX = window.innerWidth / 2
+        const centerY = window.innerHeight / 2
+        const distFromCenter = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2)
+        const maxDist = Math.min(centerX, centerY) * 0.3
+        
+        if (distFromCenter > maxDist) {
+          attempts++
+          continue
+        }
+      }
+      
+      attempts++
+    } while (
+      attempts < 100 &&
+      usedPositions.some(pos => {
+        const dx = pos.x - x
+        const dy = pos.y - y
+        return Math.sqrt(dx * dx + dy * dy) < minDistance
+      })
+    )
+    
+    usedPositions.push({ x, y })
+    
+    const layer = getLayerConfig(item.popularity)
+    const size = window.innerWidth < 500 ? 36 : layer.size
+    positions[item.idx] = {
+      x,
+      y,
+      size,
+      layer: layer.name,
     }
   })
   
-  // Sort by popularity (most popular first = inner layer)
-  positionData.sort((a, b) => b.popularity - a.popularity)
-  
-  // Generate coordinates
-  positionData.forEach((item, i) => {
-    const layer = item.layer
-    const minDistance = Math.min(centerX, centerY)
-    const distance = minDistance * layer.ratio
-    const angle = item.baseAngle + item.randomOffset
-    
-    positions.push({
-      x: centerX + Math.cos(angle) * distance - layer.size / 2,
-      y: centerY + Math.sin(angle) * distance - layer.size / 2,
-      size: layer.size,
-      layer: layer.name,
-    })
-  })
+  // Cache the positions
+  try {
+    sessionStorage.setItem(cacheKey, JSON.stringify(positions))
+  } catch {}
   
   return positions
 }
