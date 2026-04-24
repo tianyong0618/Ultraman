@@ -1,11 +1,36 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { ultramanData, totalPages } from '../data/ultraman'
 
+const STORAGE_KEY = 'ultraman-magic-book-state'
+
+function loadStateFromStorage() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY)
+    if (saved) {
+      const parsed = JSON.parse(saved)
+      return {
+        savedPage: parsed.currentPage ?? 0,
+        savedTab: parsed.activeTab ?? 0,
+        savedForm: parsed.activeForm ?? 0,
+        savedStarted: parsed.started ?? false,
+      }
+    }
+  } catch (e) {}
+  return { savedPage: 0, savedTab: 0, savedForm: 0, savedStarted: false }
+}
+
+function saveStateToStorage(state) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+  } catch (e) {}
+}
+
 export function useMagicBook() {
-  const [started, setStarted] = useState(false)
-  const [currentPage, setCurrentPage] = useState(0)
-  const [activeTab, setActiveTab] = useState(0)
-  const [activeForm, setActiveForm] = useState(0)
+  const saved = loadStateFromStorage()
+  const [started, setStarted] = useState(saved.savedStarted)
+  const [currentPage, setCurrentPage] = useState(saved.savedPage)
+  const [activeTab, setActiveTab] = useState(saved.savedTab)
+  const [activeForm, setActiveForm] = useState(saved.savedForm)
   const [soundOn, setSoundOn] = useState(true)
   const [isFlipping, setIsFlipping] = useState(false)
   const [imageLoadError, setImageLoadError] = useState({})
@@ -164,6 +189,15 @@ export function useMagicBook() {
   const toggleSound = useCallback(() => {
     setSoundOn(prev => !prev)
   }, [])
+
+  useEffect(() => {
+    saveStateToStorage({
+      currentPage,
+      activeTab,
+      activeForm,
+      started,
+    })
+  }, [currentPage, activeTab, activeForm, started])
 
   return {
     started,
