@@ -888,15 +888,15 @@ body {
 }
 
 .legend-line.brother {
-  background: #FF6B6B;
+  background: #FFD700;
 }
 
 .legend-line.master {
-  background: #4ECDC4;
+  background: #00BFFF;
 }
 
 .legend-line.parallel {
-  background: #45B7D1;
+  background: #FF69B4;
 }
 
 .legend-line.parent {
