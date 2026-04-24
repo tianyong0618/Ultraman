@@ -222,19 +222,29 @@ export const FamilyPortrait = memo(function FamilyPortrait({
           const toPos = positions[line.toIdx]
           if (!fromPos || !toPos) return null
           
-          const isVisible = !isFilterMode ||
+const isVisible = !isFilterMode ||
                            line.fromId === filterId ||
                            line.toId === filterId ||
                            ultramanRelations.some(r => r.id === filterId && r.relatedIds.includes(line.fromId)) ||
                            ultramanRelations.some(r => r.id === filterId && r.relatedIds.includes(line.toId))
           
+          const fromCx = line.fromPos.x + fromPos.size / 2
+          const fromCy = line.fromPos.y + fromPos.size / 2
+          const toCx = line.toPos.x + toPos.size / 2
+          const toCy = line.toPos.y + toPos.size / 2
+          const angle = Math.atan2(toCy - fromCy, toCx - fromCx)
+          const startX = fromCx + Math.cos(angle) * (fromPos.size / 2)
+          const startY = fromCy + Math.sin(angle) * (fromPos.size / 2)
+          const endX = toCx - Math.cos(angle) * (toPos.size / 2 + 8)
+          const endY = toCy - Math.sin(angle) * (toPos.size / 2 + 8)
+           
           return (
             <line
               key={idx}
-              x1={line.fromPos.x + fromPos.size / 2}
-              y1={line.fromPos.y + fromPos.size / 2}
-              x2={line.toPos.x + toPos.size / 2}
-              y2={line.toPos.y + toPos.size / 2}
+              x1={startX}
+              y1={startY}
+              x2={endX}
+              y2={endY}
               markerEnd={`url(#arrow-${line.type})`}
               className={`relation-line ${line.type} ${isVisible ? '' : 'hidden'}`}
             />
