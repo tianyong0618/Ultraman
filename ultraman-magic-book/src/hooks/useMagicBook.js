@@ -82,33 +82,17 @@ export function useMagicBook() {
   }, [soundOn, current, preloadAudio])
 
   useEffect(() => {
-    const img = new Image()
-    img.onload = () => setImageLoadError(prev => ({...prev, [currentPage]: false}))
-    img.onerror = () => setImageLoadError(prev => ({...prev, [currentPage]: true}))
-    img.src = ultramanData[currentPage]?.image
-    
-    const preloadNext = currentPage < totalPages - 1 ? ultramanData[currentPage + 1]?.image : null
-    const preloadPrev = currentPage > 0 ? ultramanData[currentPage - 1]?.image : null
-    
-    if (preloadNext) {
-      const nextImg = new Image()
-      nextImg.src = preloadNext
-    }
-    if (preloadPrev) {
-      const prevImg = new Image()
-      prevImg.src = preloadPrev
-    }
-    
     const safeName = sanitizeFilename(ultramanData[currentPage]?.name)
-    preloadAudio('name', safeName)
-    preloadAudio('human', safeName)
+    if (safeName) {
+      preloadAudio('name', safeName)
+    }
   }, [currentPage, preloadAudio])
 
   useEffect(() => {
     if (started && soundOn && current) {
       playAudioFile('name')
     }
-  }, [currentPage, started, soundOn, playAudioFile])
+  }, [started, soundOn, current, playAudioFile])
 
   const goNext = useCallback(() => {
     if (currentPage < totalPages - 1 && !isFlipping) {
@@ -141,13 +125,13 @@ export function useMagicBook() {
   }, [currentPage, isFlipping])
 
   const playTabAudio = useCallback((tabIndex) => {
-    if (!soundOn) return
+    if (!soundOn || !current) return
     const typeMap = ['forms', 'desc', 'human', 'catchphrase']
     const type = typeMap[tabIndex]
     if (type) {
       playAudioFile(type)
     }
-  }, [playAudioFile])
+  }, [playAudioFile, soundOn, current])
 
   const playSkill = useCallback((skillName) => {
     if (!soundOn || !current || !skillName) return
