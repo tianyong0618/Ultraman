@@ -142,7 +142,7 @@ export function useMagicBook() {
 
   const playTabAudio = useCallback((tabIndex) => {
     if (!soundOn) return
-    const typeMap = ['desc', 'human', 'catchphrase', 'forms']
+    const typeMap = ['forms', 'desc', 'human', 'catchphrase']
     const type = typeMap[tabIndex]
     if (type) {
       playAudioFile(type)
