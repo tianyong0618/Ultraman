@@ -1,0 +1,9 @@
+[build]
+  builder = "static"
+
+[build.environment]
+  INSTALL = "cd ultraman-magic-book && npm install"
+  BUILD = "cd ultraman-magic-book && npm run build"
+
+[deploy]
+  root = "ultraman-magic-book/dist"

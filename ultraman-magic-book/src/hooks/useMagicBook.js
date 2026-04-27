@@ -46,13 +46,13 @@ export function useMagicBook() {
 
   const getSkillImage = useCallback((ultramanName, skillName) => {
     const sanitize = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_')
-    return `/Ultraman/images/skills/${sanitize(ultramanName)}_${sanitize(skillName)}.jpg`
+    return `/images/skills/${sanitize(ultramanName)}_${sanitize(skillName)}.jpg`
   }, [])
 
   const preloadAudio = useCallback((type, name) => {
     const key = `${type}/${name}`
     if (!preloadedAudioRef.current[key]) {
-      const audio = new Audio(`/Ultraman/audio/${type}/${name}.mp3`)
+      const audio = new Audio(`/audio/${type}/${name}.mp3`)
       audio.preload = 'auto'
       preloadedAudioRef.current[key] = audio
     }
@@ -74,7 +74,7 @@ export function useMagicBook() {
       const playPromise = audioPlayerRef.current.play()
       if (playPromise) playPromise.catch(() => {})
     } else {
-      audioPlayerRef.current = new Audio(`/Ultraman/audio/${type}/${safeName}.mp3`)
+      audioPlayerRef.current = new Audio(`/audio/${type}/${safeName}.mp3`)
       const playPromise = audioPlayerRef.current.play()
       if (playPromise) playPromise.catch(() => {})
       preloadAudio(type, safeName)
@@ -150,10 +150,10 @@ export function useMagicBook() {
       const playPromise = audioPlayerRef.current.play()
       if (playPromise) playPromise.catch(() => {})
     } else {
-      audioPlayerRef.current = new Audio(`/Ultraman/audio/skills/${safeUltramanName}_${safeSkillName}.mp3`)
+      audioPlayerRef.current = new Audio(`/audio/skills/${safeUltramanName}_${safeSkillName}.mp3`)
       const playPromise = audioPlayerRef.current.play()
       if (playPromise) playPromise.catch(() => {})
-      const skillAudio = new Audio(`/Ultraman/audio/skills/${safeUltramanName}_${safeSkillName}.mp3`)
+      const skillAudio = new Audio(`/audio/skills/${safeUltramanName}_${safeSkillName}.mp3`)
       skillAudio.preload = 'auto'
       preloadedAudioRef.current[audioKey] = skillAudio
     }
