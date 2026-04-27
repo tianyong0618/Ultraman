@@ -39,6 +39,10 @@ jobs:
           cd ultraman-magic-book
           npm run build
 
+      - name: Copy dist to root
+        run: |
+          cp -r ultraman-magic-book/dist ./dist
+
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
