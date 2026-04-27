@@ -1,0 +1,324 @@
+- generic [ref=e2]:
+  - region
+  - generic [ref=e3]:
+    - link "Skip to content" [ref=e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - generic [ref=e7]:
+      - banner "Global Navigation Menu" [ref=e8]:
+        - generic [ref=e9]:
+          - generic [ref=e10]:
+            - button "Open menu" [ref=e12] [cursor=pointer]:
+              - img [ref=e13]
+            - link "Homepage (g then d)" [ref=e15] [cursor=pointer]:
+              - /url: /
+              - img [ref=e16]
+          - generic [ref=e18]:
+            - navigation "Breadcrumbs" [ref=e19]:
+              - list [ref=e20]:
+                - listitem [ref=e21]:
+                  - link "tianyong0618" [ref=e22] [cursor=pointer]:
+                    - /url: /tianyong0618
+                    - generic [ref=e23]: tianyong0618
+                - listitem [ref=e24]:
+                  - link "Ultraman" [ref=e25] [cursor=pointer]:
+                    - /url: /tianyong0618/Ultraman
+                    - generic [ref=e26]: Ultraman
+                    - img [ref=e27]
+            - button "Search or jump to…" [ref=e31] [cursor=pointer]:
+              - generic [ref=e32]:
+                - generic:
+                  - img
+                - generic [ref=e33]:
+                  - generic:
+                    - text: Type
+                    - generic: /
+                    - text: to search
+          - generic [ref=e34]:
+            - generic [ref=e35]:
+              - generic [ref=e38]:
+                - link "Chat with Copilot" [ref=e40] [cursor=pointer]:
+                  - /url: /copilot
+                  - img [ref=e41]
+                - button "Open Copilot…" [ref=e45] [cursor=pointer]:
+                  - generic:
+                    - img
+              - button "Create new..." [ref=e47] [cursor=pointer]:
+                - generic [ref=e48]:
+                  - generic:
+                    - img
+                - generic:
+                  - img
+              - generic [ref=e49]:
+                - link "Issues" [ref=e50] [cursor=pointer]:
+                  - /url: /issues
+                  - img [ref=e51]
+                - link "Pull requests" [ref=e54] [cursor=pointer]:
+                  - /url: /pulls
+                  - img [ref=e55]
+                - link "Repositories" [ref=e57] [cursor=pointer]:
+                  - /url: /repos
+                  - img [ref=e58]
+            - link "You have no unread notifications (g then n)" [ref=e60] [cursor=pointer]:
+              - /url: /notifications
+              - img [ref=e61]
+            - button "Open user navigation menu" [ref=e64] [cursor=pointer]:
+              - img "田勇" [ref=e65]
+        - heading "Repository navigation" [level=2] [ref=e66]
+        - navigation "Repository" [ref=e67]:
+          - list [ref=e68]:
+            - listitem [ref=e69]:
+              - link "Code" [ref=e70] [cursor=pointer]:
+                - /url: /tianyong0618/Ultraman
+                - img [ref=e72]
+                - generic [ref=e74]: Code
+            - listitem [ref=e75]:
+              - link "Issues" [ref=e76] [cursor=pointer]:
+                - /url: /tianyong0618/Ultraman/issues
+                - img [ref=e78]
+                - generic [ref=e81]: Issues
+            - listitem [ref=e82]:
+              - link "Pull requests" [ref=e83] [cursor=pointer]:
+                - /url: /tianyong0618/Ultraman/pulls
+                - img [ref=e85]
+                - generic [ref=e87]: Pull requests
+            - listitem [ref=e88]:
+              - link "Agents" [ref=e89] [cursor=pointer]:
+                - /url: /tianyong0618/Ultraman/agents?author=tianyong0618
+                - img [ref=e91]
+                - generic [ref=e94]: Agents
+            - listitem [ref=e95]:
+              - link "Actions" [ref=e96] [cursor=pointer]:
+                - /url: /tianyong0618/Ultraman/actions
+                - img [ref=e98]
+                - generic [ref=e100]: Actions
+            - listitem [ref=e101]:
+              - link "Projects" [ref=e102] [cursor=pointer]:
+                - /url: /tianyong0618/Ultraman/projects
+                - img [ref=e104]
+                - generic [ref=e106]: Projects
+            - listitem [ref=e107]:
+              - link "Security and quality" [ref=e108] [cursor=pointer]:
+                - /url: /tianyong0618/Ultraman/security
+                - img [ref=e110]
+                - generic [ref=e112]: Security and quality
+            - listitem [ref=e113]:
+              - link "Insights" [ref=e114] [cursor=pointer]:
+                - /url: /tianyong0618/Ultraman/network/dependencies
+                - img [ref=e116]
+                - generic [ref=e118]: Insights
+            - listitem [ref=e119]:
+              - link "Settings" [ref=e120] [cursor=pointer]:
+                - /url: /tianyong0618/Ultraman/settings
+                - img [ref=e122]
+                - generic [ref=e124]: Settings
+      - region "Important update" [ref=e126]:
+        - img [ref=e128]
+        - generic [ref=e131]:
+          - heading "Important update" [level=2] [ref=e133]
+          - generic [ref=e135]:
+            - text: On April 24 we'll start using GitHub Copilot interaction data for AI model training unless you opt out.
+            - link "Review this update" [ref=e136] [cursor=pointer]:
+              - /url: https://gh.io/AAzfaht
+            - text: and manage your preferences in your
+            - link "GitHub account settings" [ref=e137] [cursor=pointer]:
+              - /url: https://github.com/settings/copilot/features
+            - text: .
+        - button "Dismiss banner" [ref=e138] [cursor=pointer]:
+          - img [ref=e139]
+  - main [ref=e143]:
+    - generic [ref=e145]:
+      - 'heading "Settings: tianyong0618/Ultraman" [level=1] [ref=e146]'
+      - generic [ref=e148]:
+        - navigation "General settings" [ref=e151]:
+          - list [ref=e153]:
+            - listitem [ref=e154]:
+              - link "General" [ref=e155] [cursor=pointer]:
+                - /url: /tianyong0618/Ultraman/settings
+                - generic:
+                  - img
+                - generic [ref=e156]: General
+            - listitem [ref=e157]
+            - listitem [ref=e158]:
+              - generic [ref=e161]:
+                - heading "Access" [level=2] [ref=e163]
+                - list "Access" [ref=e164]:
+                  - listitem [ref=e165]:
+                    - link "Collaborators" [ref=e166] [cursor=pointer]:
+                      - /url: /tianyong0618/Ultraman/settings/access
+                      - generic:
+                        - img
+                      - generic [ref=e167]: Collaborators
+            - listitem [ref=e168]
+            - listitem [ref=e169]:
+              - generic [ref=e172]:
+                - heading "Code and automation" [level=2] [ref=e174]
+                - list "Code and automation" [ref=e175]:
+                  - listitem [ref=e176]:
+                    - link "Branches" [ref=e177] [cursor=pointer]:
+                      - /url: /tianyong0618/Ultraman/settings/branches
+                      - generic:
+                        - img
+                      - generic [ref=e178]: Branches
+                  - listitem [ref=e179]:
+                    - link "Tags" [ref=e180] [cursor=pointer]:
+                      - /url: /tianyong0618/Ultraman/settings/tag_protection
+                      - generic:
+                        - img
+                      - generic [ref=e181]: Tags
+                  - listitem [ref=e182]:
+                    - button "Rules" [ref=e183] [cursor=pointer]:
+                      - generic:
+                        - img
+                      - generic [ref=e184]: Rules
+                      - generic:
+                        - img
+                  - listitem [ref=e185]:
+                    - button "Actions" [ref=e186] [cursor=pointer]:
+                      - generic:
+                        - img
+                      - generic [ref=e187]: Actions
+                      - generic:
+                        - img
+                  - listitem [ref=e188]:
+                    - link "Models Preview feature" [ref=e189] [cursor=pointer]:
+                      - /url: /tianyong0618/Ultraman/settings/models/access-policy
+                      - generic:
+                        - img
+                      - generic [ref=e190]: Models
+                      - generic:
+                        - generic "Preview feature": Preview
+                  - listitem [ref=e191]:
+                    - link "Webhooks" [ref=e192] [cursor=pointer]:
+                      - /url: /tianyong0618/Ultraman/settings/hooks
+                      - generic:
+                        - img
+                      - generic [ref=e193]: Webhooks
+                  - listitem [ref=e194]:
+                    - button "Copilot" [ref=e195] [cursor=pointer]:
+                      - generic:
+                        - img
+                      - generic [ref=e196]: Copilot
+                      - generic:
+                        - img
+                  - listitem [ref=e197]:
+                    - link "Environments" [ref=e198] [cursor=pointer]:
+                      - /url: /tianyong0618/Ultraman/settings/environments
+                      - generic:
+                        - img
+                      - generic [ref=e199]: Environments
+                  - listitem [ref=e200]:
+                    - link "Codespaces" [ref=e201] [cursor=pointer]:
+                      - /url: /tianyong0618/Ultraman/settings/codespaces
+                      - generic:
+                        - img
+                      - generic [ref=e202]: Codespaces
+                  - listitem [ref=e203]:
+                    - link "Pages" [ref=e204] [cursor=pointer]:
+                      - /url: /tianyong0618/Ultraman/settings/pages
+                      - generic:
+                        - img
+                      - generic [ref=e205]: Pages
+            - listitem [ref=e206]
+            - listitem [ref=e207]:
+              - generic [ref=e210]:
+                - heading "Security and quality" [level=2] [ref=e212]
+                - list "Security and quality" [ref=e213]:
+                  - listitem [ref=e214]:
+                    - link "Advanced Security" [ref=e215] [cursor=pointer]:
+                      - /url: /tianyong0618/Ultraman/settings/security_analysis
+                      - generic:
+                        - img
+                      - generic [ref=e216]: Advanced Security
+                  - listitem [ref=e217]:
+                    - link "Deploy keys" [ref=e218] [cursor=pointer]:
+                      - /url: /tianyong0618/Ultraman/settings/keys
+                      - generic:
+                        - img
+                      - generic [ref=e219]: Deploy keys
+                  - listitem [ref=e220]:
+                    - button "Secrets and variables" [ref=e221] [cursor=pointer]:
+                      - generic:
+                        - img
+                      - generic [ref=e222]: Secrets and variables
+                      - generic:
+                        - img
+            - listitem [ref=e223]
+            - listitem [ref=e224]:
+              - generic [ref=e227]:
+                - heading "Integrations" [level=2] [ref=e229]
+                - list "Integrations" [ref=e230]:
+                  - listitem [ref=e231]:
+                    - link "GitHub Apps" [ref=e232] [cursor=pointer]:
+                      - /url: /tianyong0618/Ultraman/settings/installations
+                      - generic:
+                        - img
+                      - generic [ref=e233]: GitHub Apps
+                  - listitem [ref=e234]:
+                    - link "Email notifications" [ref=e235] [cursor=pointer]:
+                      - /url: /tianyong0618/Ultraman/settings/notifications
+                      - generic:
+                        - img
+                      - generic [ref=e236]: Email notifications
+        - generic [ref=e239]:
+          - heading "GitHub Pages" [level=2] [ref=e241]
+          - paragraph [ref=e242]:
+            - link "GitHub Pages" [ref=e243] [cursor=pointer]:
+              - /url: https://pages.github.com
+            - text: is designed to host your personal, organization, or project pages from a GitHub repository.
+          - article [ref=e244]:
+            - img "GitHub Pages" [ref=e245]
+            - generic [ref=e246]:
+              - heading "Upgrade or make this repository public to enable Pages" [level=2] [ref=e247]
+              - generic [ref=e248]:
+                - link "Upgrade" [ref=e249] [cursor=pointer]:
+                  - /url: /account/upgrade
+                  - generic [ref=e251]: Upgrade
+                - link "Learn more about GitHub Pages" [ref=e252] [cursor=pointer]:
+                  - /url: https://docs.github.com/github/working-with-github-pages/about-github-pages
+          - generic [ref=e253]:
+            - generic [ref=e254]:
+              - heading "Visibility" [level=3] [ref=e255]
+              - generic [ref=e256]: GitHub Enterprise
+            - paragraph [ref=e257]:
+              - text: With a GitHub Enterprise account, you can restrict access to your GitHub Pages site by publishing it privately. You can use privately published sites to share your internal documentation or knowledge base with members of your enterprise. You can try GitHub Enterprise risk-free for 30 days.
+              - link "Learn more about the visibility of your GitHub Pages site." [ref=e258] [cursor=pointer]:
+                - /url: https://docs.github.com/pages/getting-started-with-github-pages/changing-the-visibility-of-your-github-pages-site
+            - link "Start free for 30 days" [ref=e259] [cursor=pointer]:
+              - /url: /account/enterprises/new
+              - generic [ref=e261]: Start free for 30 days
+  - contentinfo [ref=e262]:
+    - heading "Footer" [level=2] [ref=e263]
+    - generic [ref=e264]:
+      - generic [ref=e265]:
+        - link "GitHub Homepage" [ref=e266] [cursor=pointer]:
+          - /url: https://github.com
+          - img [ref=e267]
+        - generic [ref=e269]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=e270]:
+        - heading "Footer navigation" [level=3] [ref=e271]
+        - list "Footer navigation" [ref=e272]:
+          - listitem [ref=e273]:
+            - link "Terms" [ref=e274] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=e275]:
+            - link "Privacy" [ref=e276] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=e277]:
+            - link "Security" [ref=e278] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=e279]:
+            - link "Status" [ref=e280] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=e281]:
+            - link "Community" [ref=e282] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=e283]:
+            - link "Docs" [ref=e284] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=e285]:
+            - link "Contact" [ref=e286] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=e287]:
+            - button "Manage cookies" [ref=e289] [cursor=pointer]
+          - listitem [ref=e290]:
+            - button "Do not share my personal information" [ref=e292] [cursor=pointer]
