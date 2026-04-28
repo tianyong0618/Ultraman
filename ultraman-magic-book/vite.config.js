@@ -13,6 +13,7 @@ export default defineConfig({
         const distPath = path.resolve(__dirname, 'dist', 'CNAME')
         
         if (fs.existsSync(cnamePath)) {
+          fs.mkdirSync(path.resolve(__dirname, 'dist'), { recursive: true })
           fs.copyFileSync(cnamePath, distPath)
           console.log('CNAME file copied to dist directory')
         }
