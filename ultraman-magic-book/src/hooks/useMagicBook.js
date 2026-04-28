@@ -41,6 +41,7 @@ export function useMagicBook() {
 
   const audioPlayerRef = useRef(null)
   const preloadedAudioRef = useRef({})
+  const skillTimeoutRef = useRef(null)
 
   const sanitizeFilename = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_')
 
@@ -158,12 +159,17 @@ export function useMagicBook() {
       preloadedAudioRef.current[audioKey] = skillAudio
     }
     
+    if (skillTimeoutRef.current) {
+      clearTimeout(skillTimeoutRef.current)
+    }
+    
     setActiveSkill(skillName)
     setIsSkillAnimating(true)
     
-    setTimeout(() => {
+    skillTimeoutRef.current = setTimeout(() => {
       setIsSkillAnimating(false)
       setActiveSkill(null)
+      skillTimeoutRef.current = null
     }, 3000)
   }, [soundOn, current])
 
