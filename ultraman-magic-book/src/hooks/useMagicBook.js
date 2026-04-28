@@ -86,6 +86,19 @@ export function useMagicBook() {
     const safeName = sanitizeFilename(ultramanData[currentPage]?.name)
     if (safeName) {
       preloadAudio('name', safeName)
+      const currentUltraman = ultramanData[currentPage]
+      if (currentUltraman) {
+        currentUltraman.skills?.forEach(skillName => {
+          const safeSkillName = skillName.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_')
+          preloadAudio('skills', `${safeName}_${safeSkillName}`)
+        });
+        currentUltraman.forms?.forEach(form => {
+          form.skills?.forEach(skillName => {
+            const safeSkillName = skillName.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_')
+            preloadAudio('skills', `${safeName}_${safeSkillName}`)
+          })
+        })
+      }
     }
   }, [currentPage, preloadAudio])
 
@@ -151,12 +164,25 @@ export function useMagicBook() {
       const playPromise = audioPlayerRef.current.play()
       if (playPromise) playPromise.catch(() => {})
     } else {
-      audioPlayerRef.current = new Audio(`/audio/skills/${safeUltramanName}_${safeSkillName}.mp3`)
-      const playPromise = audioPlayerRef.current.play()
-      if (playPromise) playPromise.catch(() => {})
       const skillAudio = new Audio(`/audio/skills/${safeUltramanName}_${safeSkillName}.mp3`)
-      skillAudio.preload = 'auto'
-      preloadedAudioRef.current[audioKey] = skillAudio
+      
+      const onCanPlay = () => {
+        skillAudio.removeEventListener('canplaythrough', onCanPlay)
+        skillAudio.removeEventListener('error', onError)
+        audioPlayerRef.current = skillAudio
+        skillAudio.currentTime = 0
+        const playPromise = skillAudio.play()
+        if (playPromise) playPromise.catch(() => {})
+      }
+      
+      const onError = () => {
+        skillAudio.removeEventListener('canplaythrough', onCanPlay)
+        skillAudio.removeEventListener('error', onError)
+      }
+      
+      skillAudio.addEventListener('canplaythrough', onCanPlay)
+      skillAudio.addEventListener('error', onError)
+      skillAudio.load()
     }
     
     if (skillTimeoutRef.current) {
