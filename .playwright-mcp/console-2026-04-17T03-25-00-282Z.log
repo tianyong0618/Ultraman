@@ -1,5 +1,0 @@
-[      93ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://imgbin.com/png/0wd6DQH6/ultraman-zero-ultraman-tiga-zoffy-ultra-series-ultraman-cosmos-png:0
-[      93ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o @ https://imgbin.com/png/0wd6DQH6/ultraman-zero-ultraman-tiga-zoffy-ultra-series-ultraman-cosmos-png:0
-[     915ms] [ERROR] Attestation check for Shared Storage on https://www.googleadservices.com failed. @ https://www.googleadservices.com/pagead/managed/js/activeview/current/reach_worklet.html:0
-[     915ms] [ERROR] Attestation check for Shared Storage on https://www.googleadservices.com failed. @ https://www.googleadservices.com/pagead/managed/js/activeview/current/reach_worklet.html:0
-[    1039ms] [ERROR] Attestation check for Shared Storage on https://www.googleadservices.com failed. @ https://www.googleadservices.com/pagead/managed/js/activeview/current/reach_worklet.html:0
