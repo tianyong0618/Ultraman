@@ -15,7 +15,7 @@ export const PageLeft = memo(function PageLeft({
 
   const skillImageSrc = activeSkill && isSkillAnimating && getSkillImage ? getSkillImage(current.name, activeSkill) : null
 
-  const hasValidMainImage = displayImage && !imageError[current.id - 1]
+  const hasValidMainImage = displayImage && !imageError[current.id]
 
   return (
     <div className="page-left">
@@ -33,14 +33,14 @@ export const PageLeft = memo(function PageLeft({
           src={displayImage} 
           alt={current.name}
           className="ultraman-image"
-          onError={() => onImageError(current.id - 1)}
+          onError={() => onImageError(current.id)}
           draggable="false"
           onDragStart={(e) => e.preventDefault()}
         />
       ) : null}
       <div className="ultraman-placeholder" style={{
         background: `linear-gradient(135deg, ${current.color} 0%, #ffffff 50%, ${current.color} 100%)`,
-        display: !displayImage || imageError[current.id - 1] ? 'flex' : 'none'
+        display: !displayImage || imageError[current.id] ? 'flex' : 'none'
       }} draggable="false" onDragStart={(e) => e.preventDefault()}>
         <span className="placeholder-text">{current.name.charAt(0)}</span>
       </div>

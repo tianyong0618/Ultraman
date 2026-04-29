@@ -44,8 +44,8 @@ function App() {
     disabled: isFlipping,
   })
 
-  const handleImageError = (pageId) => {
-    setImageLoadError(prev => ({...prev, [pageId]: true}))
+  const handleImageError = (ultramanId) => {
+    setImageLoadError(prev => ({...prev, [ultramanId]: true}))
   }
 
   const handleSoundToggle = () => {

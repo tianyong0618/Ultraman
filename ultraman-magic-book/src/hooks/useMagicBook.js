@@ -43,11 +43,14 @@ export function useMagicBook() {
   const preloadedAudioRef = useRef({})
   const skillTimeoutRef = useRef(null)
 
-  const sanitizeFilename = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_')
-
+const sanitizeFilename = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '')
+  
+  const getSkillAudioKey = useCallback((ultramanName, skillName) => {
+    return `${sanitizeFilename(ultramanName)}_${sanitizeFilename(skillName)}`
+  }, [])
+  
   const getSkillImage = useCallback((ultramanName, skillName) => {
-    const sanitize = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_')
-    return `/images/skills/${sanitize(ultramanName)}_${sanitize(skillName)}.jpg`
+    return `/images/skills/${sanitizeFilename(ultramanName)}_${sanitizeFilename(skillName)}.jpg`
   }, [])
 
   const preloadAudio = useCallback((type, name) => {
@@ -55,7 +58,16 @@ export function useMagicBook() {
     if (!preloadedAudioRef.current[key]) {
       const audio = new Audio(`/audio/${type}/${name}.mp3`)
       audio.preload = 'auto'
+      audio.addEventListener('error', () => console.warn('音频加载失败:', key))
       preloadedAudioRef.current[key] = audio
+      
+      if (Object.keys(preloadedAudioRef.current).length > 20) {
+        const keys = Object.keys(preloadedAudioRef.current)
+        keys.slice(0, 10).forEach(k => {
+          preloadedAudioRef.current[k]?.pause()
+          delete preloadedAudioRef.current[k]
+        })
+      }
     }
   }, [])
 
@@ -89,18 +101,16 @@ export function useMagicBook() {
       const currentUltraman = ultramanData[currentPage]
       if (currentUltraman) {
         currentUltraman.skills?.forEach(skillName => {
-          const safeSkillName = skillName.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_')
-          preloadAudio('skills', `${safeName}_${safeSkillName}`)
+          preloadAudio('skills', getSkillAudioKey(currentUltraman.name, skillName))
         });
         currentUltraman.forms?.forEach(form => {
           form.skills?.forEach(skillName => {
-            const safeSkillName = skillName.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_')
-            preloadAudio('skills', `${safeName}_${safeSkillName}`)
+            preloadAudio('skills', getSkillAudioKey(currentUltraman.name, skillName))
           })
         })
       }
     }
-  }, [currentPage, preloadAudio])
+  }, [currentPage, preloadAudio, getSkillAudioKey])
 
   useEffect(() => {
     if (started && soundOn && current) {
@@ -110,6 +120,10 @@ export function useMagicBook() {
 
   const goNext = useCallback(() => {
     if (currentPage < totalPages - 1 && !isFlipping) {
+      if (audioPlayerRef.current) {
+        audioPlayerRef.current.pause()
+        audioPlayerRef.current = null
+      }
       setIsFlipping(true)
       const rightPage = document.querySelector('.page-right')
       rightPage?.classList.add('flipping')
@@ -118,6 +132,8 @@ export function useMagicBook() {
         setCurrentPage(p => p + 1)
         setActiveTab(0)
         setActiveForm(0)
+        setIsSkillAnimating(false)
+        setActiveSkill(null)
         setIsFlipping(false)
       }, 580)
     }
@@ -125,6 +141,10 @@ export function useMagicBook() {
 
   const goPrev = useCallback(() => {
     if (currentPage > 0 && !isFlipping) {
+      if (audioPlayerRef.current) {
+        audioPlayerRef.current.pause()
+        audioPlayerRef.current = null
+      }
       setIsFlipping(true)
       const leftPage = document.querySelector('.page-left')
       leftPage?.classList.add('flipping')
@@ -133,6 +153,8 @@ export function useMagicBook() {
         setCurrentPage(p => p - 1)
         setActiveTab(0)
         setActiveForm(0)
+        setIsSkillAnimating(false)
+        setActiveSkill(null)
         setIsFlipping(false)
       }, 580)
     }
@@ -149,55 +171,37 @@ export function useMagicBook() {
 
   const playSkill = useCallback((skillName) => {
     if (!soundOn || !current || !skillName) return
-    const safeUltramanName = sanitizeFilename(current.name)
-    const safeSkillName = skillName.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_')
-    const audioKey = `skills/${safeUltramanName}_${safeSkillName}`
+    const skillAudioKey = getSkillAudioKey(current.name, skillName)
+    const audioKey = `skills/${skillAudioKey}`
     
     if (audioPlayerRef.current) {
       audioPlayerRef.current.pause()
       audioPlayerRef.current = null
     }
     
-    if (preloadedAudioRef.current[audioKey]) {
-      audioPlayerRef.current = preloadedAudioRef.current[audioKey]
-      audioPlayerRef.current.currentTime = 0
-      const playPromise = audioPlayerRef.current.play()
-      if (playPromise) playPromise.catch(() => {})
-    } else {
-      const skillAudio = new Audio(`/audio/skills/${safeUltramanName}_${safeSkillName}.mp3`)
-      
-      const onCanPlay = () => {
-        skillAudio.removeEventListener('canplaythrough', onCanPlay)
-        skillAudio.removeEventListener('error', onError)
-        audioPlayerRef.current = skillAudio
-        skillAudio.currentTime = 0
-        const playPromise = skillAudio.play()
-        if (playPromise) playPromise.catch(() => {})
-      }
-      
-      const onError = () => {
-        skillAudio.removeEventListener('canplaythrough', onCanPlay)
-        skillAudio.removeEventListener('error', onError)
-      }
-      
-      skillAudio.addEventListener('canplaythrough', onCanPlay)
-      skillAudio.addEventListener('error', onError)
-      skillAudio.load()
-    }
-    
-    if (skillTimeoutRef.current) {
-      clearTimeout(skillTimeoutRef.current)
-    }
-    
     setActiveSkill(skillName)
     setIsSkillAnimating(true)
-    
     skillTimeoutRef.current = setTimeout(() => {
       setIsSkillAnimating(false)
       setActiveSkill(null)
       skillTimeoutRef.current = null
-    }, 3000)
-  }, [soundOn, current])
+    }, 15000)
+    
+    const playAudio = (audio) => {
+      audio.currentTime = 0
+      const playPromise = audio.play()
+      if (playPromise) playPromise.catch(console.warn)
+    }
+    
+    if (preloadedAudioRef.current[audioKey]) {
+      audioPlayerRef.current = preloadedAudioRef.current[audioKey]
+      playAudio(audioPlayerRef.current)
+    } else {
+      const skillAudio = new Audio(`/audio/skills/${skillAudioKey}.mp3`)
+      skillAudio.addEventListener('canplay', () => playAudio(skillAudio), { once: true })
+      skillAudio.load()
+    }
+  }, [soundOn, current, getSkillAudioKey])
 
   const toggleSound = useCallback(() => {
     setSoundOn(prev => !prev)
