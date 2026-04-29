@@ -33,11 +33,11 @@ export const ultramanData = [
     { name: '至高型', image: '/images/ultraman/15_盖亚_至高型.jpg', skills: ['盖亚粉碎', '光子冰刀'] }
   ], skills: ['量子冲击', '盖亚粉碎', '光子冰刀'], catchphrase: '盖亚！', human: '高山我梦', color: '#8B0000', image: '/images/ultraman/15_盖亚.jpg' },
   { id: 14, name: '高斯奥特曼', year: 2001, series: '高斯奥特曼', era: '平成时期', desc: '强调和平共处理念的奥特战士。月神型代表温柔，日蚀型代表勇气。慈爱的战士，目标是与怪兽和平共处。', forms: [
-    { name: '月神型', image: '/images/ultraman/16_高斯.jpg', skills: ['高斯月光'] },
+    { name: '月神型', image: '/images/ultraman/16_高斯.avif', skills: ['高斯月光'] },
     { name: '日蚀型', image: '/images/ultraman/16_高斯_日蚀型.jpg', skills: ['日食破坏'] },
     { name: '最终型', image: '/images/ultraman/16_高斯_最终型.jpg', skills: ['高斯提取'] },
     { name: '宇宙日蚀型', image: '/images/ultraman/16_高斯_宇宙日蚀型.jpg', skills: [] }
-  ], skills: ['高斯月光', '日食破坏', '高斯提取'], catchphrase: '高斯！', human: '春野武藏', color: '#1E90FF', image: '/images/ultraman/16_高斯.jpg' },
+  ], skills: ['高斯月光', '日食破坏', '高斯提取'], catchphrase: '高斯！', human: '春野武藏', color: '#1E90FF', image: '/images/ultraman/16_高斯.avif' },
   { id: 15, name: '奈克瑟斯奥特曼', year: 2004, series: '奈克瑟斯奥特曼', era: '平成时期', desc: '风格较黑暗的成人向作品。系列构成新颖，采用单元剧形式。是被诺亚奥特曼选中的适能者。', forms: [
     { name: '幼年型', image: '/images/ultraman/17_奈克瑟斯.jpg', skills: [] },
     { name: '青年型', image: '/images/ultraman/17_奈克瑟斯_青年型.jpg', skills: [] },

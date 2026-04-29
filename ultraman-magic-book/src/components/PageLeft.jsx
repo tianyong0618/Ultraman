@@ -36,15 +36,6 @@ export const PageLeft = memo(function PageLeft({
         />
       ) : hasValidMainImage ? (
         <img 
-          src={skillImageSrc} 
-          alt={`${current.name} - ${activeSkill}`}
-          className="ultraman-image skill-animation"
-          onError={() => {}}
-          draggable="false"
-          onDragStart={(e) => e.preventDefault()}
-        />
-      ) : hasValidMainImage ? (
-        <img 
           src={displayImage} 
           alt={current.name}
           className="ultraman-image"

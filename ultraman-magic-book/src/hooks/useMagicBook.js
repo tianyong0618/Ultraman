@@ -174,6 +174,7 @@ const sanitizeFilename = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_
     if (!soundOn || !current || !skillName) return
     const skillAudioKey = getSkillAudioKey(current.name, skillName)
     const audioKey = `skills/${skillAudioKey}`
+    const skillImageSrc = getSkillImage(current.name, skillName)
     
     if (audioPlayerRef.current) {
       audioPlayerRef.current.pause()
@@ -183,6 +184,47 @@ const sanitizeFilename = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_
     setActiveSkill(skillName)
     setIsSkillLoading(true)
     setIsSkillAnimating(true)
+    
+    // 先预加载技能图片，等图片加载完成后再加载音频
+    const preloadImage = () => {
+      return new Promise((resolve) => {
+        const img = new Image()
+        img.onload = () => resolve(true)
+        img.onerror = () => resolve(false)
+        img.src = skillImageSrc
+      })
+    }
+    
+    const onImageLoaded = async () => {
+      const imgLoaded = await preloadImage()
+      if (!imgLoaded) {
+        console.warn('技能图片加载失败:', skillImageSrc)
+      }
+      
+      // 图片加载完成后再加载音频
+      const onCanPlay = () => {
+        setIsSkillLoading(false)
+        if (audioPlayerRef.current) {
+          audioPlayerRef.current.currentTime = 0
+          audioPlayerRef.current.play().catch(console.warn)
+        }
+      }
+      
+      if (preloadedAudioRef.current[audioKey]) {
+        audioPlayerRef.current = preloadedAudioRef.current[audioKey]
+        onCanPlay()
+      } else {
+        const skillAudio = new Audio(`/audio/skills/${skillAudioKey}.mp3`)
+        skillAudio.addEventListener('canplay', onCanPlay, { once: true })
+        skillAudio.addEventListener('error', () => {
+          setIsSkillLoading(false)
+          console.warn('技能音频加载失败:', skillAudioKey)
+        }, { once: true })
+        audioPlayerRef.current = skillAudio
+        skillAudio.load()
+      }
+    }
+    
     skillTimeoutRef.current = setTimeout(() => {
       setIsSkillAnimating(false)
       setActiveSkill(null)
@@ -190,28 +232,8 @@ const sanitizeFilename = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_
       skillTimeoutRef.current = null
     }, 15000)
     
-    const onCanPlay = () => {
-      setIsSkillLoading(false)
-      if (audioPlayerRef.current) {
-        audioPlayerRef.current.currentTime = 0
-        audioPlayerRef.current.play().catch(console.warn)
-      }
-    }
-    
-    if (preloadedAudioRef.current[audioKey]) {
-      audioPlayerRef.current = preloadedAudioRef.current[audioKey]
-      onCanPlay()
-    } else {
-      const skillAudio = new Audio(`/audio/skills/${skillAudioKey}.mp3`)
-      skillAudio.addEventListener('canplay', onCanPlay, { once: true })
-      skillAudio.addEventListener('error', () => {
-        setIsSkillLoading(false)
-        console.warn('技能音频加载失败:', skillAudioKey)
-      }, { once: true })
-      audioPlayerRef.current = skillAudio
-      skillAudio.load()
-    }
-  }, [soundOn, current, getSkillAudioKey])
+    onImageLoaded()
+  }, [soundOn, current, getSkillAudioKey, getSkillImage])
 
   const toggleSound = useCallback(() => {
     setSoundOn(prev => !prev)
