@@ -2,6 +2,21 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { ultramanData, totalPages } from '../data/ultraman'
 
 const STORAGE_KEY = 'ultraman-magic-book-state'
+const IMAGE_CACHE_KEY = 'ultraman-magic-book-image-cache'
+
+function loadImageCache() {
+  try {
+    const saved = localStorage.getItem(IMAGE_CACHE_KEY)
+    return saved ? JSON.parse(saved) : {}
+  } catch (e) {}
+  return {}
+}
+
+function saveImageCache(cache) {
+  try {
+    localStorage.setItem(IMAGE_CACHE_KEY, JSON.stringify(cache))
+  } catch (e) {}
+}
 
 function loadStateFromStorage() {
   try {
@@ -43,6 +58,8 @@ export function useMagicBook() {
   const audioPlayerRef = useRef(null)
   const preloadedAudioRef = useRef({})
   const skillTimeoutRef = useRef(null)
+  const [imageCache, setImageCache] = useState(loadImageCache)
+  const imageLoadingRef = useRef({})
 
 const sanitizeFilename = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '')
   
@@ -53,6 +70,22 @@ const sanitizeFilename = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_
   const getSkillImage = useCallback((ultramanName, skillName) => {
     return `/images/skills/${sanitizeFilename(ultramanName)}_${sanitizeFilename(skillName)}.jpg`
   }, [])
+
+  const preloadImage = useCallback((src) => {
+    if (!src || imageCache[src] || imageLoadingRef.current[src]) return
+    const img = new Image()
+    img.onload = () => {
+      const newCache = { ...imageCache, [src]: true }
+      setImageCache(newCache)
+      saveImageCache(newCache)
+      delete imageLoadingRef.current[src]
+    }
+    img.onerror = () => {
+      delete imageLoadingRef.current[src]
+    }
+    imageLoadingRef.current[src] = true
+    img.src = src
+  }, [imageCache])
 
   const preloadAudio = useCallback((type, name) => {
     const key = `${type}/${name}`
@@ -112,6 +145,24 @@ const sanitizeFilename = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_
       }
     }
   }, [currentPage, preloadAudio, getSkillAudioKey])
+
+  useEffect(() => {
+    const currentUltraman = ultramanData[currentPage]
+    if (currentUltraman) {
+      preloadImage(currentUltraman.image)
+      currentUltraman.forms?.forEach(form => {
+        preloadImage(form.image)
+      })
+      currentUltraman.skills?.forEach(skillName => {
+        preloadImage(getSkillImage(currentUltraman.name, skillName))
+      })
+      currentUltraman.forms?.forEach(form => {
+        form.skills?.forEach(skillName => {
+          preloadImage(getSkillImage(currentUltraman.name, skillName))
+        })
+      })
+    }
+  }, [currentPage, preloadImage, getSkillImage])
 
   useEffect(() => {
     if (started && soundOn && current) {
@@ -185,12 +236,31 @@ const sanitizeFilename = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_
     setIsSkillLoading(true)
     setIsSkillAnimating(true)
     
-    // 先预加载技能图片，等图片加载完成后再加载音频
     const preloadImage = () => {
       return new Promise((resolve) => {
+        if (imageCache[skillImageSrc]) {
+          resolve(true)
+          return
+        }
+        if (imageLoadingRef.current[skillImageSrc]) {
+          imageLoadingRef.current[skillImageSrc].then(success => resolve(success))
+          return
+        }
         const img = new Image()
-        img.onload = () => resolve(true)
-        img.onerror = () => resolve(false)
+        const loadPromise = new Promise((res) => {
+          img.onload = () => {
+            const newCache = { ...imageCache, [skillImageSrc]: true }
+            setImageCache(newCache)
+            saveImageCache(newCache)
+            delete imageLoadingRef.current[skillImageSrc]
+            res(true)
+          }
+          img.onerror = () => {
+            delete imageLoadingRef.current[skillImageSrc]
+            res(false)
+          }
+        })
+        imageLoadingRef.current[skillImageSrc] = loadPromise
         img.src = skillImageSrc
       })
     }
@@ -201,7 +271,6 @@ const sanitizeFilename = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_
         console.warn('技能图片加载失败:', skillImageSrc)
       }
       
-      // 图片加载完成后再加载音频
       const onCanPlay = () => {
         setIsSkillLoading(false)
         if (audioPlayerRef.current) {
@@ -233,7 +302,7 @@ const sanitizeFilename = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_
     }, 15000)
     
     onImageLoaded()
-  }, [soundOn, current, getSkillAudioKey, getSkillImage])
+  }, [soundOn, current, getSkillAudioKey, getSkillImage, imageCache])
 
   const toggleSound = useCallback(() => {
     setSoundOn(prev => !prev)
