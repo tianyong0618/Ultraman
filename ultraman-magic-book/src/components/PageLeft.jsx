@@ -7,19 +7,34 @@ export const PageLeft = memo(function PageLeft({
   activeForm,
   activeSkill,
   isSkillAnimating,
+  isSkillLoading,
   getSkillImage 
 }) {
   const displayImage = current.forms && current.forms.length > 0 && current.forms[activeForm]
     ? current.forms[activeForm].image
     : current.image
 
-  const skillImageSrc = activeSkill && isSkillAnimating && getSkillImage ? getSkillImage(current.name, activeSkill) : null
+  const skillImageSrc = activeSkill && getSkillImage ? getSkillImage(current.name, activeSkill) : null
 
   const hasValidMainImage = displayImage && !imageError[current.id]
 
   return (
     <div className="page-left">
-      {skillImageSrc ? (
+      {activeSkill && isSkillLoading && (
+        <div className="skill-loading-overlay">
+          <span className="skill-loading-text">⚡ 技能加载中...</span>
+        </div>
+      )}
+      {skillImageSrc && isSkillAnimating ? (
+        <img 
+          src={skillImageSrc} 
+          alt={`${current.name} - ${activeSkill}`}
+          className="ultraman-image skill-animation"
+          onError={() => {}}
+          draggable="false"
+          onDragStart={(e) => e.preventDefault()}
+        />
+      ) : hasValidMainImage ? (
         <img 
           src={skillImageSrc} 
           alt={`${current.name} - ${activeSkill}`}

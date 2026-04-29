@@ -28,6 +28,7 @@ function App() {
     playSkill,
     activeSkill,
     isSkillAnimating,
+    isSkillLoading,
     getSkillImage,
   } = useMagicBook()
 
@@ -111,6 +112,7 @@ function App() {
               activeForm={activeForm}
               activeSkill={activeSkill}
               isSkillAnimating={isSkillAnimating}
+              isSkillLoading={isSkillLoading}
               getSkillImage={getSkillImage}
             />
             <UltramanInfo 

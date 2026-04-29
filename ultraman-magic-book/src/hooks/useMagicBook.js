@@ -36,6 +36,7 @@ export function useMagicBook() {
   const [imageLoadError, setImageLoadError] = useState({})
   const [activeSkill, setActiveSkill] = useState(null)
   const [isSkillAnimating, setIsSkillAnimating] = useState(false)
+  const [isSkillLoading, setIsSkillLoading] = useState(false)
 
   const current = ultramanData[currentPage]
 
@@ -180,25 +181,34 @@ const sanitizeFilename = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_
     }
     
     setActiveSkill(skillName)
+    setIsSkillLoading(true)
     setIsSkillAnimating(true)
     skillTimeoutRef.current = setTimeout(() => {
       setIsSkillAnimating(false)
       setActiveSkill(null)
+      setIsSkillLoading(false)
       skillTimeoutRef.current = null
     }, 15000)
     
-    const playAudio = (audio) => {
-      audio.currentTime = 0
-      const playPromise = audio.play()
-      if (playPromise) playPromise.catch(console.warn)
+    const onCanPlay = () => {
+      setIsSkillLoading(false)
+      if (audioPlayerRef.current) {
+        audioPlayerRef.current.currentTime = 0
+        audioPlayerRef.current.play().catch(console.warn)
+      }
     }
     
     if (preloadedAudioRef.current[audioKey]) {
       audioPlayerRef.current = preloadedAudioRef.current[audioKey]
-      playAudio(audioPlayerRef.current)
+      onCanPlay()
     } else {
       const skillAudio = new Audio(`/audio/skills/${skillAudioKey}.mp3`)
-      skillAudio.addEventListener('canplay', () => playAudio(skillAudio), { once: true })
+      skillAudio.addEventListener('canplay', onCanPlay, { once: true })
+      skillAudio.addEventListener('error', () => {
+        setIsSkillLoading(false)
+        console.warn('技能音频加载失败:', skillAudioKey)
+      }, { once: true })
+      audioPlayerRef.current = skillAudio
       skillAudio.load()
     }
   }, [soundOn, current, getSkillAudioKey])
@@ -241,6 +251,7 @@ const sanitizeFilename = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_
     setActiveSkill,
     isSkillAnimating,
     setIsSkillAnimating,
+    isSkillLoading,
     getSkillImage,
   }
 }
