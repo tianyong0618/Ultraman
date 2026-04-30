@@ -1,8 +1,33 @@
-node_modules/
-.DS_Store
-dist/
+# Logs
+logs/
 *.log
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+
+# Local env files
+*.local
+coverage/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Playwright
 playwright-report/
 test-results/
-.worktrees/
 .playwright-mcp/
+
+# Git
+.worktrees/
