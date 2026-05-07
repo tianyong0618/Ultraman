@@ -66,9 +66,9 @@ const sanitizeFilename = (name) => name.replace(/[^a-zA-Z0-9\u4e00-\u9fff]/g, '_
   const getSkillAudioKey = useCallback((ultramanName, skillName) => {
     return `${sanitizeFilename(ultramanName)}_${sanitizeFilename(skillName)}`
   }, [])
-  
+
   const getSkillImage = useCallback((ultramanName, skillName) => {
-    return `/images/skills/${sanitizeFilename(ultramanName)}_${sanitizeFilename(skillName)}.jpg`
+    return `/images/skills/${sanitizeFilename(ultramanName)}_${sanitizeFilename(skillName)}.webp`
   }, [])
 
   const preloadImage = useCallback((src) => {
