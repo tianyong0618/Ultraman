@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全球顶级大模型厂家脑图</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
+    background: #0f0f1a;
+    color: #e0e0e0;
+    overflow: hidden;
+    width: 100vw; height: 100vh;
+  }
+  #canvas-container {
+    width: 100%; height: 100%;
+    cursor: grab;
+    position: relative;
+  }
+  #canvas-container:active { cursor: grabbing; }
+  canvas { display: block; }
+
+  .legend {
+    position: fixed; top: 16px; right: 16px;
+    background: rgba(20,20,40,0.92);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 16px 20px;
+    font-size: 13px; z-index: 10;
+    backdrop-filter: blur(10px);
+  }
+  .legend h3 { margin-bottom: 10px; font-size: 14px; color: #fff; }
+  .legend-item { display: flex; align-items: center; gap: 8px; margin: 5px 0; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+
+  .hint {
+    position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+    background: rgba(20,20,40,0.85); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; padding: 8px 18px; font-size: 12px; color: #888;
+    backdrop-filter: blur(10px); z-index: 10;
+  }
+
+  #tooltip {
+    position: fixed; display: none;
+    background: rgba(15,15,30,0.95);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px; padding: 12px 16px;
+    font-size: 13px; max-width: 280px;
+    pointer-events: none; z-index: 100;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    line-height: 1.6;
+  }
+  #tooltip .tt-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+  #tooltip .tt-sub { color: #aaa; font-size: 12px; }
+</style>
+</head>
+<body>
+<div id="canvas-container">
+  <canvas id="mindmap"></canvas>
+</div>
+
+<div class="legend">
+  <h3>📊 图例</h3>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff6b6b"></div>🇺🇸 美国</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ffd93d"></div>🇨🇳 中国</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#6bcb77"></div>🇫🇷 法国</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#4d96ff"></div>🇦🇪 阿联酋</div>
+  <div style="margin-top:10px;border-top:1px solid rgba(255,255,255,0.1);padding-top:8px;">
+    <div class="legend-item"><span style="color:#6bcb77">●</span> LLM 产品</div>
+    <div class="legend-item"><span style="color:#4d96ff">●</span> IDE / 编程工具</div>
+    <div class="legend-item"><span style="color:#ffd93d">●</span> 投资方 / 金主</div>
+  </div>
+</div>
+
+<div class="hint">🖱️ 滚轮缩放 · 拖拽平移 · 悬停查看详情</div>
+<div id="tooltip"></div>
+
+<script>
+const mindmapData = {
+  text: "全球顶级大模型厂家",
+  children: [
+    {
+      text: "🇺🇸 美国",
+      color: "#ff6b6b",
+      children: [
+        {
+          text: "OpenAI",
+          color: "#10a37f",
+          investors: ["微软 (Microsoft)", "软银 (SoftBank)", "英伟达 (NVIDIA)", "Thrive Capital", "a16z"],
+          llms: ["GPT-4o / GPT-4.5", "GPT-5", "o1 / o3 推理模型", "Sora 视频生成"],
+          ides: ["ChatGPT (对话式)", "Codex (CLI编程代理)"],
+          desc: "估值约$3000亿，AI领域标杆企业"
+        },
+        {
+          text: "Anthropic",
+          color: "#d4a574",
+          investors: ["谷歌 (Google)", "亚马逊 (Amazon)", "Salesforce", "SK Telecom", "Spark Capital"],
+          llms: ["Claude 4 Opus / Sonnet", "Claude 3.5 Haiku", "Claude Code (编程Agent)"],
+          ides: ["Claude Code (终端编程代理)", "Cowork (协作Agent平台)"],
+          desc: "估值约$3500亿，由前OpenAI成员创立"
+        },
+        {
+          text: "Google DeepMind",
+          color: "#4285f4",
+          investors: ["Alphabet (Google母公司)", "谷歌自研投资"],
+          llms: ["Gemini 3.0 Pro/Ultra", "Gemini 2.5 Flash/Pro", "Gemma (开源)"],
+          ides: ["Antigravity (Agent-First IDE)", "Project IDX (云端IDE)", "Google AI Studio"],
+          desc: "谷歌旗下AI实验室，Gemini系列+搜索深度整合"
+        },
+        {
+          text: "Meta AI",
+          color: "#0668E1",
+          investors: ["Meta (Facebook母公司) 自研", "开源社区贡献"],
+          llms: ["Llama 4 (Maverick/Scout)", "Llama 3.3 (开源标杆)", "Meta Movie Gen"],
+          ides: ["Code Llama (编程模型)", "Meta AIT (内部工具)"],
+          desc: "坚持开源路线，Llama系列全球最广泛使用"
+        },
+        {
+          text: "xAI",
+          color: "#888",
+          investors: ["马斯克 (Elon Musk)", "a16z", "红杉资本", "英伟达 (NVIDIA)", "沙特主权基金"],
+          llms: ["Grok 3 / Grok 3 Mini", "Grok 2"],
+          ides: ["Grok 集成于 X 平台", "Colossus 超算集群"],
+          desc: "马斯克创立，Grok集成于X(推特)平台"
+        },
+        {
+          text: "Amazon (AWS)",
+          color: "#ff9900",
+          investors: ["Amazon 自研投资"],
+          llms: ["Amazon Nova (Pro/Lite/Micro)", "Titan 系列"],
+          ides: ["Amazon Q Developer", "CodeWhisperer (已并入Q)"],
+          desc: "以云服务为核心，Nova模型+Bedrock平台"
+        },
+        {
+          text: "Microsoft",
+          color: "#00bcf2",
+          investors: ["Microsoft 自研投资", "与OpenAI深度合作"],
+          llms: ["Phi-4 (小模型)", "MAI-1 (传闻中模型)"],
+          ides: ["GitHub Copilot (VS Code集成)", "Copilot Workspace", "VS Code + AI"],
+          desc: "Copilot生态最成熟，全球开发者覆盖率最高"
+        }
+      ]
+    },
+    {
+      text: "🇨🇳 中国",
+      color: "#ffd93d",
+      children: [
+        {
+          text: "DeepSeek 深度求索",
+          color: "#5b8def",
+          investors: ["阿里 (Alibaba)", "腾讯 (Tencent)", "幻方量化 (母公司)"],
+          llms: ["DeepSeek V4", "DeepSeek R1 (推理)", "DeepSeek-V3 (开源)"],
+          ides: ["DeepSeek Coder (编程模型)", "开源生态工具"],
+          desc: "估值约$200亿，开源路线的全球标杆"
+        },
+        {
+          text: "阿里 (Alibaba)",
+          color: "#ff6a00",
+          investors: ["阿里巴巴集团", "软银 (SoftBank)", "公开市场"],
+          llms: ["Qwen 3 (通义千问)", "Qwen 2.5 (开源)", "Qwen-Max / Plus"],
+          ides: ["通义灵码 (Tongyi Lingma)", "阿里云百炼平台"],
+          desc: "Qwen系列全球开源影响力最大之一"
+        },
+        {
+          text: "百度",
+          color: "#2932E1",
+          investors: ["百度集团", "公开市场"],
+          llms: ["文心一言 4.5 (ERNIE)", "文心大模型 4.0"],
+          ides: ["Comate (百度智能编码)", "Baidu AI Studio"],
+          desc: "国内最早布局大模型，搜索+AI深度整合"
+        },
+        {
+          text: "字节跳动",
+          color: "#fe2c55",
+          investors: ["字节跳动集团", "红杉中国", "海纳亚洲"],
+          llms: ["豆包 (Doubao)", "云雀大模型 (Skylark)", "全双工语音大模型"],
+          ides: ["Trae (AI IDE，面向全球)", "MarsCode (扣子编程)"],
+          desc: "Trae面向全球市场，C端用户量巨大"
+        },
+        {
+          text: "腾讯",
+          color: "#07c160",
+          investors: ["腾讯集团", "公开市场"],
+          llms: ["混元 3.0 (Hunyuan)", "混元-Large"],
+          ides: ["腾讯云 AI 代码助手", "微信开发者工具+AI"],
+          desc: "混元3.0即将发布，微信生态深度整合"
+        },
+        {
+          text: "智谱AI (Zhipu)",
+          color: "#3366ff",
+          investors: ["美团", "阿里", "腾讯", "北京市人工智能基金", "君联资本"],
+          llms: ["GLM-4 / GLM-5", "ChatGLM 系列", "CogViewX (视觉)", "AutoGLM (Agent)"],
+          ides: ["智谱清言 (对话式)", "BigModel 开放平台"],
+          desc: "清华系，AutoGLM Agent能力突出"
+        },
+        {
+          text: "月之暗面 (Moonshot)",
+          color: "#7c5cfc",
+          investors: ["阿里", "腾讯", "美团", "小红书", "红杉中国"],
+          llms: ["Kimi K2", "Kimi K1.5", "Moonshot-v1"],
+          ides: ["Kimi 智能助手 (对话式)", "Kimi API 平台"],
+          desc: "长上下文能力突出，Kimi用户量国内领先"
+        },
+        {
+          text: "MiniMax",
+          color: "#ff4081",
+          investors: ["腾讯", "阿里", "小红书", "明势资本"],
+          llms: ["abab 7 / abab 6.5", "海螺AI (Hailuo)"],
+          ides: ["海螺AI (多模态助手)", "MiniMax 开放平台"],
+          desc: "视频生成能力突出，海螺AI广受好评"
+        }
+      ]
+    },
+    {
+      text: "🇫🇷 欧洲",
+      color: "#6bcb77",
+      children: [
+        {
+          text: "Mistral AI",
+          color: "#ff7000",
+          investors: ["微软 (Microsoft)", "英伟达 (NVIDIA)", "a16z", "Salesforce", "法国政府"],
+          llms: ["Mistral Large 3", "Mistral Medium / Small", "Codestral (编程)", "Mistral Nemo (开源)"],
+          ides: ["Codestral (编程专用模型)", "Mistral Le Chat (对话式)", "Mistral AI API"],
+          desc: "欧洲AI领军者，开源+商业双轨，估值约$60亿"
+        }
+      ]
+    },
+    {
+      text: "🇦🇪 中东",
+      color: "#4d96ff",
+      children: [
+        {
+          text: "Technology Innovation Institute",
+          color: "#00a878",
+          investors: ["阿布扎比政府 (阿联酋)", "TII 自研"],
+          llms: ["Falcon 3 (开源)", "Falcon 2", "NOOR (阿拉伯语)"],
+          ides: ["开源生态工具", "TII 研究平台"],
+          desc: "阿联酋国家级AI研究机构，Falcon系列开源"
+        }
+      ]
+    }
+  ]
+};
+
+const canvas = document.getElementById('mindmap');
+const ctx = canvas.getContext('2d');
+const container = document.getElementById('canvas-container');
+const tooltip = document.getElementById('tooltip');
+
+let scale = 1, offsetX = 0, offsetY = 0;
+let isDragging = false, lastX = 0, lastY = 0;
+let hoveredNode = null;
+let allNodes = [];
+let rafPending = false;
+let latestMouse = { x: 0, y: 0 };
+
+// 常量定义
+const PARTICLE_COUNT = 80;
+const PARTICLE_ALPHA = 0.03;
+const ROOT_RADIUS_RATIO = 0.01;
+const ANGLE_MARGIN_RATIO = 0.05;
+const CHILD_RADIUS_LEVEL0 = 0.38;
+const CHILD_RADIUS_OTHER = 0.32;
+const ZOOM_OUT = 0.9;
+const ZOOM_IN = 1.1;
+const MIN_SCALE = 0.3;
+const MAX_SCALE = 3;
+const TOOLTIP_OFFSET_X = 16;
+const TOOLTIP_OFFSET_Y = -10;
+const TOOLTIP_MAX_WIDTH = 290;
+const TOOLTIP_MAX_HEIGHT = 200;
+
+// 辅助函数
+function updateTooltipPosition(e) {
+  let tx = e.clientX + TOOLTIP_OFFSET_X;
+  let ty = e.clientY + TOOLTIP_OFFSET_Y;
+  if (tx + TOOLTIP_MAX_WIDTH > window.innerWidth) tx = e.clientX - (TOOLTIP_MAX_WIDTH + TOOLTIP_OFFSET_X);
+  if (ty + TOOLTIP_MAX_HEIGHT > window.innerHeight) ty = window.innerHeight - (TOOLTIP_MAX_HEIGHT + Math.abs(TOOLTIP_OFFSET_Y));
+  tooltip.style.left = tx + 'px';
+  tooltip.style.top = ty + 'px';
+}
+
+function calcTouchDist(t1, t2) {
+  return Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+}
+
+function findNode(wx, wy) {
+  let closest = null, minDistSq = Infinity;
+  allNodes.forEach(node => {
+    const dx = node.x - wx, dy = (node.y + 20) - wy;
+    const distSq = dx * dx + dy * dy;
+    const hitR = node.level === 0 ? 50 : node.level === 1 ? 45 : 40;
+    const hitRSq = hitR * hitR;
+    if (distSq < hitRSq && distSq < minDistSq) {
+      minDistSq = distSq;
+      closest = node;
+    }
+  });
+  return closest;
+}
+
+function resize() {
+  canvas.width = window.innerWidth * devicePixelRatio;
+  canvas.height = window.innerHeight * devicePixelRatio;
+  canvas.style.width = window.innerWidth + 'px';
+  canvas.style.height = window.innerHeight + 'px';
+  ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+}
+
+// 布局算法
+function layoutTree(node, x, y, level, angleStart, angleEnd) {
+  const w = window.innerWidth, h = window.innerHeight;
+  const r = Math.min(w, h) * (level === 0 ? ROOT_RADIUS_RATIO : (level === 1 ? CHILD_RADIUS_LEVEL0 : CHILD_RADIUS_OTHER));
+
+  const angle = (angleStart + angleEnd) / 2;
+  const nx = x + Math.cos(angle) * r;
+  const ny = y + Math.sin(angle) * r;
+
+  const nodeObj = {
+    text: node.text,
+    x: nx, y: ny,
+    level,
+    color: node.color || '#888',
+    desc: node.desc || '',
+    investors: node.investors || [],
+    llms: node.llms || [],
+    ides: node.ides || [],
+    parentX: x, parentY: y,
+    children: []
+  };
+
+  allNodes.push(nodeObj);
+
+  if (node.children) {
+    const count = node.children.length;
+    const angleRange = angleEnd - angleStart;
+    const childAngleStart = angleStart + angleRange * ANGLE_MARGIN_RATIO;
+    const childAngleEnd = angleEnd - angleRange * ANGLE_MARGIN_RATIO;
+
+    node.children.forEach((child, i) => {
+      const cStart = childAngleStart + (childAngleEnd - childAngleStart) * (i / count);
+      const cEnd = childAngleStart + (childAngleEnd - childAngleStart) * ((i + 1) / count);
+      const childNode = layoutTree(child, nx, ny, level + 1, cStart, cEnd);
+      nodeObj.children.push(childNode);
+    });
+  }
+
+  return nodeObj;
+}
+
+function buildLayout() {
+  allNodes = [];
+  const cx = window.innerWidth / 2;
+  const cy = window.innerHeight / 2;
+  layoutTree(mindmapData, cx, cy, 0, 0, Math.PI * 2);
+}
+
+function draw() {
+  const w = window.innerWidth, h = window.innerHeight;
+  ctx.clearRect(0, 0, w, h);
+
+  ctx.save();
+  ctx.globalAlpha = 0.03;
+  for (let i = 0; i < 80; i++) {
+    const px = ((i * 137.5) % w);
+    const py = ((i * 97.3 + i * i * 0.7) % h);
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.arc(px, py, 1.5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
+
+  ctx.save();
+  ctx.translate(offsetX, offsetY);
+  ctx.scale(scale, scale);
+
+  allNodes.forEach(node => {
+    if (node.level > 0) {
+      ctx.beginPath();
+      ctx.moveTo(node.parentX, node.parentY);
+
+      // 贝塞尔曲线
+      const midX = (node.parentX + node.x) / 2;
+      const midY = (node.parentY + node.y) / 2;
+      const cp1x = node.parentX + (node.x - node.parentX) * 0.4;
+      const cp1y = node.parentY;
+      const cp2x = node.parentX + (node.x - node.parentX) * 0.6;
+      const cp2y = node.y;
+
+      ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, node.x, node.y);
+
+      const isHovered = hoveredNode && (hoveredNode === node || hoveredNode.parentX === node.x && hoveredNode.parentY === node.y);
+      ctx.strokeStyle = isHovered ? node.color + 'cc' : node.color + '30';
+      ctx.lineWidth = node.level === 1 ? 2.5 : node.level === 2 ? 1.8 : 1.2;
+      ctx.stroke();
+    }
+  });
+
+  allNodes.forEach(node => {
+    const isHovered = hoveredNode === node;
+    const baseFontSize = node.level === 0 ? 18 : node.level === 1 ? 15 : node.level === 2 ? 13 : 11;
+
+    if (isHovered || node.level <= 1) {
+      ctx.save();
+      ctx.globalAlpha = isHovered ? 0.25 : 0.1;
+      const glow = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, 40 + baseFontSize * 2);
+      glow.addColorStop(0, node.color);
+      glow.addColorStop(1, 'transparent');
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, 40 + baseFontSize * 2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    const dotR = node.level === 0 ? 8 : node.level === 1 ? 6 : node.level === 2 ? 5 : 4;
+    ctx.beginPath();
+    ctx.arc(node.x, node.y, dotR, 0, Math.PI * 2);
+    ctx.fillStyle = node.color;
+    ctx.fill();
+
+    if (isHovered) {
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+
+    ctx.font = `${node.level <= 1 ? '700' : '500'} ${baseFontSize}px "PingFang SC","Microsoft YaHei",sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    const textY = node.y + dotR + baseFontSize + 2;
+
+    const metrics = ctx.measureText(node.text);
+    const tw = metrics.width + 12;
+    const th = baseFontSize + 6;
+
+    ctx.fillStyle = 'rgba(15,15,26,0.85)';
+    ctx.beginPath();
+    const rx = node.x - tw / 2, ry = textY - th / 2;
+    const rr = 4;
+    ctx.moveTo(rx + rr, ry);
+    ctx.lineTo(rx + tw - rr, ry);
+    ctx.quadraticCurveTo(rx + tw, ry, rx + tw, ry + rr);
+    ctx.lineTo(rx + tw, ry + th - rr);
+    ctx.quadraticCurveTo(rx + tw, ry + th, rx + tw - rr, ry + th);
+    ctx.lineTo(rx + rr, ry + th);
+    ctx.quadraticCurveTo(rx, ry + th, rx, ry + th - rr);
+    ctx.lineTo(rx, ry + rr);
+    ctx.quadraticCurveTo(rx, ry, rx + rr, ry);
+    ctx.fill();
+
+    if (isHovered) {
+      ctx.strokeStyle = node.color + '80';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    ctx.fillStyle = isHovered ? '#fff' : '#ddd';
+    ctx.fillText(node.text, node.x, textY);
+  });
+
+  ctx.restore();
+}
+
+function screenToWorld(sx, sy) {
+  return { x: (sx - offsetX) / scale, y: (sy - offsetY) / scale };
+}
+
+canvas.addEventListener('mousedown', e => {
+  isDragging = true;
+  lastX = e.clientX; lastY = e.clientY;
+});
+canvas.addEventListener('mousemove', e => {
+  latestMouse.x = e.clientX;
+  latestMouse.y = e.clientY;
+  if (!rafPending) {
+    rafPending = true;
+    requestAnimationFrame(() => {
+      rafPending = false;
+      const cx = latestMouse.x, cy = latestMouse.y;
+      if (isDragging) {
+        offsetX += cx - lastX;
+        offsetY += cy - lastY;
+        lastX = cx; lastY = cy;
+        draw();
+      }
+      const world = screenToWorld(cx, cy);
+      const node = findNode(world.x, world.y);
+      if (node !== hoveredNode) {
+        hoveredNode = node;
+        draw();
+        if (node && (node.investors.length || node.llms.length || node.ides.length)) {
+          let html = `<div class="tt-title" style="color:${node.color}">${node.text}</div>`;
+          if (node.desc) html += `<div class="tt-sub">${node.desc}</div>`;
+          if (node.investors.length) html += `<div style="margin-top:6px"><b style="color:#ffd93d">💰 投资方：</b>${node.investors.join('、')}</div>`;
+          if (node.llms.length) html += `<div style="margin-top:4px"><b style="color:#6bcb77">🤖 LLM：</b>${node.llms.join('、')}</div>`;
+          if (node.ides.length) html += `<div style="margin-top:4px"><b style="color:#4d96ff">💻 IDE：</b>${node.ides.join('、')}</div>`;
+          tooltip.innerHTML = html;
+          tooltip.style.display = 'block';
+          updateTooltipPosition({ clientX: cx, clientY: cy });
+        } else {
+          tooltip.style.display = 'none';
+        }
+      } else if (node && (node.investors.length || node.llms.length || node.ides.length)) {
+        updateTooltipPosition({ clientX: cx, clientY: cy });
+      }
+    });
+  }
+});
+canvas.addEventListener('mouseup', () => isDragging = false);
+canvas.addEventListener('mouseleave', () => {
+  isDragging = false;
+  hoveredNode = null;
+  tooltip.style.display = 'none';
+  draw();
+});
+
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  const delta = e.deltaY > 0 ? ZOOM_OUT : ZOOM_IN;
+  const newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, scale * delta));
+  const wx = e.clientX, wy = e.clientY;
+  offsetX = wx - (wx - offsetX) * (newScale / scale);
+  offsetY = wy - (wy - offsetY) * (newScale / scale);
+  scale = newScale;
+  draw();
+}, { passive: false });
+
+let lastTouchDist = 0;
+canvas.addEventListener('touchstart', e => {
+  if (e.touches.length === 1) {
+    isDragging = true;
+    lastX = e.touches[0].clientX;
+    lastY = e.touches[0].clientY;
+  } else if (e.touches.length === 2) {
+    isDragging = false;
+    lastTouchDist = calcTouchDist(e.touches[0], e.touches[1]);
+  }
+});
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  if (e.touches.length === 1 && isDragging) {
+    offsetX += e.touches[0].clientX - lastX;
+    offsetY += e.touches[0].clientY - lastY;
+    lastX = e.touches[0].clientX;
+    lastY = e.touches[0].clientY;
+    draw();
+  } else if (e.touches.length === 2) {
+    const dist = calcTouchDist(e.touches[0], e.touches[1]);
+    const delta = dist / lastTouchDist;
+    scale = Math.max(0.3, Math.min(3, scale * delta));
+    lastTouchDist = dist;
+    draw();
+  }
+}, { passive: false });
+canvas.addEventListener('touchend', () => isDragging = false);
+
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => { resize(); buildLayout(); draw(); }, 150);
+});
+resize();
+buildLayout();
+draw();
+</script>
+</body>
+</html>
